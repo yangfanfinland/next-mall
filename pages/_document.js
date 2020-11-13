@@ -34,6 +34,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <script type="text/javascript" src="/static/basic/js/jquery-1.7.min.js"></script>
           <script type="text/javascript " src="/static/js/app.js"></script>
           <script type="text/javascript" src="/static/basic/js/quick_links.js"></script>
         </Head>

@@ -17,11 +17,11 @@ const MyCarousel = () => {
     })
 
     return (
-        <div className="bw">
+        <div className="am-slider am-slider-default scoll">
             <Carousel autoplay>
                 {
                     carousel.map(c => (
-                        <img src={c.imageUrl} height={520}/>
+                        <img src={c.imageUrl} height={430} width={800}/>
                     ))
                 }
 

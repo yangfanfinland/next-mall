@@ -1,5 +1,4 @@
 import Header from '../Header'
-import Footer from '../Footer'
 import SearchBar from '../SearchBar'
 
 const Layout = ({children}) => {
@@ -11,7 +10,6 @@ const Layout = ({children}) => {
             </div>
             
             {children}
-            <Footer />
         </>
     )
 }

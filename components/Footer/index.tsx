@@ -3,7 +3,7 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <div className="footer ">
+        <div className="footer">
             <div className="footer-hd ">
                 <p>
                     <a href="https://www.imooc.com/" target="_blank">慕课网</a>
