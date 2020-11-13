@@ -9,6 +9,8 @@ import '../static/css/hmstyle.css'
 import '../static/css/skin.css'
 import '../static/css/lee.css'
 
+import '../static/css/dlstyle.css'
+
 import '../styles/globals.css'
 
 

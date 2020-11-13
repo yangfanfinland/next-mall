@@ -59,10 +59,8 @@ const SixNewItemsList = ({ categoryList }) => {
                 var subWapper = $(this).children("div.menu-in").children("div.area-in")
                     .children("div.area-bg").children("div.menu-srot").children(
                         "div.sort-side");
-                // console.log(subWapper.html());
                 var subCatHtml = subWapper.html();
                 var rootCatId = subWapper.attr("rootCatId");
-                // console.log(rootCatId);
                 // 如果该节点下没有内容，则发起请求查询子分类并且渲染到页面，如果有的话就不查询了（懒加载模式）
                 if (subCatHtml == null || subCatHtml == '' || subCatHtml == undefined) {
                     if (rootCatId != undefined && rootCatId != null && rootCatId != '') {
@@ -70,8 +68,6 @@ const SixNewItemsList = ({ categoryList }) => {
                         const res = await axios.get(serverUrl + '/index/subCat/' + rootCatId, {});
                         if (res.data.status == 200) {
                             var catList = res.data.data
-                            // this.catList = catList;
-                            // debugger;
                             var subRenderHtml = '';
                             for (var i = 0; i < catList.length; i++) {
                                 var cat = catList[i];
@@ -101,9 +97,6 @@ const SixNewItemsList = ({ categoryList }) => {
                     $(this).addClass("hover");
                     $(this).children("div.menu-in").css("display", "block");
                 }
-
-                // $(this).addClass("hover");
-                // $(this).children("div.menu-in").css("display", "block")
             }, function () {
                 $(this).removeClass("hover")
                 $(this).children("div.menu-in").css("display", "none")

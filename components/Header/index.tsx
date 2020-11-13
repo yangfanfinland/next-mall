@@ -1,12 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { getUrlParam, serverUrl, getCookie } from '../../util/app'
+
 
 const Header = () => {
 
     const [ userIsLogin, setUserIsLogin ] = useState(false)
     const [ userInfo, setUserInfo ] = useState<{ username: string }>()
 
-    const goUserCenter = () => {
+    useEffect(() => {
+        var userCookie = getCookie("user");
+        if (userCookie != null && userCookie != undefined && userCookie != '') {
+            var userInfoStr = decodeURIComponent(userCookie);
+            if (userInfoStr != null && userInfoStr != undefined && userInfoStr != '') {
+                var userInfo = JSON.parse(userInfoStr);
+                // 判断是否是一个对象
+                if ( typeof(userInfo)  == "object" ) {
+                    setUserIsLogin(true);
+                    setUserInfo(userInfo);
+                } else {
+                    setUserIsLogin(false);
+                    setUserInfo({ username: "" })
+                }
+            }
+        } else {
+            setUserIsLogin(false);
+            setUserInfo({ username: "" })
+        }
+    }, [])
 
+    const goUserCenter = () => {
+        
     }
 
     return (
@@ -20,8 +43,8 @@ const Header = () => {
                             </div>
                         ): (
                             <div className="menu-hd">
-                                <a href="login.html" target="_top" className="h">亲，请登录</a>
-                                <a href="register.html" target="_top">免费注册</a>
+                                <a href="login" target="_top" className="h">亲，请登录</a>
+                                <a href="register" target="_top">免费注册</a>
                             </div>
                         )
                     }
@@ -29,7 +52,7 @@ const Header = () => {
 			</ul>
 			<ul className="message-r">
 				<div className="topMessage home">
-					<div className="menu-hd"><a href="index.html" target="_top" className="h">商城首页</a></div>
+					<div className="menu-hd"><a href="index" target="_top" className="h">商城首页</a></div>
 				</div>
 				<div className="topMessage my-shangcheng">
 					<div className="menu-hd MyShangcheng">

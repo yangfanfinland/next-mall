@@ -11,7 +11,7 @@ const SearchBar = () => {
     return (
         <div className="nav white">
 			<div className="logoBig">
-				<li><img src="images/logobig.png" /></li>
+				<li><img src="/static/images/logobig.png" /></li>
 			</div>
 			<div className="search-bar pr">
 				<a href="#"></a>
