@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import styles from './index.scss';
 
 const Header = () => {
 
@@ -6,7 +7,7 @@ const Header = () => {
     const [ userInfo, setUserInfo ] = useState<{ username: string }>()
 
     const goUserCenter = () => {
-        
+
     }
 
     return (
@@ -15,7 +16,7 @@ const Header = () => {
 				<div className="topMessage">
                     {
                         userIsLogin ? (
-                            <div className="menu-hd" v-show="userIsLogin">
+                            <div className="menu-hd">
                                 <span style={{ color: "#d2364c" }}>欢迎，{ userInfo.username }</span>
                             </div>
                         ): (
