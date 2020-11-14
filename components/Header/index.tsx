@@ -1,6 +1,39 @@
 import React, { useEffect, useState } from 'react'
-import { getUrlParam, serverUrl, getCookie } from '../../util/app'
+import Link from "next/link"
+import { Dropdown, Menu } from "antd"
+import { DownOutlined } from '@ant-design/icons'
+import { getCookie } from '../../util/app'
+import styles from './index.module.scss'
 
+const menu = (
+    <Menu>
+        <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="/myOrder">
+                我的订单
+            </a>
+        </Menu.Item>
+        <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="/authentication">
+                实名认证
+            </a>
+        </Menu.Item>
+        <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="/addressList">
+                收货地址
+            </a>
+        </Menu.Item>
+        <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="/collectionGoods">
+                收藏商品
+            </a>
+        </Menu.Item>
+        <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="/followStore">
+                关注店铺
+            </a>
+        </Menu.Item>
+    </Menu>
+)
 
 const Header = () => {
 
@@ -28,40 +61,40 @@ const Header = () => {
         }
     }, [])
 
-    const goUserCenter = () => {
-        
+    const goUserCenter = (e) => {
+        e.preventDefault()
     }
 
     return (
-        <div className="am-container header">
-			<ul className="message-l">
-				<div className="topMessage">
+        <div className={`${styles.header} headerHeight`}>
+            <ul className={`${styles.headerInner} contentWidth`}>
+                <li>
+                    <span className={styles.welcomeMsg}>多米电商欢迎你</span>
                     {
-                        userIsLogin ? (
-                            <div className="menu-hd">
-                                <span style={{ color: "#d2364c" }}>欢迎，{ userInfo.username }</span>
-                            </div>
-                        ): (
-                            <div className="menu-hd">
-                                <a href="login" target="_top" className="h">亲，请登录</a>
-                                <a href="register" target="_top">免费注册</a>
-                            </div>
-                        )
+                        userIsLogin ?
+                            <span>{userInfo.username}</span>
+                            :
+                            <>
+                                <Link href={'/user/login'}>
+                                    <a>登陆</a>
+                                </Link>
+                                <span className={styles.line}>|</span>
+                                <Link href={'/user/register'}>
+                                    <a>注册</a>
+                                </Link>
+                            </>
                     }
-				</div>
-			</ul>
-			<ul className="message-r">
-				<div className="topMessage home">
-					<div className="menu-hd"><a href="index" target="_top" className="h">商城首页</a></div>
-				</div>
-				<div className="topMessage my-shangcheng">
-					<div className="menu-hd MyShangcheng">
-                        <a href="javascript:void(0);" onClick={goUserCenter}>
-						<i className="am-icon-user am-icon-fw"></i>个人中心</a>
-                    </div>
-				</div>
-			</ul>
-		</div>
+                </li>
+                <li>
+                    <a href="/myOrder" target={'_blank'} className={styles.buyItem}>我的订单</a>
+                    <a href="/car" target={'_blank'} className={styles.buyItem}>购物车</a>
+                    <Dropdown overlay={menu}>
+                        <a href="" className={`${styles.buyItem}`} onClick={e => e.preventDefault()}>个人中心<DownOutlined/></a>
+                    </Dropdown>
+                    <a href="" className={styles.buyItem}>商家入驻</a>
+                </li>
+            </ul>
+        </div>
     )
 }
 

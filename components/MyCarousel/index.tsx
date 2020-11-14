@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Carousel } from 'antd';
+import { Carousel } from 'antd'
+import { serverUrl } from '../../util/app'
 
 
 const MyCarousel = () => {
@@ -8,7 +9,7 @@ const MyCarousel = () => {
     const [ carousel, setCarousel ] = useState([])
 
     useEffect(() => {
-        axios.get("http://localhost:8088/index/carousel", {}).then(res => {
+        axios.get(serverUrl+ "/index/carousel", {}).then(res => {
             if (res.data.status == 200) {
                 const carouselList = res.data.data
                 setCarousel(carouselList);
@@ -17,11 +18,11 @@ const MyCarousel = () => {
     })
 
     return (
-        <div className="am-slider am-slider-default scoll">
+        <div className={`bw`}>
             <Carousel autoplay>
                 {
                     carousel.map(c => (
-                        <img src={c.imageUrl} height={430} width={800}/>
+                        <img key={c.id} src={c.imageUrl} height={400} width={800}/>
                     ))
                 }
 

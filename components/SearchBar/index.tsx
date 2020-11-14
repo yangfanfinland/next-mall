@@ -1,25 +1,22 @@
 import React, { useState } from 'react'
-
+import styles from './index.module.scss';
 
 const SearchBar = () => {
-    const [ keywords, setKeywords ] = useState()
+    const [ keywords, setKeywords ] = useState("")
 
     const doSearch = () => {
 
-    }
+	}
+	
+	const handleKeywordsChanged = (e) => {
+		setKeywords(e.target.value);
+	}
 
     return (
-        <div className="nav white">
-			<div className="logoBig">
-				<li><img src="/static/images/logobig.png" /></li>
-			</div>
-			<div className="search-bar pr">
-				<a href="#"></a>
-				<form>
-					<input id="searchInput" value={keywords} name="index_none_header_sysc" type="text" placeholder="搜索" />
-					<input id="ai-topsearch" onClick={doSearch} className="submit am-btn" value="搜索" />
-				</form>
-			</div>
+		<div className={styles.searchBar}>
+			<i className={styles.searchIcon}/>
+			<input onChange={handleKeywordsChanged} type="text" className={styles.searchInput} placeholder={'搜索'}/>
+			<a href={''} onClick={doSearch} className={styles.searchBtn}>搜索</a>
 		</div>
     )
 }

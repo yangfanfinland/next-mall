@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { serverUrl } from '../../util/app'
 
 
 const SixNewItemsList = ({ categoryList }) => {
@@ -8,7 +9,6 @@ const SixNewItemsList = ({ categoryList }) => {
     useEffect(() => {
         const renderCategorys = async ()=> {
             var rootCatHtml = "";
-            var serverUrl = "http://localhost:8088";
             let newSixNewItemsList = []
 
             for (var i = 0; i < categoryList.length; i++) {
@@ -109,7 +109,7 @@ const SixNewItemsList = ({ categoryList }) => {
         <>
         {
             sixNewItemsList.map(rootCat => (
-                <>
+                <div key={rootCat.rootCatId}>
                     <div className="am-container ">
                         <div className="shopTitle ">
                             <h4>{rootCat.rootCatName}</h4>
@@ -118,7 +118,7 @@ const SixNewItemsList = ({ categoryList }) => {
                     </div>
                     <div className="am-g am-g-fixed floodFour">
                         <div className="am-u-sm-5 am-u-md-4 text-one list" style={{ backgroundColor: 'background-color:' + rootCat.bgColor}}>
-                            <a href="javascript:void(0);">
+                            <a href="#" onClick={e => e.preventDefault()}>
                                 <img src={rootCat.catImage} />
                             </a>
                             <div className="triangle-topright"></div>
@@ -185,7 +185,7 @@ const SixNewItemsList = ({ categoryList }) => {
                         </div>
                     </div>
                     <div className="clear "></div>
-                </>
+                </div>
             ))
         }
         </>

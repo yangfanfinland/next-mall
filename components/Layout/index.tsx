@@ -1,15 +1,15 @@
 import Header from '../Header'
-import SearchBar from '../SearchBar'
+import Footer from '../Footer'
+import styles from './index.module.scss'
 
 const Layout = ({children}) => {
     return (
         <>
-            <div className="hmtop">
-                <Header />
-                <SearchBar />
+            <Header />
+            <div id={'mainBody'} className={styles.main}>
+                {children}
             </div>
-            
-            {children}
+            <Footer/>
         </>
     )
 }

@@ -1,17 +1,9 @@
 import App from 'next/app'
 import Layout from '../components/Layout'
 
+import '../static/styles/base.scss';
 import 'antd/dist/antd.css'
-import '../static/AmazeUI-2.4.2/assets/css/amazeui.css'
-import '../static/AmazeUI-2.4.2/assets/css/admin.css'
-import '../static/basic/css/demo.css'
-import '../static/css/hmstyle.css'
-import '../static/css/skin.css'
-import '../static/css/lee.css'
-
-import '../static/css/dlstyle.css'
-
-import '../styles/globals.css'
+import '../static/styles/globals.scss'
 
 
 // function MyApp({ Component, pageProps }) {
