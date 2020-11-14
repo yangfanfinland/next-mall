@@ -1,10 +1,9 @@
 import App from 'next/app'
 import Layout from '../components/Layout'
 
-import '../static/styles/base.scss';
+import '../static/styles/base.scss'
 import 'antd/dist/antd.css'
 import '../static/styles/globals.scss'
-
 
 // function MyApp({ Component, pageProps }) {
 //   return <Component {...pageProps} />

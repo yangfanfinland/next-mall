@@ -3,7 +3,6 @@ import GoodsItem from '../GoodsItem'
 import styles from './index.module.scss'
 
 const AreaLike = ({ likeItemList }) => {
-	console.log(likeItemList)
     return (
 		<div className={`fcb mb40`}>
 			<h1 className={styles.title}>猜你喜欢</h1>

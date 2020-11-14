@@ -22,7 +22,7 @@ const SubCategory = ({ subCategoryList = [] }) => {
                                     <div className={`${styles.ctgnamebox}`}>
                                         {
                                             category.subCatList.map(subCat => (
-                                                <Link href={`/catItems.html?searchType=catItems&catId=${subCat.subId}`}>
+                                                <Link key={subCat.subId} href={`/catItems.html?searchType=catItems&catId=${subCat.subId}`}>
                                                     <a key={subCat.subId} target="_blank" className="f-fcred">
                                                         {subCat.subName}
                                                     </a>

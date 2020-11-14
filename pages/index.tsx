@@ -6,6 +6,7 @@ import SearchArea from '../components/SearchArea'
 import TopNav from '../components/TopNav'
 import MyCarousel from '../components/MyCarousel'
 import Warranty from '../components/Warranty'
+import AreaSixNewGoods from '../components/HomePage/AreaSixNewGoods'
 import AreaBrand from '../components/HomePage/AreaBrand'
 import AreaSuperGoods from '../components/HomePage/AreaSuperGoods'
 import AreaShops from '../components/HomePage/AreaShops'
@@ -23,6 +24,7 @@ export default function Home({ categoryList, likeItemList }) {
       <Warranty />
       <div className={`${styles.homeContent}`}>
           <div className={`contentWidth`}>
+              <AreaSixNewGoods likeItemList = {likeItemList} />
               <AreaBrand />
               <AreaSuperGoods />
               <AreaShops />
@@ -47,7 +49,7 @@ Home.getInitialProps = async ({ ctx }) => {
       const res = await axios.get(serverUrl + '/index/sixNewItems/' + category.id, {})
       if (res.data.status == 200) {
           const itemTemp = res.data.data
-          likeItemList.push(itemTemp)
+          likeItemList.push(itemTemp[0])
       }
     }
   }
