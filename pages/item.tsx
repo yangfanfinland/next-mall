@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { withRouter, SingletonRouter } from 'next/router'
 import { Tabs } from 'antd'
 import HtmlHead from '../components/HtmlHead'
 import SearchArea from '../components/SearchArea'
@@ -10,9 +11,14 @@ import ItemComment from '../components/ItemPage/ItemComment'
 import axios from 'axios'
 import { serverUrl, addItemToShopcart, getCookie, getShopcartItemCounts, ShopcartItem } from '../util/app'
 
+
+interface Props extends SingletonRouter {
+  itemInfo: any;
+}
+
 const { TabPane } = Tabs
 
-const Item = ({ itemInfo }) => {
+const Item = ({ itemInfo }: Props) => {
   console.log(itemInfo)
 
   const { item, itemParams, itemImgList, itemSpecList } = itemInfo
@@ -129,7 +135,8 @@ const Item = ({ itemInfo }) => {
 }
 
 Item.getInitialProps = async ({ ctx }) => {
-  const itemId = 'cake-1001'
+  const { itemId } = ctx.query
+  // const itemId = 'cake-1001'
 
   let itemInfo
   const res = await axios.get(serverUrl + '/items/info/' + itemId, {})
@@ -146,4 +153,4 @@ Item.getInitialProps = async ({ ctx }) => {
   }
 }
 
-export default Item
+export default withRouter(Item)
