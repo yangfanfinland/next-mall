@@ -3,7 +3,7 @@ import styles from './index.module.scss'
 
 const GoodsItem = ({ item, rightGap = 8, myClassName, myStyle }: { item, rightGap?: number, myClassName?: string, myStyle?: any }) => {
     return (
-        <a href={item && '/item.html?itemId=' + item.itemId} target={'_blank'}
+        <a href={item && '/item?itemId=' + item.itemId} target={'_blank'}
            className={`${styles.goodsItem} ${myClassName ? myClassName : ''}`} >
             <img src={(item && item.itemUrl) || '../../static/images/test/goods.jpg'} className={styles.goodsImg} alt=""/>
             <div className={styles.goodsDesc}>

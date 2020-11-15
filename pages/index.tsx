@@ -14,7 +14,7 @@ import AreaSpecial from '../components/HomePage/AreaSpecial'
 import AreaLike from '../components/HomePage/AreaLike'
 import styles from '../static/styles/index.module.scss'
 
-export default function Home({ categoryList, likeItemList }) {
+const Home = ({ categoryList, likeItemList }) => {
   return (
     <>
       <HtmlHead title={'多米电商 - 首页'}/>
@@ -36,6 +36,8 @@ export default function Home({ categoryList, likeItemList }) {
   )
 }
 
+export default Home
+
 Home.getInitialProps = async ({ ctx }) => {
   let categoryList;
   let likeItemList = [];
@@ -53,7 +55,6 @@ Home.getInitialProps = async ({ ctx }) => {
       }
     }
   }
-
 
   return {
     categoryList,

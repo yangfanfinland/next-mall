@@ -18,7 +18,7 @@ const AreaSixNewGoods = ({ likeItemList }) => {
                                 </a>
                             </li>
                             <li className={styles.item}>
-                                <a href={'/item.html?itemId=' + rootCat.simpleItemList[0].itemId} target={'_blank'} className={styles.topA} style={{position: "relative"}} >
+                                <a href={'/item?itemId=' + rootCat.simpleItemList[0].itemId} target={'_blank'} className={styles.topA} style={{position: "relative"}} >
                                     <img src={rootCat.simpleItemList[0].itemUrl} alt=""/>
                                     <div className="goodsDesc" style={{position:"absolute",width:"100%",bottom:"0",backgroundColor:"snow",opacity:"0.7"}}>
                                         <p className="goodsName">{rootCat.simpleItemList[0].itemName}</p>
@@ -42,7 +42,7 @@ const AreaSixNewGoods = ({ likeItemList }) => {
                                 </div>
                             </li>
                             <li className={styles.item}>
-                                <a href={'/item.html?itemId=' + rootCat.simpleItemList[3].itemId} target={'_blank'} className={styles.topA} style={{position: "relative"}}>
+                                <a href={'/item?itemId=' + rootCat.simpleItemList[3].itemId} target={'_blank'} className={styles.topA} style={{position: "relative"}}>
                                     <img src={rootCat.simpleItemList[3].itemUrl} alt=""/>
                                     <div className="goodsDesc" style={{position:"absolute",width:"100%",bottom:"0",backgroundColor:"snow",opacity:"0.7"}}>
                                         <p className="goodsName">{rootCat.simpleItemList[0].itemName}</p>
