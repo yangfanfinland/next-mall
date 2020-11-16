@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './index.module.scss'
 
-const Warranty = ({ width }: { width?: boolean }) => {
+const Warranty = ({ width }: { width?: string }) => {
     return (
         <div className={`bw`}>
             <ul className={`${styles.warranty} ${width ? width : 'contentWidth'} fcb`}>

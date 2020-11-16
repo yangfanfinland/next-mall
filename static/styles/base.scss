@@ -48,6 +48,10 @@ input:focus {
 .contentWidth {
   width: 1270px;
   margin: 0 auto;
+  &.login {
+    display: flex;
+    justify-content: space-around;
+  }
 }
 
 .fcb:after {

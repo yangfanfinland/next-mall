@@ -1,5 +1,6 @@
 import App from 'next/app'
 import Layout from '../components/Layout'
+import UserLayout from "../components/Layout/UserLayout"
 
 import '../static/styles/base.scss'
 import 'antd/dist/antd.css'
@@ -22,7 +23,16 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, router = {} } = this.props
+    const { pathname } = router
+
+    if (pathname.indexOf('/user/') === 0) {
+      return (
+          <UserLayout>
+              <Component {...pageProps} />
+          </UserLayout>
+      )
+  }
 
     return (
         <Layout>

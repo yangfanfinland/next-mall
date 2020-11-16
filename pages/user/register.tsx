@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Footer from '../components/Footer'
-import { getUrlParam, serverUrl } from '../util/app'
+import Footer from '../../components/Footer'
+import { getUrlParam, serverUrl } from '../../util/app'
 import axios from 'axios'
 
 export default function Register() {
