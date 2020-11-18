@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Form, Input } from "antd"
 import styles from './styles.module.scss'
+import { useIntl } from "react-intl"
 
 const layout = {
     labelCol: {span: 8},
@@ -8,9 +9,12 @@ const layout = {
 }
 
 const LoginForm = ({ onFinish, onFinishFailed, loading }: { onFinish: (values: any) => void, onFinishFailed?: (errorInfo: any) => void, loading: boolean }) => {
+    const { formatMessage } = useIntl()
+    const f = id => formatMessage({ id })
+    
     return (
         <div className={styles.userWrap}>
-            <div className={styles.title}>密码登录</div>
+            <div className={styles.title}>{f("login.title")}</div>
             <Form
                 {...layout}
                 name="login"
@@ -20,31 +24,31 @@ const LoginForm = ({ onFinish, onFinishFailed, loading }: { onFinish: (values: a
             >
                 <Form.Item
                     name="username"
-                    rules={[{required: true, message: '请输入用户名'}]}
+                    rules={[{required: true, message: f("login.username")}]}
                 >
                     <Input prefix={<i className={`${styles.userIcon} ${styles.phone}`}/>}
-                           placeholder={'请输入用户名'}
+                           placeholder={f("login.username")}
                     />
                 </Form.Item>
 
                 <Form.Item
                     name="password"
-                    rules={[{required: true, message: '请输入密码'}]}
+                    rules={[{required: true, message: f("login.password")}]}
                 >
                     <Input.Password prefix={<i className={`${styles.userIcon} ${styles.pwd}`}/>}
-                                    placeholder={'请输入密码'}
+                                    placeholder={f("login.password")}
                     />
                 </Form.Item>
                 <div className={`${styles.forgetPwd} tr`}>
-                    <a className={styles.alink} href={'/user/forgetPassword'}>忘记密码</a>
+                    <a className={styles.alink} href={'/user/forgetPassword'}>{f("login.forgetPasswordLink")}</a>
                 </div>
                 <Button type="primary"
                         className={`${styles.loginItem}`}
                         htmlType="submit"
                         disabled={loading}
-                        loading={loading}>登录</Button>
+                        loading={loading}>{f("login.loginBtn")}</Button>
                 <div className={styles.bottom}>
-                    <a href={'/user/register'}>免费注册</a>
+                    <a href={'/user/register'}>{f("login.registerLink")}</a>
                 </div>
             </Form>
         </div>

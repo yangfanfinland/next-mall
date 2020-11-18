@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Dropdown, Menu } from "antd"
 import { DownOutlined } from '@ant-design/icons'
 import { getCookie } from '../../util/app'
+import { useIntl } from "react-intl"
 import styles from './index.module.scss'
 
 const menu = (
@@ -39,6 +40,8 @@ const Header = () => {
 
     const [ userIsLogin, setUserIsLogin ] = useState(false)
     const [ userInfo, setUserInfo ] = useState<{ username: string }>()
+    const { formatMessage } = useIntl()
+    const f = id => formatMessage({ id })
 
     useEffect(() => {
         var userCookie = getCookie("user");
@@ -69,27 +72,27 @@ const Header = () => {
         <div className={`${styles.header} headerHeight`}>
             <ul className={`${styles.headerInner} contentWidth`}>
                 <li>
-                    <span className={styles.welcomeMsg}>多米电商欢迎你</span>
+                    <span className={styles.welcomeMsg}>{f("header.welcome")}</span>
                     {
                         userIsLogin ?
                             <span>{userInfo.username}</span>
                             :
                             <>
                                 <Link href={'/user/login'}>
-                                    <a>登陆</a>
+                                    <a>{f("header.login")}</a>
                                 </Link>
                                 <span className={styles.line}>|</span>
                                 <Link href={'/user/register'}>
-                                    <a>注册</a>
+                                    <a>{f("header.register")}</a>
                                 </Link>
                             </>
                     }
                 </li>
                 <li>
-                    <a href="/myOrder" target={'_blank'} className={styles.buyItem}>我的订单</a>
-                    <a href="/car" target={'_blank'} className={styles.buyItem}>购物车</a>
+                    <a href="/myOrder" target={'_blank'} className={styles.buyItem}>{f("header.myOrder")}</a>
+                    <a href="/car" target={'_blank'} className={styles.buyItem}>{f("header.shoppingCart")}</a>
                     <Dropdown overlay={menu}>
-                        <a href="" className={`${styles.buyItem}`} onClick={e => e.preventDefault()}>个人中心<DownOutlined/></a>
+                        <a href="" className={`${styles.buyItem}`} onClick={e => e.preventDefault()}>{f("header.personalCenter")}<DownOutlined/></a>
                     </Dropdown>
                     <a href="" className={styles.buyItem}>商家入驻</a>
                 </li>

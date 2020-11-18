@@ -4,14 +4,9 @@ import axios from 'axios'
 import LoginForm from '../../components/User/LoginForm'
 import { message } from 'antd'
 
-import { useIntl } from 'react-intl'
-
 export default function Login() {
-  const [returnUrl, setReturnUrl] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  const { formatMessage } = useIntl()
-  const f = (id) => formatMessage({ id })
+  const [ returnUrl, setReturnUrl ] = useState('')
+  const [ loading, setLoading ] = useState(false)
 
   useEffect(() => {
     const url = getUrlParam('returnUrl')
@@ -46,7 +41,6 @@ export default function Login() {
 
   return (
     <>
-        <h1>{f("hello")}</h1>
       <LoginForm onFinish={doLogin} loading={loading} />
     </>
   )

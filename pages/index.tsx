@@ -24,15 +24,11 @@ const Home = ({ categoryList, likeItemList }) => {
 
   return (
     <>
-      <h1>{f("hello")}</h1>
-      <p>{f("welcomeMessage")}</p>
-      <br />
-      <p>Current locale: {locale}</p>
-      <p>Default locale: {defaultLocale}</p>
-      <p>Configured locales: {JSON.stringify(locales)}</p>
+      {/* <p>Current locale: {locale}</p>   // Current locale: en */}
+      {/* <p>Default locale: {defaultLocale}</p>   // Default locale: zh */}
+      {/* <p>Configured locales: {JSON.stringify(locales)}</p>  // Configured locales: ["zh","en","fi"] */}
 
-
-      <HtmlHead title={'多米电商 - 首页'}/>
+      <HtmlHead title={f("home.title")} />
       <SearchArea/>
       <TopNav categoryList={categoryList} />
       <MyCarousel />
