@@ -13,10 +13,25 @@ import AreaShops from '../components/HomePage/AreaShops'
 import AreaSpecial from '../components/HomePage/AreaSpecial'
 import AreaLike from '../components/HomePage/AreaLike'
 import styles from '../static/styles/index.module.scss'
+import { useRouter } from "next/router"
+import { useIntl } from "react-intl"
 
 const Home = ({ categoryList, likeItemList }) => {
+  const router = useRouter()
+  const { locale, locales, defaultLocale } = router
+  const { formatMessage } = useIntl()
+  const f = id => formatMessage({ id })
+
   return (
     <>
+      <h1>{f("hello")}</h1>
+      <p>{f("welcomeMessage")}</p>
+      <br />
+      <p>Current locale: {locale}</p>
+      <p>Default locale: {defaultLocale}</p>
+      <p>Configured locales: {JSON.stringify(locales)}</p>
+
+
       <HtmlHead title={'多米电商 - 首页'}/>
       <SearchArea/>
       <TopNav categoryList={categoryList} />

@@ -1,6 +1,9 @@
 import App from 'next/app'
 import Layout from '../components/Layout'
-import UserLayout from "../components/Layout/UserLayout"
+import UserLayout from '../components/Layout/UserLayout'
+
+import { IntlProvider } from 'react-intl'
+import * as locales from '../content/locale'
 
 import '../static/styles/base.scss'
 import 'antd/dist/antd.css'
@@ -24,20 +27,34 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, router = {} } = this.props
-    const { pathname } = router
+    const { locale, defaultLocale, pathname } = router
+    const localeCopy = locales[locale]
+    const messages = localeCopy[pathname]
 
     if (pathname.indexOf('/user/') === 0) {
       return (
+        <IntlProvider
+          locale={locale}
+          defaultLocale={defaultLocale}
+          messages={messages}
+        >
           <UserLayout>
-              <Component {...pageProps} />
+            <Component {...pageProps} />
           </UserLayout>
+        </IntlProvider>
       )
-  }
+    }
 
     return (
+      <IntlProvider
+        locale={locale}
+        defaultLocale={defaultLocale}
+        messages={messages}
+      >
         <Layout>
           <Component {...pageProps} />
         </Layout>
+      </IntlProvider>
     )
   }
 }
