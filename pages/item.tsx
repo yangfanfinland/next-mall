@@ -122,7 +122,7 @@ const Item = ({ itemInfo }: Props) => {
             addToCartCallback={handleAddToCart}
           />
         </div>
-        <div className="introduce contentWidth">
+        <div className={`${styles.introduce} contentWidth`}>
           <Tabs defaultActiveKey="1" onChange={handleChange}>
             <TabPane tab="宝贝详情" key="1">
               <ItemDetails item={item} itemParams={itemParams} />
@@ -136,7 +136,7 @@ const Item = ({ itemInfo }: Props) => {
       <style jsx>
         {`
           :global(.introduce) {
-            
+
           }
         `}
       </style>

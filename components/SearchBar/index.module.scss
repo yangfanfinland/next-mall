@@ -1,3 +1,5 @@
+@import "../../static/styles/color";
+
 .searchBar {
   display: flex;
   justify-content: space-between;
@@ -5,7 +7,7 @@
   width: 510px;
   height: 40px;
   background: rgba(255, 255, 255, 1);
-  border: 2px solid #007DC6;
+  border: 2px solid $primary-color;
   border-radius: 20px;
 
   .searchIcon {
@@ -29,7 +31,7 @@
   .searchBtn {
     width: 80px;
     height: 40px;
-    background: #007DC6;
+    background: $primary-color;
     border-radius: 20px;
     font-size: 18px;
     color: #fff;

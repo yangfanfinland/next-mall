@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Pagination } from "antd"
 import styles from './index.module.scss'
 import axios from 'axios'
 import { serverUrl } from '../../../util/app'
@@ -57,8 +58,8 @@ const ItemComment = ({ item }) => {
     )
 
     if (res.data.status == 200) {
-      var grid = res.data.data
-      var commentList = grid.rows
+      const grid = res.data.data
+      const commentList = grid.rows
 
       for (var i = 0; i < commentList.length; i++) {
         var date = commentList[i].createdTime
@@ -68,14 +69,19 @@ const ItemComment = ({ item }) => {
 
       setCommentList(commentList)
 
-      var maxPage = grid.total // 获得总页数
-      var total = grid.records // 获得总记录数
+      const maxPage = grid.total // 获得总页数
+      const total = grid.records // 获得总记录数
 
       setMaxPage(maxPage)
       setTotal(total)
     } else if (res.data.status == 500) {
       alert(res.data.msg)
     }
+  }
+
+  const doPaging = (page) => {
+    setPage(page)
+    renderComments(id, level, page, pageSize)
   }
 
   return (
@@ -169,6 +175,10 @@ const ItemComment = ({ item }) => {
           </li>
         ))}
       </ul>
+
+      <div className={`${styles.wrap}`}>
+        <Pagination showQuickJumper defaultCurrent={1} total={total} onChange={doPaging} />
+      </div>
     </div>
   )
 }

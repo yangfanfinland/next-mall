@@ -1,3 +1,5 @@
+@import "../../../static/styles/color";
+
 .superGoods {
   position: relative;
 }
@@ -7,7 +9,7 @@
   top: 0;
   height: 500px;
   width: 100%;
-  background: #007DC6;
+  background: $primary-color;
   background-image: '/static/images/super_goods_bg.png';
   background-size: 691px 345px;
   background-repeat: no-repeat;

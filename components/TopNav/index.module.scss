@@ -1,3 +1,5 @@
+@import "../../static/styles/color";
+
 .topTab {
   height: 40px;
   position: relative;
@@ -32,7 +34,7 @@
 
         &:hover {
           background: #fff;
-          color: #007DC6;
+          color: $primary-color;
         }
       }
     }
