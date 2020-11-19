@@ -81,8 +81,8 @@ const ItemComment = ({ item }) => {
   return (
     <div className="">
       {countsVO && (
-        <div className="comment-summary">
-          <div className="rate">
+        <div className={`${styles['comment-summary']}`}>
+          <div className={`${styles.rate}`}>
             {countsVO.totalCounts === 0 && (
               <div>
                 <strong>
@@ -104,7 +104,7 @@ const ItemComment = ({ item }) => {
             <br />
             <span>好评度</span>
           </div>
-          <div className="comment-counts">
+          <div className={`${styles['comment-counts']}`}>
             <div
               className="counts-words"
               onClick={() => renderCommentsByLevel('')}
@@ -136,16 +136,16 @@ const ItemComment = ({ item }) => {
         </div>
       )}
 
-      <ul className="am-comments-list">
+      <ul className={`${styles['am-comments-list']}`}>
         {commentList.map((commentRecord, commentIndex) => (
-          <li key={commentIndex} className="am-comment">
+          <li key={commentIndex} className={`${styles['am-comment']}`}>
             <a href="#" onClick={(e) => e.preventDefault()}>
-              <img className="am-comment-avatar" src={commentRecord.userFace} />
+              <img className={`${styles['am-comment-avatar']}`} src={commentRecord.userFace} />
             </a>
-            <div className="am-comment-main">
-              <header className="am-comment-hd">
-                <div className="am-comment-meta">
-                  <a href="#link-to-user" className="am-comment-author">
+            <div className={`${styles['am-comment-main']}`}>
+              <header className={`${styles['am-comment-hd']}`}>
+                <div className={`${styles['am-comment-meta']}`}>
+                  <a href="#link-to-user" className={`${styles['am-comment-author']}`}>
                     {commentRecord.nickname} (匿名)
                   </a>
                   评论于
@@ -153,7 +153,7 @@ const ItemComment = ({ item }) => {
                 </div>
               </header>
 
-              <div className="am-comment-bd">
+              <div className={`${styles['am-comment-bd']}`}>
                 <div className="tb-rev-item" data-id="255776406962">
                   <div className="J_TbcRate_ReviewContent tb-tbcr-content">
                     {commentRecord.content}

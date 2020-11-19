@@ -9,11 +9,17 @@ import ItemSpecification from '../components/ItemPage/ItemSpecification'
 import ItemDetails from '../components/ItemPage/ItemDetails'
 import ItemComment from '../components/ItemPage/ItemComment'
 import axios from 'axios'
-import { serverUrl, addItemToShopcart, getCookie, getShopcartItemCounts, ShopcartItem } from '../util/app'
-
+import {
+  serverUrl,
+  addItemToShopcart,
+  getCookie,
+  getShopcartItemCounts,
+  ShopcartItem,
+} from '../util/app'
+import styles from '../static/styles/item.module.scss'
 
 interface Props extends SingletonRouter {
-  itemInfo: any;
+  itemInfo: any
 }
 
 const { TabPane } = Tabs
@@ -22,9 +28,9 @@ const Item = ({ itemInfo }: Props) => {
   console.log(itemInfo)
 
   const { item, itemParams, itemImgList, itemSpecList } = itemInfo
-  const [ userIsLogin, setUserIsLogin ] = useState(false)
-  const [ userInfo, setUserInfo ] = useState<any>()
-  const [ shopcartItemCounts, setShopcartItemCounts ] = useState(0)
+  const [userIsLogin, setUserIsLogin] = useState(false)
+  const [userInfo, setUserInfo] = useState<any>()
+  const [shopcartItemCounts, setShopcartItemCounts] = useState(0)
 
   useEffect(() => {
     // 通过cookie判断用户是否登录
@@ -33,11 +39,7 @@ const Item = ({ itemInfo }: Props) => {
 
   const judgeUserLoginStatus = () => {
     var userCookie = getCookie('user')
-    if (
-      userCookie != null &&
-      userCookie != undefined &&
-      userCookie != ''
-    ) {
+    if (userCookie != null && userCookie != undefined && userCookie != '') {
       var userInfoStr = decodeURIComponent(userCookie)
       if (
         userInfoStr != null &&
@@ -72,8 +74,8 @@ const Item = ({ itemInfo }: Props) => {
       return
     }
 
-    console.log("Item adding to shopcart", shopcartItem);
-    shopcartItem.itemImgUrl = itemImgList[0].url;
+    console.log('Item adding to shopcart', shopcartItem)
+    shopcartItem.itemImgUrl = itemImgList[0].url
 
     // 添加商品至购物车list
     addItemToShopcart(shopcartItem)
@@ -95,7 +97,6 @@ const Item = ({ itemInfo }: Props) => {
       )
 
       if (res.data.status == 200) {
-        
       } else if (res.data.status == 500) {
         alert(res.data.msg)
       }
@@ -121,15 +122,24 @@ const Item = ({ itemInfo }: Props) => {
             addToCartCallback={handleAddToCart}
           />
         </div>
-        <Tabs defaultActiveKey="1" onChange={handleChange}>
-          <TabPane tab="宝贝详情" key="1">
-            <ItemDetails item={item} itemParams={itemParams} />
-          </TabPane>
-          <TabPane tab="全部评价" key="2">
-            <ItemComment item={item} />
-          </TabPane>
-        </Tabs>
+        <div className="introduce contentWidth">
+          <Tabs defaultActiveKey="1" onChange={handleChange}>
+            <TabPane tab="宝贝详情" key="1">
+              <ItemDetails item={item} itemParams={itemParams} />
+            </TabPane>
+            <TabPane tab="全部评价" key="2">
+              <ItemComment item={item} />
+            </TabPane>
+          </Tabs>
+        </div>
       </div>
+      <style jsx>
+        {`
+          :global(.introduce) {
+            
+          }
+        `}
+      </style>
     </>
   )
 }

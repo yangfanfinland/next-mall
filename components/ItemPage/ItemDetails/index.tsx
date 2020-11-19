@@ -9,7 +9,7 @@ const ItemDetails = ({ item, itemParams }) => {
           <div className="">
             <h4>产品参数：</h4>
           </div>
-          <ul id="J_AttrUL">
+          <ul className={`${styles.J_AttrUL}`}>
             <li title="">产地:&nbsp;{itemParams.producPlace}</li>
             <li title="">品牌名:&nbsp;{itemParams.brand}</li>
             <li title="">生产厂名:&nbsp;{itemParams.factoryName}</li>
