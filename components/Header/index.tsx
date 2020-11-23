@@ -90,7 +90,7 @@ const Header = () => {
                 </li>
                 <li>
                     <a href="/myOrder" target={'_blank'} className={styles.buyItem}>{f("header.myOrder")}</a>
-                    <a href="/car" target={'_blank'} className={styles.buyItem}>{f("header.shoppingCart")}</a>
+                    <a href="/shopcart" target={'_blank'} className={styles.buyItem}>{f("header.shoppingCart")}</a>
                     <Dropdown overlay={menu}>
                         <a href="" className={`${styles.buyItem}`} onClick={e => e.preventDefault()}>{f("header.personalCenter")}<DownOutlined/></a>
                     </Dropdown>

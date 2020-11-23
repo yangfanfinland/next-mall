@@ -17,6 +17,7 @@ import {
   ShopcartItem,
 } from '../util/app'
 import styles from '../static/styles/item.module.scss'
+import { debug } from 'console'
 
 interface Props extends SingletonRouter {
   itemInfo: any
@@ -75,10 +76,11 @@ const Item = ({ itemInfo }: Props) => {
     }
 
     console.log('Item adding to shopcart', shopcartItem)
+    console.log('Item adding to shopcart', {...shopcartItem})
     shopcartItem.itemImgUrl = itemImgList[0].url
 
     // 添加商品至购物车list
-    addItemToShopcart(shopcartItem)
+    addItemToShopcart({...shopcartItem})
 
     // 购物车应该在登录/注册的时候同步
 
