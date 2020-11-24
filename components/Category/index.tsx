@@ -8,7 +8,6 @@ const Category = ({ hoverShow = false, categoryList=[] }) => {
     const [subCategoryList, setSubCategoryList] = useState()
 
     const handleMouseEnter = (rootCatId) => {
-        console.log(rootCatId)
         getSubCategoryList(rootCatId)
     }
 

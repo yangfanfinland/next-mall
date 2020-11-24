@@ -37,7 +37,6 @@ const Shopcart = () => {
     const userCookie = getCookie('user')
     if (userCookie != null && userCookie != undefined && userCookie != '') {
       const userInfoStr = decodeURIComponent(userCookie)
-      // console.log(userInfo);
       if (
         userInfoStr != null &&
         userInfoStr != undefined &&
@@ -87,7 +86,6 @@ const Shopcart = () => {
           var newItemList = res.data.data
           // 删除现有购物车cookie
           deleteCookie('shopcart')
-          // console.log(newItemList);
           // 拿到最新商品数据以后，重新组合成购物车数据
           for (var i = 0; i < newItemList.length; i++) {
             var tmpNewItem = newItemList[i]
@@ -96,7 +94,6 @@ const Shopcart = () => {
               shopcartList,
               tmpNewItemSpecId
             )
-            // console.log(buyCounts);
 
             // 构建购物车商品对象
             var shopcartItem = new ShopcartItem(
@@ -180,7 +177,7 @@ const Shopcart = () => {
         .then((res) => {
           if (res.data.status == 200) {
           } else if (res.data.status == 500) {
-            alert(res.data.msg)
+            message.error(res.data.msg)
           }
         })
     }
@@ -230,11 +227,42 @@ const Shopcart = () => {
   const handleSpecChanged = (specId) => {
     const clonedSpecIds = [...specIds]
     if (clonedSpecIds.indexOf(specId) > -1) {
-      setSpecIds(clonedSpecIds.filter(id => id != specId));
+      setSpecIds(clonedSpecIds.filter((id) => id != specId))
     } else {
-      clonedSpecIds.push(specId);
-      setSpecIds(clonedSpecIds);
+      clonedSpecIds.push(specId)
+      setSpecIds(clonedSpecIds)
     }
+  }
+
+  const goPay = () => {
+    // href={'/submitOrder'}
+    var shopcartList = getShopcartList()
+    if (shopcartList.length <= 0) {
+      message.info('购物车中没有商品，无法结算')
+      return
+    }
+
+    if (specIds.length <= 0) {
+      message.info('请至少在购物车中选择一个商品后再结算')
+      return
+    }
+
+    // 判断是否登录
+    if (userIsLogin) {
+      var specIdsStr = specIds.toString()
+      window.location.href = 'submitOrder?selectedItemSpecIds=' + specIdsStr
+    } else {
+      var bool = window.confirm('请登录/注册后再进行结算操作噢~！')
+      if (!bool) {
+        return
+      } else {
+        goLogin()
+      }
+    }
+  }
+
+  const goLogin = () => {
+    window.location.href = "login?returnUrl=shopcart.html";
   }
 
   return (
@@ -259,7 +287,10 @@ const Shopcart = () => {
               shopcartList.map((cartItem, sidx) => (
                 <li key={sidx} className={`${styles.item} fcb`}>
                   <div className={`fl`}>
-                    <Checkbox onChange={() => handleSpecChanged(cartItem.specId)} value={cartItem.specId}></Checkbox>
+                    <Checkbox
+                      onChange={() => handleSpecChanged(cartItem.specId)}
+                      value={cartItem.specId}
+                    ></Checkbox>
                   </div>
                   <div className={`${styles.goodsImg} fl`}>
                     <img src={cartItem.itemImgUrl} alt="" />
@@ -299,11 +330,13 @@ const Shopcart = () => {
             <div className={`fl`}>
               <div className={`${styles.choseGoods}`}>
                 合计（不含运费）
-                <span className={`${styles.choseRed}`}>{totalAmount / 100}</span>
+                <span className={`${styles.choseRed}`}>
+                  {totalAmount / 100}
+                </span>
               </div>
               <div className={`${styles.rate}`}>商品税费： ¥0</div>
             </div>
-            <a className={`${styles.buyBtn} fr`} href={'/submitOrder'}>
+            <a className={`${styles.buyBtn} fr`} onClick={goPay}>
               结算
             </a>
           </div>

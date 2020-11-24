@@ -13,7 +13,6 @@ export function getCookie(cname) {
   var ca = document.cookie.split(';')
   for (var i = 0; i < ca.length; i++) {
     var c = ca[i]
-    // console.log(c)
     while (c.charAt(0) == ' ') c = c.substring(1)
     if (c.indexOf(name) != -1) {
       return c.substring(name.length, c.length)
@@ -128,6 +127,10 @@ export function deleteCookie(name) {
         cookieContent += "domain=" + cookieDomain;
     }
     document.cookie = cookieContent;
+}
+
+export function goErrorPage() {
+  window.location.href = "http://localhost:8080/error/noexists";
 }
 
 export class ShopcartItem {

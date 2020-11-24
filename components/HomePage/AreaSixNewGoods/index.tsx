@@ -3,7 +3,6 @@ import styles from './index.module.scss'
 import GoodsItem from '../GoodsItem'
 
 const AreaSixNewGoods = ({ likeItemList }) => {
-    console.log(likeItemList)
     return (
         <>
         {

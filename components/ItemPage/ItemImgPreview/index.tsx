@@ -26,7 +26,6 @@ const ItemImgPreview = ({ images }) => {
             <div className={`${styles.leftListWrap} fcb`}>
                 <a className={`${styles.prevBtn} ${disabledUp ? styles.disabled : ''}`} onClick={() => {
                     if (disabledUp) {
-                        console.log('上不可点')
                         return
                     }
                     onClickPrevBtn('up');
@@ -57,7 +56,6 @@ const ItemImgPreview = ({ images }) => {
                 </div>
                 <a className={`${styles.prevBtn} ${disabledDown ? styles.disabled : ''}`} onClick={() => {
                     if (disabledDown) {
-                        console.log('下不可点')
                         return
                     }
                     onClickPrevBtn('down');

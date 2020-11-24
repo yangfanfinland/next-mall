@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter, SingletonRouter } from 'next/router'
-import { Tabs } from 'antd'
+import { Tabs, message } from 'antd'
 import HtmlHead from '../components/HtmlHead'
 import SearchArea from '../components/SearchArea'
 import BreadcrumbNav from '../components/BreadcrumbNav'
@@ -17,7 +17,6 @@ import {
   ShopcartItem,
 } from '../util/app'
 import styles from '../static/styles/item.module.scss'
-import { debug } from 'console'
 
 interface Props extends SingletonRouter {
   itemInfo: any
@@ -26,8 +25,6 @@ interface Props extends SingletonRouter {
 const { TabPane } = Tabs
 
 const Item = ({ itemInfo }: Props) => {
-  console.log(itemInfo)
-
   const { item, itemParams, itemImgList, itemSpecList } = itemInfo
   const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
@@ -71,12 +68,9 @@ const Item = ({ itemInfo }: Props) => {
     // 由于cookie大小限制为4k，另外课程第一阶段是没有redis的，所以相关暂存性内容会存入到cookie中
     var shopcartCounts = getShopcartItemCounts()
     if (shopcartCounts >= 8) {
-      alert('您购物车中的食物太多啦~请把它们带回家吧~！')
+      message.info('您购物车中的食物太多啦~请把它们带回家吧~！')
       return
     }
-
-    console.log('Item adding to shopcart', shopcartItem)
-    console.log('Item adding to shopcart', {...shopcartItem})
     shopcartItem.itemImgUrl = itemImgList[0].url
 
     // 添加商品至购物车list
@@ -100,11 +94,11 @@ const Item = ({ itemInfo }: Props) => {
 
       if (res.data.status == 200) {
       } else if (res.data.status == 500) {
-        alert(res.data.msg)
+        message.error(res.data.msg)
       }
     }
 
-    alert('商品添加至购物车成功！')
+    message.success('商品添加至购物车成功！')
 
     // 刷新购物车数量
     setShopcartItemCounts(getShopcartItemCounts())
@@ -154,10 +148,8 @@ Item.getInitialProps = async ({ ctx }) => {
   const res = await axios.get(serverUrl + '/items/info/' + itemId, {})
   if (res.data.status == 200) {
     itemInfo = res.data.data
-
-    // console.log(this.itemImgList);
   } else if (res.data.status == 500) {
-    alert(res.data.msg)
+    message.error(res.data.msg)
   }
 
   return {

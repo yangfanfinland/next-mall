@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Pagination } from "antd"
+import { Pagination, message } from "antd"
 import styles from './index.module.scss'
 import axios from 'axios'
 import { serverUrl } from '../../../util/app'
@@ -38,7 +38,7 @@ const ItemComment = ({ item }) => {
       countsVO = res.data.data
       setCountsVO(countsVO)
     } else if (res.data.status == 500) {
-      alert(res.data.msg)
+      message.error(res.data.msg)
     }
   }
 
@@ -75,7 +75,7 @@ const ItemComment = ({ item }) => {
       setMaxPage(maxPage)
       setTotal(total)
     } else if (res.data.status == 500) {
-      alert(res.data.msg)
+      message.error(res.data.msg)
     }
   }
 

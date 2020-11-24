@@ -58,11 +58,9 @@ export default function imageScale() {
         // 获取鼠标在页面中的位置
         let pageX = event.pageX || myScroll().left + event.clientX;
         let pageY = event.pageY || myScroll().top + event.clientY;
-        //console.log(pageX, pageY);
         // 获取图片左上角在页面中的位置
         let imgX = box.getBoundingClientRect().left;//box.offsetLeft;
         let imgY = box.getBoundingClientRect().top;//box.offsetTop;
-        console.log(imgX, imgY)
         let x = pageX - imgX;
         let y = pageY - imgY;
         contentX.innerHTML = x;
@@ -73,7 +71,6 @@ export default function imageScale() {
         // 让鼠标在黄盒子最中间，减去黄盒子宽高的一半
         let maskX = x - mask.offsetWidth / 2;
         let maskY = y - mask.offsetHeight / 2;
-        //console.log(maskX, maskY)
         //限制换盒子范围
         //left取值为大于0，小盒子的宽 - mask的宽。
         if (maskX < 0) {
@@ -92,7 +89,6 @@ export default function imageScale() {
         //移动mask
         mask.style.left = maskX + "px";
         mask.style.top = maskY + "px";
-        // console.log(maskX, maskY);
 
         // 右侧的大图片, 等比例移动。
         // 大图片走的距离 / mask走的距离 = 大图片/小图片

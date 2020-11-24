@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Radio } from "antd"
+import { Radio, message } from "antd"
 import InputBuyNumber from "../../InputBuyNumber"
 import { ShopcartItem } from '../../../util/app'
 import styles from './index.module.scss'
@@ -17,7 +17,7 @@ const ItemSpecification = ({ item, specification, addToCartCallback }) => {
         e.preventDefault()
         // 创建购物车对象
         if (typeof buyCounts != 'number') {
-            alert('购买数量不能为非数字！')
+            message.warning('购买数量不能为非数字！')
             setBuyCounts(1)
             return
         }
