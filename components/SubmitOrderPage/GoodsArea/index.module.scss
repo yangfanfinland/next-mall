@@ -8,8 +8,15 @@
   margin: 20px 0;
 }
 
+.payTable {
+  border: 1px solid rgba(221, 221, 221, 1);
+}
+
 .header {
+  height: 48px;
+  line-height: 48px;
   padding: 0 15px;
+  background: #F5F5F5;
 
   > span {
     display: inline-block;
@@ -42,7 +49,8 @@
 .goodsBox {
   padding: 15px;
   background: rgba(255, 255, 255, 1);
-  border: 1px solid rgba(221, 221, 221, 1);
+  border-top: 1px solid rgba(221, 221, 221, 1);
+  border-bottom: 1px solid rgba(221, 221, 221, 1);
 
   .item {
     margin-bottom: 10px;
@@ -87,7 +95,8 @@
 }
 
 .msgWrap {
-  margin-top: 10px;
+  margin: 10px 0;
+  padding: 0 15px;
 
   .msgTitle {
     color: black;

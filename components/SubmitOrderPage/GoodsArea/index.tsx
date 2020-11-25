@@ -69,57 +69,61 @@ const GoodsArea = () => {
   return (
     <div className={`contentWidth ${styles.goodsAreaPage}`}>
       <div className={`${styles.title}`}>确认订单信息</div>
-      <div className={`${styles.header} fcb`}>
-        <span className={`${styles.goodsInfo} fl`}>商品信息</span>
-        <span className={`${styles.goodsPrice} fl`}>单价(元)</span>
-        <span className={`${styles.goodsNum} fl`}>数量</span>
-        <span className={`${styles.money} fl`}>金额(元)</span>
-      </div>
+      <div className={`${styles.payTable}`}>
+        <div className={`${styles.header} fcb`}>
+          <span className={`${styles.goodsInfo} fl`}>商品信息</span>
+          <span className={`${styles.goodsPrice} fl`}>单价(元)</span>
+          <span className={`${styles.goodsNum} fl`}>数量</span>
+          <span className={`${styles.money} fl`}>金额(元)</span>
+        </div>
 
-      {orderItemList &&
-        orderItemList.map((orderItem, index) => (
-          <div key={index} className={styles.goodsBox}>
-            <div className={`${styles.item} fcb`}>
-              <img
-                className={`${styles.goodsImg} fl`}
-                src={orderItem.itemImgUrl}
-                alt=""
-              />
-              <div className={`${styles.goodsName} fl`}>
-                {orderItem.itemName}
-                <div><span>规格：{orderItem.specName} </span></div>
-              </div>
-              {/* <div className={`${styles.size} fl`}>
+        {orderItemList &&
+          orderItemList.map((orderItem, index) => (
+            <div key={index} className={styles.goodsBox}>
+              <div className={`${styles.item} fcb`}>
+                <img
+                  className={`${styles.goodsImg} fl`}
+                  src={orderItem.itemImgUrl}
+                  alt=""
+                />
+                <div className={`${styles.goodsName} fl`}>
+                  {orderItem.itemName}
+                  <div>
+                    <span>规格：{orderItem.specName} </span>
+                  </div>
+                </div>
+                {/* <div className={`${styles.size} fl`}>
                 
               </div> */}
-              <div className={`${styles.fontBold} ${styles.price} fl`}>
-                {orderItem.priceDiscount / 100}
+                <div className={`${styles.fontBold} ${styles.price} fl`}>
+                  {orderItem.priceDiscount / 100}
+                </div>
+                <div className={`${styles.fontBold}  ${styles.num} fl`}>
+                  {orderItem.buyCounts}
+                </div>
+                <div className={`${styles.fontBold} ${styles.money} fl`}>
+                  {(orderItem.priceDiscount * orderItem.buyCounts) / 100}
+                </div>
               </div>
-              <div className={`${styles.fontBold}  ${styles.num} fl`}>
-                {orderItem.buyCounts}
-              </div>
-              <div className={`${styles.fontBold} ${styles.money} fl`}>
-                {(orderItem.priceDiscount * orderItem.buyCounts) / 100}
-              </div>
-            </div>
 
-            <div className={styles.yunFee}>
-              <span className={`color6 f16`}>运费：</span>
-              <span className={`red f16`}>￥5.00</span>
+              {/* <div className={styles.yunFee}>
+                <span className={`color6 f16`}>运费：</span>
+                <span className={`red f16`}>￥5.00</span>
+              </div> */}
+            </div>
+          ))}
+
+        <div className={`${styles.msgWrap} fcb`}>
+          <div className={`fl fcb`}>
+            <span className={`${styles.msgTitle} fl`}>给商家留言：</span>
+            <div className={`fl ${styles.msgText}`}>
+              <Input.TextArea rows={2} placeholder={'选填，最多200字'} />
             </div>
           </div>
-        ))}
-
-      <div className={`${styles.msgWrap} fcb`}>
-        <div className={`fl fcb`}>
-          <span className={`${styles.msgTitle} fl`}>给商家留言：</span>
-          <div className={`fl ${styles.msgText}`}>
-            <Input.TextArea rows={2} placeholder={'选填，最多200字'} />
+          <div className={`fr`}>
+            <span>合计(包邮)：</span>
+            <span className={`f20 fwb red`}>¥{totalAmount / 100}</span>
           </div>
-        </div>
-        <div className={`fr`}>
-          <span>店铺合计(含运费)：</span>
-          <span className={`f20 fwb red`}>¥{totalAmount / 100}</span>
         </div>
       </div>
 
