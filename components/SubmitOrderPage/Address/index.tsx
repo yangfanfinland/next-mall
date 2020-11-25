@@ -13,17 +13,15 @@ const Address = () => {
   const [userInfo, setUserInfo] = useState<any>()
   const [defaultAddressId, setDefaultAddressId] = useState('')
   const [choosedAddressId, setChoosedAddressId] = useState('')
-  const [receiver, setReceiver] = useState('')
-  const [mobile, setMobile] = useState('')
   const [prov, setProv] = useState('北京')
   const [city, setCity] = useState('北京')
   const [district, setDistrict] = useState('东城区')
-  const [detail, setDetail] = useState('')
   const [arr] = useState(cities)
   const [cityArr, setCityArr] = useState([])
   const [districtArr, setDistrictArr] = useState([])
   const [updatedAddressId, setUpdatedAddressId] = useState('')
   const [initialValues, setInitialValues] = useState<any>()
+  const [confirmAddress, setConfirmAddress] = useState<any>()
 
   useEffect(() => {
     // updateCity();
@@ -98,12 +96,9 @@ const Address = () => {
   }
 
   const flushAddressForm = () => {
-    setReceiver('')
-    setMobile('')
     setProv('北京')
     setCity('北京')
     setDistrict('东城区')
-    setDetail('')
 
     // updateCity()
     updateDistrict()
@@ -149,13 +144,34 @@ const Address = () => {
     }
   }
 
+  const chooseAddress = (choosedAddressId) => {
+    setChoosedAddressId(choosedAddressId);
+
+    // 确认地址动态改变
+    renderConfirmAddress(choosedAddressId);
+  }
+
+  const renderConfirmAddress = (addressId) => {
+    // 提交订单的确认地址要跟着动态改变
+    var tempConfirmAddress = null;
+    for (var i = 0 ; i < addressList.length ; i ++) {
+      var tmpAddress = addressList[i];
+      if (tmpAddress.id == addressId) {
+        tempConfirmAddress = tmpAddress;
+        break;
+      }
+    }
+    // 赋值
+    setConfirmAddress(tempConfirmAddress);
+  }
+
   const setDefaultChoosedAddressId = (addressList) => {
-    var confirmAddress = {}
+    var tempConfirmAddress = {}
     for (var i = 0; i < addressList.length; i++) {
       var address = addressList[i]
       if (address.isDefault == 1) {
         setDefaultAddressId(address.id)
-        confirmAddress = address
+        tempConfirmAddress = address
         // 如果当前页面还没有选中的地址，则把默认地址作为选中地址
         if (
           choosedAddressId == null ||
@@ -169,7 +185,7 @@ const Address = () => {
     }
 
     // 赋值
-    confirmAddress = confirmAddress
+    setConfirmAddress(tempConfirmAddress)
   }
 
   const editAddress = (addressId) => {
@@ -387,8 +403,9 @@ const Address = () => {
         {addressList.map((address, aindex) => {
           return (
             <div
-              className={`${styles.item} ${aindex === 0 ? styles.active : ''}`}
+              className={`${styles.item} ${address.id === choosedAddressId ? styles.active : ''}`}
               key={aindex}
+              onClick={() => chooseAddress(address.id)}
             >
               <div className={`${styles.nameWrap} fcb`}>
                 <span className={`${styles.name} fl`}>
