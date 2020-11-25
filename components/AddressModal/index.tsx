@@ -78,7 +78,6 @@ const AddressModal = ({
     const [form] = Form.useForm();
 
     useEffect(() => {
-        console.log("changing...")
         form.setFieldsValue(initialValues);
     }, [form, initialValues])
 

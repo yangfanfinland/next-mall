@@ -183,8 +183,6 @@ const Address = () => {
       }
     }
 
-    console.log(updateAddress)
-
     // 赋值
     setInitialValues({
       receiver: updateAddress.receiver,
@@ -348,6 +346,33 @@ const Address = () => {
       })
   }
 
+  // 设置默认地址
+  const setDefaultAddress = (addressId) => {
+    axios.defaults.withCredentials = true
+    axios
+      .post(
+        serverUrl +
+          '/address/setDefalut?userId=' +
+          userInfo.id +
+          '&addressId=' +
+          addressId,
+        {},
+        {
+          headers: {
+            headerUserId: userInfo.id,
+            headerUserToken: userInfo.userUniqueToken,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.status == 200) {
+          renderUserAddressList()
+        } else {
+          alert(res.data.msg)
+        }
+      })
+  }
+
   const closeAddressDialog = () => {
     setVisible(false)
     // 设置更新地址的id为空
@@ -369,8 +394,8 @@ const Address = () => {
                 <span className={`${styles.name} fl`}>
                   {address.receiver} 收{' '}
                 </span>
-                {aindex === 0 && (
-                  <span className={`${styles.default} fr`}>默认</span>
+                {address.isDefault === 1 && (
+                  <span className={`${styles.default} fr`}>默认地址</span>
                 )}
               </div>
               <div className={styles.address}>
@@ -378,12 +403,24 @@ const Address = () => {
                 {address.detail}
               </div>
               <div>{address.mobile}</div>
+              {address.isDefault !== 1 && (
+                <>
+                  <a
+                    className={styles.modifyBtn}
+                    onClick={() => setDefaultAddress(address.id)}
+                  >
+                    设为默认
+                  </a>
+                  |
+                </>
+              )}
               <a
                 className={styles.modifyBtn}
                 onClick={() => editAddress(address.id)}
               >
                 修改
               </a>
+              |
               <a
                 className={styles.modifyBtn}
                 onClick={() => deleteAddress(address.id)}
