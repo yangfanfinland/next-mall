@@ -91,7 +91,7 @@ const AddressModal = ({
                       onOk && onOk(values);
                   }}
             >
-                <Form.Item
+                {/* <Form.Item
                     name="area"
                     label="所在地区"
                     rules={[
@@ -99,23 +99,44 @@ const AddressModal = ({
                     ]}
                 >
                     <Cascader options={residences}/>
+                </Form.Item> */}
+                <Form.Item
+                    name="prov"
+                    label="省"
+                    rules={[{required: true, message: '必填'}]}
+                >
+                    <Input placeholder={'请填写省'}/>
                 </Form.Item>
                 <Form.Item
-                    name="detailAddr"
+                    name="city"
+                    label="市"
+                    rules={[{required: true, message: '必填'}]}
+                >
+                    <Input placeholder={'请填写市'}/>
+                </Form.Item>
+                <Form.Item
+                    name="district"
+                    label="区"
+                    rules={[{required: true, message: '必填'}]}
+                >
+                    <Input placeholder={'请填写区'}/>
+                </Form.Item>
+                <Form.Item
+                    name="detail"
                     label="详细地址"
                     rules={[{required: true, message: '必填'}]}
                 >
-                    <Input.TextArea row={2} placeholder={'请填写详细地址，小于75字'}/>
+                    <Input.TextArea rows={2} placeholder={'请填写详细地址，小于75字'}/>
                 </Form.Item>
                 <Form.Item
-                    name="recieveName"
+                    name="receiver"
                     label="收货人姓名"
                     rules={[{required: true, message: '必填'}]}
                 >
                     <Input placeholder={'请填写真实姓名'}/>
                 </Form.Item>
                 <Form.Item
-                    name="phone"
+                    name="mobile"
                     label="手机号码"
                     rules={[{required: true, message: '必填'}]}
                 >

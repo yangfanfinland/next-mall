@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddressModal from '../../AddressModal'
-import { serverUrl, getCookie } from '../../../util/app'
+import { serverUrl, getCookie, checkMobile } from '../../../util/app'
 import { cities } from '../../../util/cities'
 import axios from 'axios'
 import { message } from 'antd'
@@ -22,6 +22,7 @@ const Address = () => {
   const [arr] = useState(cities)
   const [cityArr, setCityArr] = useState([])
   const [districtArr, setDistrictArr] = useState([])
+  const [updatedAddressId, setUpdatedAddressId] = useState("")
 
   useEffect(() => {
     // updateCity();
@@ -170,6 +171,118 @@ const Address = () => {
     confirmAddress = confirmAddress
   }
 
+  const saveNewAddressOrUpdate = async (values) => {
+    var receiver = values.receiver
+    if (receiver == null || receiver == '' || receiver == undefined) {
+      message.warning('收货人姓名不能为空')
+      return
+    }
+    if (receiver.length > 12) {
+      message.warning('收货人姓名不能太长')
+      return
+    }
+
+    var mobile = values.mobile
+    if (mobile == null || mobile == '' || mobile == undefined) {
+      message.warning('手机不能为空')
+      return
+    }
+    if (mobile.length != 11) {
+      message.warning('手机号长度为11位')
+      return
+    }
+
+    if (!checkMobile(mobile)) {
+      message.warning('请输入有效的手机号码！')
+      return
+    }
+
+    var prov = values.prov
+    var city = values.city
+    var district = values.district
+
+    var detail = values.detail
+    if (detail == null || detail == '' || detail == undefined) {
+      message.warning('详细地址不能为空')
+      return
+    }
+
+    // 添加新地址
+    axios.defaults.withCredentials = true
+
+    var addressId = updatedAddressId
+
+    // 地址id为空，则新增地址，否则更新地址
+    if (addressId == '' || addressId == undefined || addressId == null) {
+      axios
+        .post(
+          serverUrl + '/address/add',
+          {
+            userId: userInfo.id,
+            receiver: receiver,
+            mobile: mobile,
+            province: prov,
+            city: city,
+            district: district,
+            detail: detail,
+          },
+          {
+            headers: {
+              headerUserId: userInfo.id,
+              headerUserToken: userInfo.userUniqueToken,
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data.status == 200) {
+            closeAddressDialog()
+            renderUserAddressList()
+
+            // 设置更新地址的id为空
+            setUpdatedAddressId('')
+          } else if (res.data.status == 500) {
+            message.error(res.data.msg)
+          }
+        })
+    } else {
+      axios
+        .post(
+          serverUrl + '/address/update',
+          {
+            addressId: addressId,
+            userId: userInfo.id,
+            receiver: receiver,
+            mobile: mobile,
+            province: prov,
+            city: city,
+            district: district,
+            detail: detail,
+          },
+          {
+            headers: {
+              headerUserId: userInfo.id,
+              headerUserToken: userInfo.userUniqueToken,
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data.status == 200) {
+            closeAddressDialog()
+            renderUserAddressList()
+          } else if (res.data.status == 500) {
+            message.error(res.data.msg)
+          }
+        })
+    }
+  }
+
+  const closeAddressDialog = () => {
+    setVisible(false)
+    // 设置更新地址的id为空
+    setUpdatedAddressId("");
+    flushAddressForm();
+  }
+
   return (
     <div className={`contentWidth`}>
       <div className={styles.title}>选择收货地址</div>
@@ -206,9 +319,7 @@ const Address = () => {
         onCancel={() => {
           setVisible(false)
         }}
-        onOk={(values) => {
-          console.log(values)
-        }}
+        onOk={saveNewAddressOrUpdate}
       />
     </div>
   )
