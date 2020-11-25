@@ -22,7 +22,7 @@ const Address = () => {
   const [arr] = useState(cities)
   const [cityArr, setCityArr] = useState([])
   const [districtArr, setDistrictArr] = useState([])
-  const [updatedAddressId, setUpdatedAddressId] = useState("")
+  const [updatedAddressId, setUpdatedAddressId] = useState('')
   const [initialValues, setInitialValues] = useState<any>()
 
   useEffect(() => {
@@ -174,12 +174,12 @@ const Address = () => {
 
   const editAddress = (addressId) => {
     // 获得编辑的地址内容
-    var updateAddress = null;
-    for (var i = 0 ; i < addressList.length ; i ++) {
-      var tmpAddress = addressList[i];
+    var updateAddress = null
+    for (var i = 0; i < addressList.length; i++) {
+      var tmpAddress = addressList[i]
       if (tmpAddress.id == addressId) {
-        updateAddress = tmpAddress;
-        break;
+        updateAddress = tmpAddress
+        break
       }
     }
 
@@ -192,14 +192,14 @@ const Address = () => {
       prov: updateAddress.province,
       city: updateAddress.city,
       district: updateAddress.district,
-      detail: updateAddress.detail
+      detail: updateAddress.detail,
     })
 
     // 设置更新地址的id
-    setUpdatedAddressId(addressId);
+    setUpdatedAddressId(addressId)
 
     // 弹出对话框
-    setVisible(true);
+    setVisible(true)
   }
 
   const saveNewAddressOrUpdate = async (values) => {
@@ -307,11 +307,52 @@ const Address = () => {
     }
   }
 
+  // 删除地址
+  const deleteAddress = (addressId) => {
+    var isDel = window.confirm('确认删除改地址吗')
+    if (!isDel) {
+      return
+    }
+
+    // 如果删除的地址是默认地址或者选中地址，则choosedAddressId和defaultAddressId要设置为空
+    if (addressId == choosedAddressId) {
+      setChoosedAddressId('')
+    }
+
+    if (addressId == defaultAddressId) {
+      setDefaultAddressId('')
+    }
+
+    axios.defaults.withCredentials = true
+    axios
+      .post(
+        serverUrl +
+          '/address/delete?userId=' +
+          userInfo.id +
+          '&addressId=' +
+          addressId,
+        {},
+        {
+          headers: {
+            headerUserId: userInfo.id,
+            headerUserToken: userInfo.userUniqueToken,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.status == 200) {
+          renderUserAddressList()
+        } else {
+          message.error(res.data.msg)
+        }
+      })
+  }
+
   const closeAddressDialog = () => {
     setVisible(false)
     // 设置更新地址的id为空
-    setUpdatedAddressId("");
-    flushAddressForm();
+    setUpdatedAddressId('')
+    flushAddressForm()
   }
 
   return (
@@ -337,7 +378,18 @@ const Address = () => {
                 {address.detail}
               </div>
               <div>{address.mobile}</div>
-              <a className={styles.modifyBtn} onClick={() => editAddress(address.id)}>修改</a>
+              <a
+                className={styles.modifyBtn}
+                onClick={() => editAddress(address.id)}
+              >
+                修改
+              </a>
+              <a
+                className={styles.modifyBtn}
+                onClick={() => deleteAddress(address.id)}
+              >
+                删除
+              </a>
             </div>
           )
         })}
