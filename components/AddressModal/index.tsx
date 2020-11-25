@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import {Button, Cascader, Checkbox, Col, Form, Input, Modal, Row} from "antd"
 import styles from './index.module.scss'
 
@@ -71,9 +71,17 @@ const residences = [
 const AddressModal = ({
                           visible,
                           onOk,
-                          onCancel
+                          onCancel,
+                          initialValues
                       }) => {
+
     const [form] = Form.useForm();
+
+    useEffect(() => {
+        console.log("changing...")
+        form.setFieldsValue(initialValues);
+    }, [form, initialValues])
+
     return (
         <Modal
             title="添加/编辑地址"
@@ -86,7 +94,7 @@ const AddressModal = ({
         >
             <Form {...formItemLayout}
                   form={form}
-                  initialValues={{}}
+                  initialValues={initialValues}
                   onFinish={(values) => {
                       onOk && onOk(values);
                   }}
@@ -142,9 +150,9 @@ const AddressModal = ({
                 >
                     <Input placeholder={'请填写手机号码'}/>
                 </Form.Item>
-                <Form.Item label=" " name="remember" valuePropName="checked" colon={false}>
+                {/* <Form.Item label=" " name="remember" valuePropName="checked" colon={false}>
                     <Checkbox>设为默认地址</Checkbox>
-                </Form.Item>
+                </Form.Item> */}
                 <Row justify={'center'}>
                     <Col span={3}>
                         <Button type="primary" htmlType="submit">确定</Button>

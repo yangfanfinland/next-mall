@@ -23,6 +23,7 @@ const Address = () => {
   const [cityArr, setCityArr] = useState([])
   const [districtArr, setDistrictArr] = useState([])
   const [updatedAddressId, setUpdatedAddressId] = useState("")
+  const [initialValues, setInitialValues] = useState<any>()
 
   useEffect(() => {
     // updateCity();
@@ -171,6 +172,36 @@ const Address = () => {
     confirmAddress = confirmAddress
   }
 
+  const editAddress = (addressId) => {
+    // 获得编辑的地址内容
+    var updateAddress = null;
+    for (var i = 0 ; i < addressList.length ; i ++) {
+      var tmpAddress = addressList[i];
+      if (tmpAddress.id == addressId) {
+        updateAddress = tmpAddress;
+        break;
+      }
+    }
+
+    console.log(updateAddress)
+
+    // 赋值
+    setInitialValues({
+      receiver: updateAddress.receiver,
+      mobile: updateAddress.mobile,
+      prov: updateAddress.province,
+      city: updateAddress.city,
+      district: updateAddress.district,
+      detail: updateAddress.detail
+    })
+
+    // 设置更新地址的id
+    setUpdatedAddressId(addressId);
+
+    // 弹出对话框
+    setVisible(true);
+  }
+
   const saveNewAddressOrUpdate = async (values) => {
     var receiver = values.receiver
     if (receiver == null || receiver == '' || receiver == undefined) {
@@ -306,7 +337,7 @@ const Address = () => {
                 {address.detail}
               </div>
               <div>{address.mobile}</div>
-              <a className={styles.modifyBtn}>修改</a>
+              <a className={styles.modifyBtn} onClick={() => editAddress(address.id)}>修改</a>
             </div>
           )
         })}
@@ -315,6 +346,7 @@ const Address = () => {
         +新建地址
       </a>
       <AddressModal
+        initialValues={initialValues}
         visible={visible}
         onCancel={() => {
           setVisible(false)
