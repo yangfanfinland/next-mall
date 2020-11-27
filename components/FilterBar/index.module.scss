@@ -1,0 +1,23 @@
+.filterWrap {
+  height: 56px;
+  line-height: 56px;
+  background: #ffffff;
+  padding: 0 15px;
+  margin-bottom: 10px;
+}
+
+.btnGroup {
+  display: inline-block;
+  margin-right: 24px;
+}
+
+.inputW {
+  .ant-input-affix-wrapper {
+    width: 80px;
+    margin-right: 10px;
+  }
+}
+
+.searchWrap {
+  width: 250px;
+}

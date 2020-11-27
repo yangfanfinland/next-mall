@@ -1,0 +1,33 @@
+import React from 'react'
+import { ShoppingCartOutlined } from '@ant-design/icons/lib/icons'
+import styles from './index.module.scss'
+
+const GoodsItem = ({ item, myClassName }: { item; myClassName?: string }) => {
+  return (
+    <a
+      href=""
+      className={`${styles.goodsItem} ${myClassName ? myClassName : ''}`}
+      //style={tempStyle}
+    >
+      <img src={item.imgUrl} className={styles.goodsImg} alt="" />
+      <div className={styles.goodsDesc}>
+        <p className={styles.goodsName}>{item.itemName}</p>
+        <p className={styles.priceWrap}>
+          <span className={styles.nowPrice}>¥{item.price / 100}</span>
+          {/* <span className={styles.marketPrice}>市场价 ¥630</span> */}
+        </p>
+        {/* <p className={styles.storeName}>春雨（papa recipe）海外旗舰店</p> */}
+        <div className={`${styles.totalSaleWrap} fcb`}>
+          <p className={`${styles.saleTotal} fl fcb`}>
+            销量：<span className={styles.num}>{item.sellCounts}</span>
+          </p>
+          <span className={`${styles.car} fr`}>
+            <ShoppingCartOutlined style={{ fontSize: 24, color: '#F33A3F' }} />
+          </span>
+        </div>
+      </div>
+    </a>
+  )
+}
+
+export default GoodsItem
