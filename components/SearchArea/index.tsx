@@ -2,7 +2,7 @@ import React from 'react'
 import SearchBar from '../SearchBar'
 import styles from './index.module.scss'
 
-const SearchArea = ({ keywords, noSearch = false }) => {
+const SearchArea = ({ keywords, noSearch = false }: { keywords?: string, noSearch?: boolean }) => {
     return (
         <div className={`bw`}>
             <div className={`${styles.searchWrap} contentWidth`}>

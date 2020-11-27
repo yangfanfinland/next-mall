@@ -1,78 +1,50 @@
 @import '../../static/styles/color';
+@import '../../static/styles/common';
 
-.footerTop {
-  height: 328px;
-  background: $primary-color;
+.footer {
+  margin-top: 20px;
+  text-align: left;
+  display: block;
+  position: relative;
+  padding: 7px 0px 9px;
+  border-top: 2px solid $primary-color;
+}
 
-  .warrWrap {
-    margin: 20px 0;
+.footer-hd {
+  p {
+    margin-bottom: 8px;
+    line-height: 27px;
+    border-bottom: 1px solid #DDD;
+    text-align: left;
+    @include center();
   }
 
-  .item {
-    height: 50px;
-    line-height: 50px;
-    width: 25%;
-    float: left;
-    padding-left: 30px;
-    margin: 20px 0;
+  a {
+    margin: 0px 4px;
+    white-space: nowrap;
+    color: #6C6C6C;
 
-    img {
-      width: 45px;
-      height: 45px;
+    &:link,
+    &:visited,
+    &:hover {
+      text-decoration: none;
+      outline: none;
     }
-
-    a {
-      font-size: 26px;
-      color: #fff;
-      vertical-align: middle;
-      margin-left: 15px;
-    }
   }
 
-  .telWrap {
-    margin-top: 40px;
-    padding-left: 30px;
-  }
-
-  .wxText {
-    font-size: 20px;
-    color: #f8f8f8;
-  }
-
-  .wxQRCode {
-    float: left;
-    width: 119px;
-    height: 122px;
-    margin-left: 7px;
-    margin-top: 15px;
-  }
-
-  .companyInfo {
-    float: left;
-    padding-top: 35px;
-    padding-left: 20px;
-
-    p {
-      font-size: 16px;
-      color: #fff;
-    }
+  b {
+    margin: 0px 3px;
+    font-weight: 400;
+    color: #DDD;
   }
 }
 
-.footerBottom {
-  height: 195px;
-  background: #090723;
-  text-align: center;
-  padding-top: 30px;
-
+.footer-bd {
   p {
-    margin-top: 10px;
-    line-height: 26px;
-  }
-
-  a,
-  p {
-    font-size: 14px;
-    color: #ffffff;
+    border-bottom: none;
+    margin-bottom: 8px;
+    line-height: 27px;
+    text-align: left;
+    @include center();
   }
 }
