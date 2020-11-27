@@ -5,20 +5,17 @@ import SearchArea from '../components/SearchArea'
 import BreadcrumbNav from '../components/BreadcrumbNav'
 import FilterBar from '../components/FilterBar'
 import GoodsList from '../components/GoodsList'
-import {
-  serverUrl,
-  getCookie,
-  getUrlParam,
-  getShopcartItemCounts,
-} from '../util/app'
+import { serverUrl, getCookie } from '../util/app'
 import axios from 'axios'
 import { message } from 'antd'
 
 interface Props extends SingletonRouter {
   grid: any
+  type: string
+  categoryId: number
 }
 
-const catItems = ({ grid }: Props) => {
+const catItems = ({ grid, type, categoryId }: Props) => {
   const [keywords, setKeywords] = useState(null)
   const [sort, setSort] = useState('k')
   const [page, setPage] = useState(1)
@@ -28,52 +25,12 @@ const catItems = ({ grid }: Props) => {
   const [itemsList, setItemsList] = useState(grid.rows)
   const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
-  const [searchType, setSearchType] = useState(null)
-  const [catId, setCatId] = useState(0)
+  const [searchType, setSearchType] = useState(type)
+  const [catId, setCatId] = useState(categoryId)
   const [shopcartItemCounts, setShopcartItemCounts] = useState(0)
 
   useEffect(() => {
     judgeUserLoginStatus()
-    var page = getUrlParam('page')
-    if (page == null || page == undefined || page == '') {
-      setPage(1)
-    } else {
-      setPage(parseInt(page))
-    }
-
-    var pageSize = getUrlParam('pageSize')
-    if (pageSize == null || pageSize == undefined || pageSize == '') {
-      setPageSize(20)
-    } else {
-      setPageSize(parseInt(pageSize))
-    }
-
-    var searchType = getUrlParam('searchType')
-    if (searchType == null || searchType == undefined || searchType == '') {
-      return false
-    } else if (searchType == 'searchItems') {
-      setSearchType(searchType)
-
-      var keywords = getUrlParam('keywords')
-      if (keywords == null || keywords == undefined || keywords == '') {
-        return
-      }
-      setKeywords(keywords)
-
-      searchInBackend(keywords, 'k', 1, 20)
-    } else if (searchType == 'catItems') {
-      setSearchType(searchType)
-      // 从别的页面来的搜索
-      var catId = getUrlParam('catId')
-      if (catId == null || catId == undefined || catId == '') {
-        setCatId(0)
-      } else {
-        setCatId(parseInt(catId))
-      }
-    }
-
-    // 从购物车中拿到商品的数量
-    setShopcartItemCounts(getShopcartItemCounts())
   }, [])
 
   const searchInBackend = async (keywords, sort, page, pageSize) => {
@@ -186,28 +143,51 @@ const catItems = ({ grid }: Props) => {
 }
 
 catItems.getInitialProps = async ({ ctx }) => {
-  const { searchType, catId, sort = 'k', page = 1, pageSize = 20 } = ctx.query
+  const {
+    searchType,
+    catId,
+    sort = 'k',
+    page = 1,
+    pageSize = 20,
+    keywords,
+  } = ctx.query
 
-  let grid
+  let grid, url
   axios.defaults.withCredentials = true
-  const res = await axios.get(
-    serverUrl +
-      '/items/catItems?catId=' +
+  if (searchType == 'catItems') {
+    url =
+      serverUrl +
+      '/items/' +
+      searchType +
+      '?catId=' +
       catId +
       '&sort=' +
       sort +
       '&page=' +
       page +
       '&pageSize=' +
-      pageSize,
-    {}
-  )
-
+      pageSize
+  }
+  if (searchType == 'searchItems') {
+    url =
+      serverUrl +
+      '/items/search?keywords=' +
+      encodeURIComponent(keywords) +
+      '&sort=' +
+      sort +
+      '&page=' +
+      page +
+      '&pageSize=' +
+      pageSize
+  }
+  const res = await axios.get(url, {})
   if (res.data.status == 200) {
     grid = res.data.data
   }
   return {
     grid,
+    type: searchType,
+    categoryId: catId,
   }
 }
 
