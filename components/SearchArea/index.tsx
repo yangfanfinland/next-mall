@@ -2,7 +2,7 @@ import React from 'react'
 import SearchBar from '../SearchBar'
 import styles from './index.module.scss'
 
-const SearchArea = ({ noSearch = false }) => {
+const SearchArea = ({ keywords, noSearch = false }) => {
     return (
         <div className={`bw`}>
             <div className={`${styles.searchWrap} contentWidth`}>
@@ -12,7 +12,7 @@ const SearchArea = ({ noSearch = false }) => {
                 {
                     !noSearch &&
                     <div className={styles.searchArea}>
-                        <SearchBar />
+                        <SearchBar defaultValue={keywords} />
                     </div>
                 }
             </div>

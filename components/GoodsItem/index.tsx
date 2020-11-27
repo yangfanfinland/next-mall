@@ -5,9 +5,9 @@ import styles from './index.module.scss'
 const GoodsItem = ({ item, myClassName }: { item; myClassName?: string }) => {
   return (
     <a
-      href=""
+      href={item && '/item?itemId=' + item.itemId}
+      target={'_blank'}
       className={`${styles.goodsItem} ${myClassName ? myClassName : ''}`}
-      //style={tempStyle}
     >
       <img src={item.imgUrl} className={styles.goodsImg} alt="" />
       <div className={styles.goodsDesc}>

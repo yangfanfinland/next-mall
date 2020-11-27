@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './index.module.scss'
-import SubCategory from './SubCategory.tsx'
+import SubCategory from './SubCategory'
 import axios from 'axios'
 import { serverUrl } from '../../util/app'
 
@@ -31,10 +31,10 @@ const Category = ({ hoverShow = false, categoryList=[] }) => {
         </div>
         <ul className={`${styles.categoryList} ${hoverShow ? styles.hideCategory : ''}`}>
             {
-                categoryList.map(category => (
-                    <li key={category.id} className={styles.categoryItem} onMouseEnter={() => handleMouseEnter(category.id) } >
-                        <i className={`${styles.categoryIcon} ${styles.categoryCos}`}/>
-                        <span className={styles.categoryName}>{category.name}</span>
+                categoryList.map(rootCat => (
+                    <li key={rootCat.id} className={styles.categoryItem} onMouseEnter={() => handleMouseEnter(rootCat.id) } >
+                        <img className={`${styles.categoryIcon}`} src={rootCat.catImage} />
+                        <span className={styles.categoryName}>{rootCat.name}</span>
                         <i className={styles.iconArrow}/>
                         <div className={`${styles.subCategory}`}>
                             <SubCategory subCategoryList={subCategoryList} />

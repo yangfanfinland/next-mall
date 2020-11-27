@@ -7,27 +7,25 @@ import FilterBar from '../components/FilterBar'
 import GoodsList from '../components/GoodsList'
 import { serverUrl, getCookie } from '../util/app'
 import axios from 'axios'
-import { message } from 'antd'
+import { Pagination, message } from 'antd'
+import styles from '../static/styles/catItems.module.scss'
 
 interface Props extends SingletonRouter {
   grid: any
-  type: string
-  categoryId: number
+  searchType: string
+  catId: number
+  pageSize: number
+  keywords?: string
 }
 
-const catItems = ({ grid, type, categoryId }: Props) => {
-  const [keywords, setKeywords] = useState(null)
+const catItems = ({ grid, searchType, catId, pageSize, keywords }: Props) => {
   const [sort, setSort] = useState('k')
   const [page, setPage] = useState(1)
-  const [pageSize, setPageSize] = useState(20)
   const [maxPage, setMaxPage] = useState(grid.total)
   const [total, setTotal] = useState(grid.records)
   const [itemsList, setItemsList] = useState(grid.rows)
   const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
-  const [searchType, setSearchType] = useState(type)
-  const [catId, setCatId] = useState(categoryId)
-  const [shopcartItemCounts, setShopcartItemCounts] = useState(0)
 
   useEffect(() => {
     judgeUserLoginStatus()
@@ -131,13 +129,32 @@ const catItems = ({ grid, type, categoryId }: Props) => {
     }
   }
 
+  const doPaging = async (page) => {
+    setPage(page)
+
+    if (searchType == 'searchItems') {
+      await searchInBackend(keywords, sort, page, pageSize)
+    } else if (searchType == 'catItems') {
+      await searchCatItemsInBackend(catId, sort, page, pageSize)
+    }
+  }
+
   return (
     <>
       <HtmlHead title={'商品列表'} />
-      <SearchArea />
+      <SearchArea keywords={keywords} />
       <BreadcrumbNav />
       <FilterBar onSort={chooseSort} />
       <GoodsList itemsList={itemsList} />
+      <div className={`contentWidth ${styles.wrap}`}>
+        <Pagination
+          pageSize={pageSize}
+          showQuickJumper
+          defaultCurrent={1}
+          total={total}
+          onChange={doPaging}
+        />
+      </div>
     </>
   )
 }
@@ -186,8 +203,10 @@ catItems.getInitialProps = async ({ ctx }) => {
   }
   return {
     grid,
-    type: searchType,
-    categoryId: catId,
+    searchType: searchType,
+    catId: catId,
+	pageSize: pageSize,
+	keywords: keywords
   }
 }
 
