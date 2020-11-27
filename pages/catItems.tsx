@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { withRouter, SingletonRouter } from 'next/router'
 import HtmlHead from '../components/HtmlHead'
 import SearchArea from '../components/SearchArea'
 import BreadcrumbNav from '../components/BreadcrumbNav'
@@ -13,14 +14,18 @@ import {
 import axios from 'axios'
 import { message } from 'antd'
 
-const catItems = () => {
+interface Props extends SingletonRouter {
+  grid: any
+}
+
+const catItems = ({ grid }: Props) => {
   const [keywords, setKeywords] = useState(null)
   const [sort, setSort] = useState('k')
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(20)
-  const [maxPage, setMaxPage] = useState(1)
-  const [total, setTotal] = useState(1)
-  const [itemsList, setItemsList] = useState([])
+  const [maxPage, setMaxPage] = useState(grid.total)
+  const [total, setTotal] = useState(grid.records)
+  const [itemsList, setItemsList] = useState(grid.rows)
   const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
   const [searchType, setSearchType] = useState(null)
@@ -71,13 +76,6 @@ const catItems = () => {
     setShopcartItemCounts(getShopcartItemCounts())
   }, [])
 
-  useEffect(() => {
-    if (catId == 0) {
-      return
-    }
-    searchCatItemsInBackend(catId, 'k', page, pageSize)
-  }, [catId, page, pageSize])
-
   const searchInBackend = async (keywords, sort, page, pageSize) => {
     axios.defaults.withCredentials = true
     await axios
@@ -108,30 +106,28 @@ const catItems = () => {
 
   const searchCatItemsInBackend = async (catId, sort, page, pageSize) => {
     axios.defaults.withCredentials = true
-    await axios
-      .get(
-        serverUrl +
-          '/items/catItems?catId=' +
-          catId +
-          '&sort=' +
-          sort +
-          '&page=' +
-          page +
-          '&pageSize=' +
-          pageSize,
-        {}
-      )
-      .then((res) => {
-        if (res.data.status == 200) {
-          var grid = res.data.data
-          setItemsList(grid.rows)
-          setMaxPage(grid.total)
-          setTotal(grid.records)
-        } else if (res.data.status == 500) {
-          message.error(res.data.msg)
-          return
-        }
-      })
+    const res = await axios.get(
+      serverUrl +
+        '/items/catItems?catId=' +
+        catId +
+        '&sort=' +
+        sort +
+        '&page=' +
+        page +
+        '&pageSize=' +
+        pageSize,
+      {}
+    )
+
+    if (res.data.status == 200) {
+      var grid = res.data.data
+      setItemsList(grid.rows)
+      setMaxPage(grid.total)
+      setTotal(grid.records)
+    } else if (res.data.status == 500) {
+      message.error(res.data.msg)
+      return
+    }
   }
 
   const chooseSort = async (sort) => {
@@ -189,4 +185,30 @@ const catItems = () => {
   )
 }
 
-export default catItems
+catItems.getInitialProps = async ({ ctx }) => {
+  const { searchType, catId, sort = 'k', page = 1, pageSize = 20 } = ctx.query
+
+  let grid
+  axios.defaults.withCredentials = true
+  const res = await axios.get(
+    serverUrl +
+      '/items/catItems?catId=' +
+      catId +
+      '&sort=' +
+      sort +
+      '&page=' +
+      page +
+      '&pageSize=' +
+      pageSize,
+    {}
+  )
+
+  if (res.data.status == 200) {
+    grid = res.data.data
+  }
+  return {
+    grid,
+  }
+}
+
+export default withRouter(catItems)
