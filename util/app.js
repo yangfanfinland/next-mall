@@ -141,6 +141,14 @@ export function checkMobile(mobile) {
   return true;
 }
 
+export function checkEmail(email) {
+  var myreg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+  if (!myreg.test(email)) {
+      return false;
+  }
+  return true;
+}
+
 export class ShopcartItem {
   constructor(
     itemId,
