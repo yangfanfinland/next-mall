@@ -1,4 +1,5 @@
 export const serverUrl = 'http://localhost:8088'
+export const shopServerUrl = "http://localhost:8080/foodie-shop/"
 const cookieDomain = 'localhost;'
 
 export function getUrlParam(paramName) {
