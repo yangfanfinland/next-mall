@@ -12,8 +12,6 @@ import styles from '../../static/styles/order.module.scss'
 const { TabPane } = Tabs
 
 const Order = () => {
-  const handleChange = () => {}
-
   const [myOrderList, setMyOrderList] = useState([])
   const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
