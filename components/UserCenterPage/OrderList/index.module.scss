@@ -123,6 +123,47 @@
                 .td {
                   width: 25%;
                 }
+                .td-change {
+                  .btn {
+                    font-size: 14px;
+                    color: #FFF;
+                    display: inline-block;
+                    margin-bottom: 0;
+                    padding: 0.5em 1em;
+                    vertical-align: middle;
+                    font-weight: normal;
+                    line-height: 1.2;
+                    text-align: center;
+                    white-space: nowrap;
+                    background-image: none;
+                    border: 1px solid transparent;
+                    border-radius: 0;
+                    cursor: pointer;
+                    outline: none;
+                    user-select: none;
+                    transition: background-color 300ms ease-out, border-color 300ms ease-out;
+
+                    &.delete-order {
+                      background-color: #dd514c;
+                      border-color: #dd514c;
+                    }
+
+                    &.confirm-receive {
+                      background-color: #dd514c;
+                      border-color: #dd514c;
+                    }
+
+                    &.comment-items {
+                      background-color: #dd514c;
+                      border-color: #dd514c;
+                    }
+
+                    &.go-pay {
+                      background-color: #dd514c;
+                      border-color: #dd514c;
+                    }
+                  }
+                }
               }
             }
           }

@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { shopServerUrl } from '../../../util/app'
 import styles from './index.module.scss'
 
-const OrderList = ({ myOrderList }) => {
-  const goPay = (orderId, payMethod, totalAmount) => {}
-
-  const confirmReceive = (orderId) => {}
-
-  const commentItems = (orderId) => {
-    window.location.href = 'doComment?orderId=' + orderId
-  }
-
-  const deleteOrder = (orderId) => {}
+const OrderList = ({
+  myOrderList,
+  deleteOrder,
+  confirmReceive,
+  commentItems,
+  goPay
+}: {
+  myOrderList
+  deleteOrder?: (orderId) => void
+  confirmReceive?: (orderId) => void
+  commentItems?: (orderId) => void
+  goPay?: (orderId, payMethod, totalAmount) => void
+}) => {
 
   return (
     <div className={styles['am-tabs-bd']}>
@@ -56,7 +59,9 @@ const OrderList = ({ myOrderList }) => {
                       {order.subOrderItemList &&
                         order.subOrderItemList.map((subItem, subIndex) => (
                           <ul className={styles['item-list']} key={subIndex}>
-                            <li className={`${styles['td']} ${styles['td-item']}`}>
+                            <li
+                              className={`${styles['td']} ${styles['td-item']}`}
+                            >
                               <div className={styles['item-pic']}>
                                 <a
                                   href={`${shopServerUrl}item.html?itemId=${subItem.itemId}`}
@@ -87,12 +92,16 @@ const OrderList = ({ myOrderList }) => {
                                 </div>
                               </div>
                             </li>
-                            <li className={`${styles['td']} ${styles['td-price']}`}>
+                            <li
+                              className={`${styles['td']} ${styles['td-price']}`}
+                            >
                               <div className="item-price">
                                 ￥{subItem.price / 100}
                               </div>
                             </li>
-                            <li className={`${styles['td']} ${styles['td-number']}`}>
+                            <li
+                              className={`${styles['td']} ${styles['td-number']}`}
+                            >
                               <div className="item-number">
                                 <span>×</span>
                                 {subItem.buyCounts}
@@ -104,8 +113,12 @@ const OrderList = ({ myOrderList }) => {
                     <div className={styles['order-right']}>
                       <li className={styles['td']}>
                         <div className={styles['item-operation']}>
-                          {order.payMethod == 1 && <img src="/static/images/wxpay.png" />}
-                          {order.payMethod == 2 && <img src="/static/images/alipay.png" />}
+                          {order.payMethod == 1 && (
+                            <img src="/static/images/wxpay.png" />
+                          )}
+                          {order.payMethod == 2 && (
+                            <img src="/static/images/alipay.png" />
+                          )}
                         </div>
                       </li>
                       <li className={`${styles['td']} ${styles['td-amount']}`}>
@@ -159,7 +172,7 @@ const OrderList = ({ myOrderList }) => {
                                   order.realPayAmount
                                 )
                               }
-                              className="am-btn am-btn-danger anniu"
+                              className={`${styles['btn']} ${styles['go-pay']}`}
                             >
                               一键支付
                             </div>
@@ -172,7 +185,7 @@ const OrderList = ({ myOrderList }) => {
                           {order.orderStatus == 30 && (
                             <div
                               onClick={() => confirmReceive(order.orderId)}
-                              className="am-btn am-btn-danger anniu"
+                              className={`${styles['btn']} ${styles['confirm-receive']}`}
                             >
                               确认收货
                             </div>
@@ -181,7 +194,7 @@ const OrderList = ({ myOrderList }) => {
                           {order.isComment == 0 && order.orderStatus == 40 && (
                             <div
                               onClick={() => commentItems(order.orderId)}
-                              className="am-btn am-btn-danger anniu"
+                              className={`${styles['btn']} ${styles['comment-items']}`}
                             >
                               评价商品
                             </div>
@@ -194,7 +207,7 @@ const OrderList = ({ myOrderList }) => {
                           {order.orderStatus == 50 && (
                             <div
                               onClick={() => deleteOrder(order.orderId)}
-                              className="am-btn am-btn-danger anniu"
+                              className={`${styles['btn']} ${styles['delete-order']}`}
                             >
                               删除订单
                             </div>
