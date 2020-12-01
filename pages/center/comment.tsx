@@ -65,9 +65,9 @@ const Comment = () => {
   }
 
   const doPaging = async (page) => {
-    setPage(page);
-    await renderMyCommentList(page, pageSize);
-}
+    setPage(page)
+    await renderMyCommentList(page, pageSize)
+  }
 
   const judgeUserLoginStatus = () => {
     var userCookie = getCookie('user')
@@ -157,14 +157,14 @@ const Comment = () => {
               </ul>
             </div>
             <div className={`${styles.wrap}`}>
-                <Pagination
-                  pageSize={pageSize}
-                  showQuickJumper
-                  defaultCurrent={1}
-                  total={total}
-                  onChange={doPaging}
-                />
-              </div>
+              <Pagination
+                pageSize={pageSize}
+                showQuickJumper
+                defaultCurrent={1}
+                total={total}
+                onChange={doPaging}
+              />
+            </div>
           </div>
         </div>
       </div>

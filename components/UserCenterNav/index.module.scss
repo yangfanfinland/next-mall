@@ -1,14 +1,36 @@
 @import '../../static/styles/color';
 
+.person {
+  border-bottom: 1px solid #f5f8fa;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  a {
+    font-size: 18px;
+    color: #f69;
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+    line-height: 28px;
+    height: 28px;
+  }
+}
+
 .navWrap {
-  width: 150px;
-  margin-top: 15px;
+  width: 160px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 0px 8px;
+  font-size: 14px;
+  background: #fff;
+  border-top: 5px solid #fec4d7;
 
   li {
     height: 20px;
     border-left: 3px solid #ffffff;
-    padding-left: 15px;
     margin-bottom: 10px;
+    text-align: center;
 
     &:hover,
     &.active {
