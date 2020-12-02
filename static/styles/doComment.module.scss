@@ -3,10 +3,158 @@
 .center {
   display: flex;
 }
+.main-wrap {
+  width: 100%;
+  .user-comment {
+    .am-padding {
+      margin: 20px 0px;
+      padding: 0px 10px;
+      .am-fl {
+        .am-text-danger {
+          color: #000;
+          font-size: 18px;
+        }
+      }
+    }
 
-.info-little {
-  span {
-    color: gray;
-    font-size:14px;
+    .comment-main {
+      padding-bottom: 10px;
+      .comment-list {
+        position: relative;
+        margin: 0px 5px;
+        padding-bottom: 10px;
+
+        .item {
+          position: relative;
+          .item-pic {
+            width: 150px;
+            height: auto;
+            float: none;
+            border: 1px solid #eee;
+            overflow: hidden;
+            margin-left: 5px;
+            margin-right: 10px;
+            img {
+              width: 100%;
+            }
+          }
+          .item-title {
+            width: 150px;
+            overflow: hidden;
+            .item-basic-info {
+              height: 18px;
+              line-height: 18px;
+              overflow: hidden;
+            }
+            .info-little {
+              span {
+                color: gray;
+                font-size: 14px;
+                height: 18px;
+                line-height: 18px;
+                overflow: hidden;
+              }
+            }
+          }
+          .clear {
+            clear: both;
+          }
+          .item-comment {
+            position: absolute;
+            left: 200px;
+            top: 40px;
+            right: 0px;
+            max-width: 600px;
+            textarea {
+              min-height: 120px;
+              border: 1px solid #f5f8fa;
+              padding: 10px;
+              margin: 0px 0px;
+              width: 100%;
+              resize: none;
+              outline: 0px none;
+              overflow: hidden;
+            }
+          }
+          .item-opinion {
+            position: absolute;
+            left: 200px;
+            top: 0px;
+            right: 0px;
+            width: auto;
+            max-width: 600px;
+            border-top: 1px solid #f5f8fa;
+            overflow: hidden;
+            padding: 10px 0px;
+            li {
+              float: left;
+              width: 33.33%;
+              text-align: center;
+              font-size: 14px;
+              cursor: pointer;
+              .op1 {
+                background: url('/static/images/iconfont-evaluate.png');
+                background-size: 16px 16px;
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                margin-right: 5px;
+                &.active {
+                  background: url('/static/images/iconfont-good.png');
+                  background-size: 16px 16px;
+                }
+              }
+              .op2 {
+                background: url('/static/images/iconfont-evaluate.png');
+                background-size: 16px 16px;
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                margin-right: 5px;
+                &.active {
+                  background: url('/static/images/iconfont-middle.png');
+                  background-size: 16px 16px;
+                }
+              }
+              .op3 {
+                background: url('/static/images/iconfont-bad.png');
+                background-size: 16px 16px;
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                margin-right: 5px;
+                &.active {
+                  background: url('/static/images/iconfont-badon.png');
+                  background-size: 16px 16px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .info-btn {
+        text-align: center;
+        .am-btn-danger {
+          color: #fff;
+          background-color: #dd514c;
+          border-color: #dd514c;
+          display: inline-block;
+          margin-bottom: 0;
+          padding: 0.5em 1em;
+          vertical-align: middle;
+          font-weight: normal;
+          line-height: 1.2;
+          text-align: center;
+          white-space: nowrap;
+          background-image: none;
+          border: 1px solid transparent;
+          border-radius: 0;
+          cursor: pointer;
+          outline: none;
+          user-select: none;
+          transition: background-color 300ms ease-out, border-color 300ms ease-out;
+        }
+      }
+    }
   }
 }

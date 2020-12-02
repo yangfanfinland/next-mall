@@ -13,8 +13,11 @@ const DoComment = () => {
   const [userInfo, setUserInfo] = useState<any>()
   const [orderId, setOrderId] = useState('')
 
+  const [level, setLevel] = useState(0)
+  const [content, setContent] = useState("")
+
   useEffect(() => {
-    var orderId = getUrlParam("orderId")
+    var orderId = getUrlParam('orderId')
     setOrderId(orderId)
     judgeUserLoginStatus()
   }, [])
@@ -102,6 +105,19 @@ const DoComment = () => {
     }
   }
 
+  const makeCommentContent = (e, orderItemId) => {
+    var tempOrderItemList = orderItemList
+    for (var i = 0; i < tempOrderItemList.length; i++) {
+      var tempId = tempOrderItemList[i].id
+      if (tempId == orderItemId) {
+        tempOrderItemList[i].content = e.target.value
+      }
+    }
+
+    setOrderItemList(tempOrderItemList)
+    setContent(orderItemId + e.target.value)
+  }
+
   const makeComment = (orderItemId, level) => {
     var tempOrderItemList = orderItemList
     for (var i = 0; i < tempOrderItemList.length; i++) {
@@ -112,31 +128,7 @@ const DoComment = () => {
     }
 
     setOrderItemList(tempOrderItemList)
-
-    var liId = ''
-    if (level == 1) {
-      liId = 'good_' + orderItemId
-    } else if (level == 2) {
-      liId = 'normal_' + orderItemId
-    } else if (level == 3) {
-      liId = 'bad_' + orderItemId
-    }
-
-    var goodLiId = 'good_' + orderItemId
-    var normalLiId = 'normal_' + orderItemId
-    var badLiId = 'bad_' + orderItemId
-
-    // 判断评价等级，先把所有的颜色去掉，然后再在当前点击的上面标记颜色
-    var goodDomLi = document.getElementById(goodLiId)
-    var normalDomLi = document.getElementById(normalLiId)
-    var badDomLi = document.getElementById(badLiId)
-    goodDomLi.children[0].classList.remove('active')
-    normalDomLi.children[0].classList.remove('active')
-    badDomLi.children[0].classList.remove('active')
-
-    var domLi = document.getElementById(liId)
-    var classList = domLi.children[0].classList
-    classList.add('active')
+    setLevel(orderItemId + level)
   }
 
   const judgeUserLoginStatus = () => {
@@ -171,65 +163,77 @@ const DoComment = () => {
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="comment" />
-        <div className="main-wrap">
-          <div className="user-comment">
-            <div className="am-cf am-padding">
-              <div className="am-fl am-cf">
-                <strong className="am-text-danger am-text-lg">发表评论</strong><small>Make&nbsp;Comments</small>
+        <div className={`${styles['main-wrap']}`}>
+          <div className={`${styles['user-comment']}`}>
+            <div className={`${styles['am-padding']}`}>
+              <div className={`${styles['am-fl']}`}>
+                <strong className={`${styles['am-text-danger']}`}>发表评论</strong> / <small>Make&nbsp;Comments</small>
               </div>
             </div>
-            <hr />
 
-            <div className="comment-main">
-              <div className="comment-list">
+            <div className={`${styles['comment-main']}`}>
+              <div className={`${styles['comment-list']}`}>
                 {orderItemList.map((orderItem, index) => (
-                  <>
-                    <div className="item-pic">
-                      <a href="javascript:void(0);" className="J_MakePoint">
-                        <img src={orderItem.itemImg} className="itempic" />
+                  <div className={`${styles['item']}`} key={index}>
+                    <div className={`${styles['item-pic']}`}>
+                      <a href="" className={`${styles['J_MakePoint']}`}>
+                        <img
+                          src={orderItem.itemImg}
+                          className={`${styles['itempic']}`}
+                        />
                       </a>
                     </div>
 
-                    <div className="item-title">
-                      <div className="item-name">
+                    <div className={`${styles['item-title']}`}>
+                      <div className={`${styles['item-name']}`}>
                         <a href="">
-                          <p className="item-basic-info">
+                          <p className={`${styles['item-basic-info']}`}>
                             {orderItem.itemName}
                           </p>
                         </a>
                       </div>
-                      <div className="item-info">
-                        <div className="info-little">
-                          <span>
-                            规格：{orderItem.itemSpecName}
-                          </span>
+                      <div className={`${styles['item-info']}`}>
+                        <div className={`${styles['info-little']}`}>
+                          <span>规格：{orderItem.itemSpecName}</span>
                         </div>
                       </div>
                     </div>
-                    <div className="clear"></div>
-                    <div className="item-comment">
+                    <div className={`${styles['clear']}`}></div>
+                    <div className={`${styles['item-comment']}`}>
                       <textarea
                         placeholder="您的评价将会对其他小伙伴们提供很大帮助哟~"
-                        v-model="orderItem.content"
+                        onChange={(e) => makeCommentContent(e, orderItem.id)}
                       ></textarea>
                     </div>
-                    <div className="item-opinion">
-                      <li id={'good_'+orderItem.id} onClick={() => makeComment(orderItem.id, 1)}>
-                        <i className="op1"></i>好评
+                    <div className={`${styles['item-opinion']}`}>
+                      <li
+                        id={'good_' + orderItem.id}
+                        onClick={() => makeComment(orderItem.id, 1)}
+                      >
+                        <i className={orderItem.commentLevel == 1 ? `${styles['op1']} ${styles['active']}`: `${styles['op1']}`}></i>好评
                       </li>
-                      <li id={'normal_'+orderItem.id} onClick={() => makeComment(orderItem.id, 2)}>
-                        <i className="op2"></i>中评
+                      <li
+                        id={'normal_' + orderItem.id}
+                        onClick={() => makeComment(orderItem.id, 2)}
+                      >
+                        <i className={orderItem.commentLevel == 2 ? `${styles['op2']} ${styles['active']}`: `${styles['op2']}`}></i>中评
                       </li>
-                      <li id={'bad_'+orderItem.id} onClick={() => makeComment(orderItem.id, 3)}>
-                        <i className="op3"></i>差评
+                      <li
+                        id={'bad_' + orderItem.id}
+                        onClick={() => makeComment(orderItem.id, 3)}
+                      >
+                        <i className={orderItem.commentLevel == 3 ? `${styles['op3']} ${styles['active']}`: `${styles['op3']}`}></i>差评
                       </li>
                     </div>
-                  </>
+                  </div>
                 ))}
               </div>
 
-              <div className="info-btn">
-                <div className="am-btn am-btn-danger" onClick={saveComments}>
+              <div className={`${styles['info-btn']}`}>
+                <div
+                  className={`${styles['am-btn-danger']}`}
+                  onClick={saveComments}
+                >
                   发表评论
                 </div>
               </div>
