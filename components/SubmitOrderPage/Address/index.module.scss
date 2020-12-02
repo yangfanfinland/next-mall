@@ -7,8 +7,8 @@
 }
 
 .addressList {
+  display: flex;
   .item {
-    display: inline-block;
     position: relative;
     width: 310px;
     height: 170px;
