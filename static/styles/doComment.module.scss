@@ -1,0 +1,12 @@
+@import './common';
+
+.center {
+  display: flex;
+}
+
+.info-little {
+  span {
+    color: gray;
+    font-size:14px;
+  }
+}
