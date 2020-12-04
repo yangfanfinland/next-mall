@@ -3,7 +3,7 @@ import UserCenterNav from '../../components/UserCenterNav'
 import HtmlHead from '../../components/HtmlHead'
 import SearchArea from '../../components/SearchArea'
 import OrderList from '../../components/UserCenterPage/OrderList'
-import { Tabs, message } from 'antd'
+import { Tabs, message, Pagination } from 'antd'
 import { serverUrl, getCookie, shopServerUrl } from '../../util/app'
 import axios from 'axios'
 import moment from 'moment'
@@ -94,6 +94,11 @@ const Order = () => {
     } else if (res.data.status == 500) {
       message.error(res.data.msg)
     }
+  }
+
+  const doPaging = async (page) => {
+    setPage(page)
+    await renderOrderList(orderStatus, page, pageSize)
   }
 
   const queryOrdersByStatus = async (status) => {
@@ -213,6 +218,15 @@ const Order = () => {
               />
             </TabPane>
           </Tabs>
+          <div className={`${styles.wrap}`}>
+            <Pagination
+              pageSize={pageSize}
+              showQuickJumper
+              defaultCurrent={1}
+              total={total}
+              onChange={doPaging}
+            />
+          </div>
         </div>
       </div>
     </>
