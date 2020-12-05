@@ -13,7 +13,6 @@ import { useSelector } from 'react-redux'
 import {
   serverUrl,
   addItemToShopcart,
-  getCookie,
   getShopcartItemCounts,
   ShopcartItem,
 } from '../util/app'
@@ -26,7 +25,8 @@ interface Props extends SingletonRouter {
 const { TabPane } = Tabs
 
 const Item = ({ itemInfo }: Props) => {
-  const { item, itemParams, itemImgList, itemSpecList } = itemInfo
+  console.log(itemInfo)
+  const { item, itemParams, itemImgList, itemSpecList, parentCatList } = itemInfo
   const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
   const [shopcartItemCounts, setShopcartItemCounts] = useState(0)
@@ -61,7 +61,7 @@ const Item = ({ itemInfo }: Props) => {
     shopcartItem.itemImgUrl = itemImgList[0].url
 
     // 添加商品至购物车list
-    addItemToShopcart({...shopcartItem})
+    addItemToShopcart({ ...shopcartItem })
 
     // 购物车应该在登录/注册的时候同步
 
@@ -96,7 +96,7 @@ const Item = ({ itemInfo }: Props) => {
       <HtmlHead title={'商品详情'} />
       <SearchArea />
       <div className={`bw`}>
-        <BreadcrumbNav showTotal={false} />
+        <BreadcrumbNav showTotal={false} items={parentCatList} item={item} />
         <div className={`fcb contentWidth`}>
           <ItemImgPreview images={itemImgList} />
           <ItemSpecification
@@ -119,7 +119,6 @@ const Item = ({ itemInfo }: Props) => {
       <style jsx>
         {`
           :global(.introduce) {
-
           }
         `}
       </style>
