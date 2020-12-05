@@ -8,6 +8,7 @@ import GoodsList from '../components/GoodsList'
 import { serverUrl, getCookie } from '../util/app'
 import axios from 'axios'
 import { Pagination, message } from 'antd'
+import { useSelector } from 'react-redux'
 import styles from '../static/styles/catItems.module.scss'
 
 interface Props extends SingletonRouter {
@@ -26,6 +27,7 @@ const catItems = ({ grid, searchType, catId, pageSize, keywords }: Props) => {
   const [itemsList, setItemsList] = useState(grid.rows)
   const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
+  const user = useSelector((store) => store.user)
 
   useEffect(() => {
     judgeUserLoginStatus()
@@ -104,25 +106,9 @@ const catItems = ({ grid, searchType, catId, pageSize, keywords }: Props) => {
   }
 
   const judgeUserLoginStatus = () => {
-    var userCookie = getCookie('user')
-    if (userCookie != null && userCookie != undefined && userCookie != '') {
-      var userInfoStr = decodeURIComponent(userCookie)
-
-      if (
-        userInfoStr != null &&
-        userInfoStr != undefined &&
-        userInfoStr != ''
-      ) {
-        var userInfo = JSON.parse(userInfoStr)
-        // 判断是否是一个对象
-        if (typeof userInfo == 'object') {
-          setUserIsLogin(true)
-          setUserInfo(userInfo)
-        } else {
-          setUserIsLogin(false)
-          setUserInfo({})
-        }
-      }
+    if (user && user.id) {
+      setUserIsLogin(true)
+      setUserInfo(user)
     } else {
       setUserIsLogin(false)
       setUserInfo({})

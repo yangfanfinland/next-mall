@@ -6,6 +6,7 @@ import SearchArea from '../../components/SearchArea'
 import { serverUrl, getCookie, checkEmail, checkMobile } from '../../util/app'
 import axios from 'axios'
 import moment from 'moment'
+import { useSelector } from 'react-redux'
 import styles from '../../static/styles/userInfo.module.scss'
 
 const layout = {
@@ -15,10 +16,11 @@ const layout = {
 
 const dateFormat = "YYYY-MM-DD"
 
-const UserInfo = ({ user }) => {
+const UserInfo = () => {
   const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
   const [userInfoMore, setUserInfoMore] = useState<any>()
+  const user = useSelector((store) => store.user)
 
   const onFinish = (values: any) => {}
 
@@ -32,25 +34,9 @@ const UserInfo = ({ user }) => {
   }, [userInfo])
 
   const judgeUserLoginStatus = () => {
-    var userCookie = getCookie('user')
-    if (userCookie != null && userCookie != undefined && userCookie != '') {
-      var userInfoStr = decodeURIComponent(userCookie)
-
-      if (
-        userInfoStr != null &&
-        userInfoStr != undefined &&
-        userInfoStr != ''
-      ) {
-        var userInfo = JSON.parse(userInfoStr)
-        // 判断是否是一个对象
-        if (typeof userInfo == 'object') {
-          setUserIsLogin(true)
-          setUserInfo(userInfo)
-        } else {
-          setUserIsLogin(false)
-          setUserInfo({})
-        }
-      }
+    if (user && user.id) {
+      setUserIsLogin(true)
+      setUserInfo(user)
     } else {
       setUserIsLogin(false)
       setUserInfo({})

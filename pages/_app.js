@@ -1,6 +1,8 @@
 import App from 'next/app'
 import Layout from '../components/Layout'
 import UserLayout from '../components/Layout/UserLayout'
+import { Provider } from 'react-redux'
+import withRedux from '../util/with-redux'
 import { ConfigProvider } from 'antd'
 import { IntlProvider } from 'react-intl'
 import * as locales from '../content/locale'
@@ -50,7 +52,7 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, router = {} } = this.props
+    const { Component, pageProps, router = {}, reduxStore } = this.props
     const { locale, defaultLocale, pathname } = router
 
     // const localeCopy = locales[locale]
@@ -60,34 +62,38 @@ class MyApp extends App {
 
     if (pathname.indexOf('/user/') === 0) {
       return (
-        <ConfigProvider locale={appLocale.antd}>
-          <IntlProvider
-            locale={locale}
-            defaultLocale={defaultLocale}
-            messages={Flat(appLocale.messages)}
-          >
-            <UserLayout>
-              <Component {...pageProps} />
-            </UserLayout>
-          </IntlProvider>
-        </ConfigProvider>
+        <Provider store={reduxStore}>
+          <ConfigProvider locale={appLocale.antd}>
+            <IntlProvider
+              locale={locale}
+              defaultLocale={defaultLocale}
+              messages={Flat(appLocale.messages)}
+            >
+              <UserLayout>
+                <Component {...pageProps} />
+              </UserLayout>
+            </IntlProvider>
+          </ConfigProvider>
+        </Provider>
       )
     }
 
     return (
-      <ConfigProvider locale={appLocale.antd}>
-        <IntlProvider
-          locale={appLocale.locale}
-          defaultLocale={defaultLocale}
-          messages={Flat(appLocale.messages)}
-        >
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </IntlProvider>
-      </ConfigProvider>
+      <Provider store={reduxStore}>
+        <ConfigProvider locale={appLocale.antd}>
+          <IntlProvider
+            locale={appLocale.locale}
+            defaultLocale={defaultLocale}
+            messages={Flat(appLocale.messages)}
+          >
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </IntlProvider>
+        </ConfigProvider>
+      </Provider>
     )
   }
 }
 
-export default MyApp
+export default withRedux(MyApp)

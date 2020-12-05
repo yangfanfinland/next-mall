@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Form, Input } from "antd"
 import Router from "next/router"
+import { UserAddOutlined, KeyOutlined } from '@ant-design/icons'
 import styles from './styles.module.scss'
 
 const layout = {
@@ -31,7 +32,7 @@ const RegisterForm = ({ onFinish, onFinishFailed, loading }: { onFinish: (values
                     name="username"
                     rules={[{required: true, message: '请输入用户名'}]}
                 >
-                    <Input prefix={<i className={`${styles.userIcon} ${styles.phone}`}/>}
+                    <Input prefix={<UserAddOutlined className={`${styles.userIcon} ${styles.user}`} />}
                            placeholder={'请输入用户名'}
                            maxLength={11}
                     />
@@ -42,7 +43,7 @@ const RegisterForm = ({ onFinish, onFinishFailed, loading }: { onFinish: (values
                     rules={[{required: true, message: '请输入密码'}]}
                     className={styles.codeItem}
                 >
-                    <Input.Password prefix={<i className={`${styles.userIcon} ${styles.code}`}/>}
+                    <Input.Password prefix={<KeyOutlined className={`${styles.userIcon} ${styles.pwd}`} />}
                            placeholder={'请输入密码'}
                     />
                 </Form.Item>
@@ -51,7 +52,7 @@ const RegisterForm = ({ onFinish, onFinishFailed, loading }: { onFinish: (values
                     name="confirmPassword"
                     rules={[{required: true, message: '请输入确认密码'}]}
                 >
-                    <Input.Password prefix={<i className={`${styles.userIcon} ${styles.pwd}`}/>}
+                    <Input.Password prefix={<KeyOutlined className={`${styles.userIcon} ${styles.pwd}`} />}
                                     placeholder={'请输入确认密码'}
                     />
                 </Form.Item>

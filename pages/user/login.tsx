@@ -3,10 +3,14 @@ import { getUrlParam, serverUrl } from '../../util/app'
 import axios from 'axios'
 import LoginForm from '../../components/User/LoginForm'
 import { message } from 'antd'
+import { useSelector, useDispatch } from 'react-redux'
+import Router from 'next/router'
+import { request } from '../../lib/api'
 
 export default function Login() {
-  const [ returnUrl, setReturnUrl ] = useState('')
-  const [ loading, setLoading ] = useState(false)
+  const [returnUrl, setReturnUrl] = useState('')
+  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const url = getUrlParam('returnUrl')
@@ -24,13 +28,15 @@ export default function Login() {
     // form提交
     setLoading(true)
     axios.defaults.withCredentials = true
-    const res = await axios.post(serverUrl + '/passport/login', userBO)
+    // const res = await axios.post(serverUrl + '/passport/login', userBO)
+    const res = await request({ method: "POST", url: '/auth/passport/login', data: userBO })
     if (res.data.status == 200) {
       var user = res.data
+      dispatch({ type: 'LOGIN', user: { ...user.data } })
       if (returnUrl != null && returnUrl != undefined && returnUrl != '') {
-        window.location.href = returnUrl
+        Router.push(returnUrl)
       } else {
-        window.location.href = '/'
+        Router.push('/')
       }
     } else if (res.data.status == 500) {
       message.error(res.data.msg)

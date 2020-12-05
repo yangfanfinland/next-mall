@@ -9,6 +9,7 @@ import ItemSpecification from '../components/ItemPage/ItemSpecification'
 import ItemDetails from '../components/ItemPage/ItemDetails'
 import ItemComment from '../components/ItemPage/ItemComment'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 import {
   serverUrl,
   addItemToShopcart,
@@ -29,6 +30,7 @@ const Item = ({ itemInfo }: Props) => {
   const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
   const [shopcartItemCounts, setShopcartItemCounts] = useState(0)
+  const user = useSelector((store) => store.user)
 
   useEffect(() => {
     // 通过cookie判断用户是否登录
@@ -36,24 +38,9 @@ const Item = ({ itemInfo }: Props) => {
   }, [item.id])
 
   const judgeUserLoginStatus = () => {
-    var userCookie = getCookie('user')
-    if (userCookie != null && userCookie != undefined && userCookie != '') {
-      var userInfoStr = decodeURIComponent(userCookie)
-      if (
-        userInfoStr != null &&
-        userInfoStr != undefined &&
-        userInfoStr != ''
-      ) {
-        var userInfo = JSON.parse(userInfoStr)
-        // 判断是否是一个对象
-        if (typeof userInfo == 'object') {
-          setUserIsLogin(true)
-          setUserInfo(userInfo)
-        } else {
-          setUserIsLogin(false)
-          setUserInfo({})
-        }
-      }
+    if (user && user.id) {
+      setUserIsLogin(true)
+      setUserInfo(user)
     } else {
       setUserIsLogin(false)
       setUserInfo({})

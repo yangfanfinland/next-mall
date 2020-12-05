@@ -5,6 +5,7 @@ import SearchArea from '../../components/SearchArea'
 import { serverUrl, getCookie, getUrlParam } from '../../util/app'
 import axios from 'axios'
 import { message } from 'antd'
+import { useSelector } from 'react-redux'
 import styles from '../../static/styles/doComment.module.scss'
 
 const DoComment = () => {
@@ -15,6 +16,7 @@ const DoComment = () => {
 
   const [level, setLevel] = useState(0)
   const [content, setContent] = useState("")
+  const user = useSelector((store) => store.user)
 
   useEffect(() => {
     var orderId = getUrlParam('orderId')
@@ -132,25 +134,9 @@ const DoComment = () => {
   }
 
   const judgeUserLoginStatus = () => {
-    var userCookie = getCookie('user')
-    if (userCookie != null && userCookie != undefined && userCookie != '') {
-      var userInfoStr = decodeURIComponent(userCookie)
-      // console.log(userInfoStr);
-      if (
-        userInfoStr != null &&
-        userInfoStr != undefined &&
-        userInfoStr != ''
-      ) {
-        var userInfo = JSON.parse(userInfoStr)
-        // 判断是否是一个对象
-        if (typeof userInfo == 'object') {
-          setUserIsLogin(true)
-          setUserInfo(userInfo)
-        } else {
-          setUserIsLogin(false)
-          setUserInfo({})
-        }
-      }
+    if (user && user.id) {
+      setUserIsLogin(true)
+      setUserInfo(user)
     } else {
       setUserIsLogin(false)
       setUserInfo({})

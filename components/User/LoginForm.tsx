@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form, Input } from "antd"
 import styles from './styles.module.scss'
 import { useIntl } from "react-intl"
+import { UserAddOutlined, KeyOutlined } from '@ant-design/icons'
 
 const layout = {
     labelCol: {span: 8},
@@ -26,7 +27,7 @@ const LoginForm = ({ onFinish, onFinishFailed, loading }: { onFinish: (values: a
                     name="username"
                     rules={[{required: true, message: f("login.username")}]}
                 >
-                    <Input prefix={<i className={`${styles.userIcon} ${styles.phone}`}/>}
+                    <Input prefix={<UserAddOutlined className={`${styles.userIcon} ${styles.user}`} />}
                            placeholder={f("login.username")}
                     />
                 </Form.Item>
@@ -35,7 +36,7 @@ const LoginForm = ({ onFinish, onFinishFailed, loading }: { onFinish: (values: a
                     name="password"
                     rules={[{required: true, message: f("login.password")}]}
                 >
-                    <Input.Password prefix={<i className={`${styles.userIcon} ${styles.pwd}`}/>}
+                    <Input.Password prefix={<KeyOutlined className={`${styles.userIcon} ${styles.pwd}`} />}
                                     placeholder={f("login.password")}
                     />
                 </Form.Item>

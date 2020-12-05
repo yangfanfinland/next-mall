@@ -67,22 +67,19 @@
     background-repeat: no-repeat;
     background-position: center;
 
-    &.phone {
+    &.user {
       width: 15px;
-      height: 19px;
-      background-image: url('/static/images/icons/icon_phone.png');
+      height: 15px;
     }
 
     &.pwd {
-      width: 16px;
-      height: 17px;
-      background-image: url('/static/images/icons/icon_pwd.png');
+      width: 15px;
+      height: 15px;
     }
 
     &.code {
       width: 16px;
       height: 18px;
-      background-image: url('/static/images/icons/icon_code.png');
     }
   }
 

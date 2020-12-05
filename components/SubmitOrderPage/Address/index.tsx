@@ -4,6 +4,7 @@ import { serverUrl, getCookie, checkMobile } from '../../../util/app'
 import { cities } from '../../../util/cities'
 import axios from 'axios'
 import { message } from 'antd'
+import { useSelector } from 'react-redux'
 import styles from './index.module.scss'
 
 const Address = () => {
@@ -22,11 +23,11 @@ const Address = () => {
   const [updatedAddressId, setUpdatedAddressId] = useState('')
   const [initialValues, setInitialValues] = useState<any>()
   const [confirmAddress, setConfirmAddress] = useState<any>()
+  const user = useSelector((store) => store.user)
 
   useEffect(() => {
     // updateCity();
     updateDistrict()
-    // 通过cookie判断用户是否登录
     judgeUserLoginStatus()
     // renderOrderInfoList();
   }, [])
@@ -36,26 +37,10 @@ const Address = () => {
     renderUserAddressList()
   }, [userInfo])
 
-  // 通过cookie判断用户是否登录
   const judgeUserLoginStatus = () => {
-    var userCookie = getCookie('user')
-    if (userCookie != null && userCookie != undefined && userCookie != '') {
-      var userInfoStr = decodeURIComponent(userCookie)
-      if (
-        userInfoStr != null &&
-        userInfoStr != undefined &&
-        userInfoStr != ''
-      ) {
-        var userInfo = JSON.parse(userInfoStr)
-        // 判断是否是一个对象
-        if (typeof userInfo == 'object') {
-          setUserIsLogin(true)
-          setUserInfo(userInfo)
-        } else {
-          setUserIsLogin(false)
-          setUserInfo({})
-        }
-      }
+    if (user && user.id) {
+      setUserIsLogin(true)
+      setUserInfo(user)
     } else {
       setUserIsLogin(false)
       setUserInfo({})

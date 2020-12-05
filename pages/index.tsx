@@ -49,7 +49,8 @@ const Home = ({ categoryList, likeItemList }) => {
 
 export default Home
 
-Home.getInitialProps = async ({ ctx }) => {
+Home.getInitialProps = async ({ ctx, reduxStore }) => {
+  const { user } = reduxStore.getState()
   let categoryList;
   let likeItemList = [];
   const res = await axios.get(serverUrl + '/index/cats', {})
@@ -69,6 +70,7 @@ Home.getInitialProps = async ({ ctx }) => {
 
   return {
     categoryList,
-    likeItemList
+    likeItemList,
+    user
   }
 }

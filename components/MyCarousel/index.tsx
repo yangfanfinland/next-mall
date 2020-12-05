@@ -15,7 +15,7 @@ const MyCarousel = () => {
                 setCarousel(carouselList);
             }
         })
-    })
+    }, [])
 
     return (
         <div className={`bw`}>

@@ -6,6 +6,7 @@ import { serverUrl, getCookie } from '../../util/app'
 import axios from 'axios'
 import styles from '../../static/styles/comment.module.scss'
 import { message, Pagination } from 'antd'
+import { useSelector } from 'react-redux'
 import moment from 'moment'
 
 const Comment = () => {
@@ -16,6 +17,7 @@ const Comment = () => {
   const [pageSize, setPageSize] = useState(10)
   const [maxPage, setMaxPage] = useState(1)
   const [total, setTotal] = useState(1)
+  const user = useSelector((store) => store.user)
 
   useEffect(() => {
     judgeUserLoginStatus()
@@ -70,24 +72,9 @@ const Comment = () => {
   }
 
   const judgeUserLoginStatus = () => {
-    var userCookie = getCookie('user')
-    if (userCookie != null && userCookie != undefined && userCookie != '') {
-      var userInfoStr = decodeURIComponent(userCookie)
-      if (
-        userInfoStr != null &&
-        userInfoStr != undefined &&
-        userInfoStr != ''
-      ) {
-        var userInfo = JSON.parse(userInfoStr)
-        // 判断是否是一个对象
-        if (typeof userInfo == 'object') {
-          setUserIsLogin(true)
-          setUserInfo(userInfo)
-        } else {
-          setUserIsLogin(false)
-          setUserInfo({})
-        }
-      }
+    if (user && user.id) {
+      setUserIsLogin(true)
+      setUserInfo(user)
     } else {
       setUserIsLogin(false)
       setUserInfo({})

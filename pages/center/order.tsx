@@ -7,6 +7,7 @@ import { Tabs, message, Pagination } from 'antd'
 import { serverUrl, getCookie, shopServerUrl } from '../../util/app'
 import axios from 'axios'
 import moment from 'moment'
+import { useSelector } from 'react-redux'
 import styles from '../../static/styles/order.module.scss'
 
 const { TabPane } = Tabs
@@ -20,6 +21,7 @@ const Order = () => {
   const [orderStatus, setOrderStatus] = useState('')
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
+  const user = useSelector((store) => store.user)
 
   useEffect(() => {
     judgeUserLoginStatus()
@@ -31,25 +33,9 @@ const Order = () => {
   }, [userInfo])
 
   const judgeUserLoginStatus = () => {
-    var userCookie = getCookie('user')
-    if (userCookie != null && userCookie != undefined && userCookie != '') {
-      var userInfoStr = decodeURIComponent(userCookie)
-
-      if (
-        userInfoStr != null &&
-        userInfoStr != undefined &&
-        userInfoStr != ''
-      ) {
-        var userInfo = JSON.parse(userInfoStr)
-        // 判断是否是一个对象
-        if (typeof userInfo == 'object') {
-          setUserIsLogin(true)
-          setUserInfo(userInfo)
-        } else {
-          setUserIsLogin(false)
-          setUserInfo({})
-        }
-      }
+    if (user && user.id) {
+      setUserIsLogin(true)
+      setUserInfo(user)
     } else {
       setUserIsLogin(false)
       setUserInfo({})

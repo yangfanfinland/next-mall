@@ -11,6 +11,7 @@ import {
   addItemToShopcart,
 } from '../../../util/app'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 import styles from './index.module.scss'
 
 const Shopcart = () => {
@@ -21,9 +22,9 @@ const Shopcart = () => {
   const [specIds, setSpecIds] = useState([])
   const [allSelectedCounts, setAllSelectedCounts] = useState(0)
   const [totalAmount, setTotalAmount] = useState(0)
+  const user = useSelector((store) => store.user)
 
   useEffect(() => {
-    // 通过cookie判断用户是否登录
     judgeUserLoginStatus()
     renderShopcart()
   }, [])
@@ -32,26 +33,11 @@ const Shopcart = () => {
     reCalItemsCountsAndAmount()
   }, [specIds])
 
-  // 通过cookie判断用户是否登录
+
   const judgeUserLoginStatus = () => {
-    const userCookie = getCookie('user')
-    if (userCookie != null && userCookie != undefined && userCookie != '') {
-      const userInfoStr = decodeURIComponent(userCookie)
-      if (
-        userInfoStr != null &&
-        userInfoStr != undefined &&
-        userInfoStr != ''
-      ) {
-        const userInfo = JSON.parse(userInfoStr)
-        // 判断是否是一个对象
-        if (typeof userInfo == 'object') {
-          setUserIsLogin(true)
-          setUserInfo(userInfo)
-        } else {
-          setUserIsLogin(false)
-          setUserInfo({})
-        }
-      }
+    if (user && user.id) {
+      setUserIsLogin(true)
+      setUserInfo(user)
     } else {
       setUserIsLogin(false)
       setUserInfo({})
