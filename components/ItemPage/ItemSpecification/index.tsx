@@ -77,7 +77,7 @@ const ItemSpecification = ({ item, specification, addToCartCallback }) => {
                 <ul className={`${styles.skuList} fl`}>
                     {
                         specification.map(spec => (
-                            <li key={spec.id} onClick={ () => handleClick(spec.id) }>
+                            <li key={spec.id} className={ selectedSku.id == spec.id? `${styles["sku-line"]} ${styles.selected}`: `${styles["sku-line"]}` } onClick={ () => handleClick(spec.id) }>
                                 <a href="#" className={styles.skuName} onClick={(e) => e.preventDefault()}>{spec.name}</a>
                             </li>
                         ))
