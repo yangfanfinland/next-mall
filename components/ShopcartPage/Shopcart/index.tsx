@@ -17,7 +17,6 @@ import styles from './index.module.scss'
 const Shopcart = () => {
   const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
-  const [keywords, setKeywords] = useState('')
   const [shopcartList, setShopcartList] = useState([])
   const [specIds, setSpecIds] = useState([])
   const [allSelectedCounts, setAllSelectedCounts] = useState(0)
@@ -195,6 +194,16 @@ const Shopcart = () => {
     }
   }
 
+  const handleSpecChanged = (specId) => {
+    const clonedSpecIds = [...specIds]
+    if (clonedSpecIds.indexOf(specId) > -1) {
+      setSpecIds(clonedSpecIds.filter((id) => id != specId))
+    } else {
+      clonedSpecIds.push(specId)
+      setSpecIds(clonedSpecIds)
+    }
+  }
+
   // 全选与反选
   const checkedAll = () => {
     if (specIds.length === shopcartList.length) {
@@ -207,16 +216,6 @@ const Shopcart = () => {
         tempSpecIds.push(item.specId)
       })
       setSpecIds(tempSpecIds)
-    }
-  }
-
-  const handleSpecChanged = (specId) => {
-    const clonedSpecIds = [...specIds]
-    if (clonedSpecIds.indexOf(specId) > -1) {
-      setSpecIds(clonedSpecIds.filter((id) => id != specId))
-    } else {
-      clonedSpecIds.push(specId)
-      setSpecIds(clonedSpecIds)
     }
   }
 
@@ -249,6 +248,21 @@ const Shopcart = () => {
 
   const goLogin = () => {
     window.location.href = "login?returnUrl=shopcart.html";
+  }
+
+  const handleBuyNumberChange = (specId, value) => {
+    var shopcartList = getShopcartList()
+    for (var i = 0; i < shopcartList.length; i++) {
+      var tmpItem = shopcartList[i]
+      if (tmpItem.specId == specId) {
+        tmpItem.buyCounts = value;
+        break
+      }
+    }
+    // 重新放入cookie，更新一下
+    setCookie('shopcart', JSON.stringify(shopcartList))
+    setShopcartList(shopcartList)
+    reCalItemsCountsAndAmount()
   }
 
   return (
@@ -291,7 +305,7 @@ const Shopcart = () => {
                     {cartItem.priceNormal / 100}
                   </div>
                   <div className={`${styles.goodsNum} fl`}>
-                    <InputBuyNumber defaultValue={cartItem.buyCounts} />
+                    <InputBuyNumber defaultValue={cartItem.buyCounts} onChange={(value) => handleBuyNumberChange(cartItem.specId, value)} />
                   </div>
                   <div className={`${styles.goodsSale} fl`}>
                     {(cartItem.priceDiscount / 100) * cartItem.buyCounts}

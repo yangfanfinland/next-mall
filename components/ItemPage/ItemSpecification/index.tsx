@@ -96,7 +96,7 @@ const ItemSpecification = ({ item, specification, addToCartCallback }) => {
             <div className={`${styles.buyNum} fcb`}>
                 <span className={`${styles.title} fl`}>数量</span>
                 <div className={`fl`}>
-                    <InputBuyNumber stock={selectedSku.stock} onChange={(value) => setBuyCounts(value)} />
+                    <InputBuyNumber defaultValue={1} stock={selectedSku.stock} onChange={(value) => setBuyCounts(value)} />
                 </div>
             </div>
             <div className={styles.buyBtnWrap}>
