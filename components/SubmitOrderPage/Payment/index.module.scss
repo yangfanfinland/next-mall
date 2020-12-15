@@ -1,0 +1,32 @@
+.logistics {
+  h3 {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f1f1f1;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .pay-list {
+    list-style: none;
+
+    li {
+      margin-right: 2%;
+      float: left;
+      cursor: pointer;
+      border: 1px solid transparent;
+      overflow: hidden;
+    }
+
+    .wxpay {
+      width: 180px;
+      height: 40px;
+      padding: 3px;
+    }
+    .alipay {
+      width: 180px;
+      height: 40px;
+      padding: 3px;
+    }
+  }
+}

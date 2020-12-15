@@ -5,6 +5,7 @@ import { withRouter } from 'next/router'
 import axios from 'axios'
 import { serverUrl } from '../util/app'
 import Address from "../components/SubmitOrderPage/Address"
+import Payment from "../components/SubmitOrderPage/Payment"
 import GoodsArea from "../components/SubmitOrderPage/GoodsArea"
 
 const SubmitOrder = () => {
@@ -14,6 +15,7 @@ const SubmitOrder = () => {
             <SearchArea noSearch={true}/>
             <div className={`bw`}>
                 <Address/>
+                <Payment/>
                 <GoodsArea/>
             </div>
         </>
