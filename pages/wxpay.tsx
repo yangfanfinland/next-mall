@@ -24,16 +24,17 @@ const WXpay = ({ orderId }: Props) => {
   }, [])
 
   useEffect(() => {
-    if (!user) return
+    if (!userInfo) return
     getWXPayQRCodeUrl(orderId)
-  }, [user])
+  }, [userInfo])
 
   useEffect(() => {
+    if (!userInfo) return
     const intervalId = setInterval(() => {
       checkPayResult()
     }, 3000)
     return () => clearInterval(intervalId)
-  }, [])
+  }, [userInfo])
 
   const judgeUserLoginStatus = () => {
     if (user && user.id) {
@@ -62,6 +63,8 @@ const WXpay = ({ orderId }: Props) => {
         },
       }
     )
+
+    console.log(userInfo, res)
 
     if (res.data.status == 200) {
       var paymentInfo = res.data.data
@@ -131,7 +134,10 @@ const WXpay = ({ orderId }: Props) => {
                       支付金额：
                       <em className={`${styles["rmb"]}`}>
                         <i>¥</i>
-                        {paymentInfo.amount / 100}
+                        {
+                          paymentInfo? (<>{paymentInfo.amount / 100}</>) : <>0.00</>
+                        }
+                        
                       </em>
                     </span>
                   </div>

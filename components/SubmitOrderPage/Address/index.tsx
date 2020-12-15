@@ -7,7 +7,7 @@ import { message } from 'antd'
 import { useSelector } from 'react-redux'
 import styles from './index.module.scss'
 
-const Address = () => {
+const Address = ({ chooseAddressCallback }: {chooseAddressCallback?: (choosedAddress) => void}) => {
   const [visible, setVisible] = useState(false)
   const [addressList, setAddressList] = useState([])
   const [userIsLogin, setUserIsLogin] = useState(false)
@@ -130,10 +130,11 @@ const Address = () => {
   }
 
   const chooseAddress = (choosedAddressId) => {
-    setChoosedAddressId(choosedAddressId);
+    setChoosedAddressId(choosedAddressId)
+    chooseAddressCallback(choosedAddressId)
 
     // 确认地址动态改变
-    renderConfirmAddress(choosedAddressId);
+    renderConfirmAddress(choosedAddressId)
   }
 
   const renderConfirmAddress = (addressId) => {
@@ -164,6 +165,7 @@ const Address = () => {
           choosedAddressId == ''
         ) {
           setChoosedAddressId(address.id)
+          chooseAddressCallback(address.id)
         }
         break
       }
@@ -316,6 +318,7 @@ const Address = () => {
     // 如果删除的地址是默认地址或者选中地址，则choosedAddressId和defaultAddressId要设置为空
     if (addressId == choosedAddressId) {
       setChoosedAddressId('')
+      chooseAddressCallback('')
     }
 
     if (addressId == defaultAddressId) {

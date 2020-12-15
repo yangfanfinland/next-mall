@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 
-const Payment = () => {
+const Payment = ({choosePaymentCallback}: {choosePaymentCallback?: (choosedPayment) => void}) => {
   const [payMethod, setPayMethod] = useState(0)
 
   const choosePayMethod = (payMethod) => {
     setPayMethod(payMethod)
+    choosePaymentCallback(payMethod)
   }
 
   return (

@@ -8,7 +8,7 @@ import {
 } from '../../../util/app'
 import styles from './index.module.scss'
 
-const GoodsArea = () => {
+const GoodsArea = ({ goodsCallback }: { goodsCallback?: (goods) => void} ) => {
   const [orderItemList, setOrderItemList] = useState([])
   const [totalAmount, setTotalAmount] = useState(0)
 
@@ -40,6 +40,7 @@ const GoodsArea = () => {
 
     setOrderItemList(orderItemList)
     setTotalAmount(totalAmount)
+    goodsCallback({ orderItemList, totalAmount })
 
     if (orderItemList.length <= 0) {
       message.error('没有商品信息，或订单已经提交')
@@ -125,10 +126,6 @@ const GoodsArea = () => {
             <span className={`f20 fwb red`}>¥{totalAmount / 100}</span>
           </div>
         </div>
-      </div>
-
-      <div className={`tr`}>
-        <a className={`${styles.submitOrder}`}>提交订单</a>
       </div>
     </div>
   )
