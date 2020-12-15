@@ -129,7 +129,7 @@ const catItems = ({ grid, searchType, catId, pageSize, keywords }: Props) => {
     <>
       <HtmlHead title={'商品列表'} />
       <SearchArea keywords={keywords} />
-      <BreadcrumbNav />
+      <BreadcrumbNav items={null} />
       <FilterBar onSort={chooseSort} />
       <GoodsList itemsList={itemsList} />
       <div className={`contentWidth ${styles.wrap}`}>

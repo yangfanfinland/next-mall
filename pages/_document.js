@@ -34,6 +34,8 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+        <script src="/static/js/jquery.qrcode.min.js"></script>
         </Head>
         <body>
           <Main />

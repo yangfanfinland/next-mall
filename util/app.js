@@ -1,5 +1,7 @@
 export const serverUrl = 'http://localhost:8088'
 export const shopServerUrl = "http://localhost:8080/foodie-shop/"
+//export const paymentServerUrl = "http://localhost:8089"
+export const paymentServerUrl = "http://payment.t.mukewang.com/foodie-payment"
 const cookieDomain = 'localhost;'
 
 export function getUrlParam(paramName) {
