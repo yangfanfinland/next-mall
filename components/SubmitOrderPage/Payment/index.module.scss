@@ -16,6 +16,21 @@
       cursor: pointer;
       border: 1px solid transparent;
       overflow: hidden;
+      &.selected {
+        border-color: #f03726;
+        position: relative;
+        span {
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          font-size: 0;
+          line-height: 0;
+          right: 0px;
+          bottom: 0px;
+          background: url('/static/images/sys_item_selected.gif') no-repeat right
+            bottom;
+        }
+      }
     }
 
     .wxpay {

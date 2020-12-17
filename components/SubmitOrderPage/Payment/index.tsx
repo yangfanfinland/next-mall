@@ -15,14 +15,14 @@ const Payment = ({choosePaymentCallback}: {choosePaymentCallback?: (choosedPayme
         <h3>选择支付方式</h3>
         <ul className={`${styles['pay-list']}`}>
           <li
-            className={`${styles['wxpay']}`}
+            className={ payMethod === 1? `${styles['wxpay']} ${styles['selected']}` : `${styles['wxpay']}`}
             onClick={() => choosePayMethod(1)}
           >
             <img src="/static/images/wxpay.png" />
             <span></span>
           </li>
           <li
-            className={`${styles['alipay']}`}
+            className={ payMethod === 2? `${styles['alipay']} ${styles['selected']}` : `${styles['alipay']}`}
             onClick={() => choosePayMethod(2)}
           >
             <img src="/static/images/alipay.png" />

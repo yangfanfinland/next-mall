@@ -7,7 +7,7 @@ import axios from 'axios'
 import { message } from 'antd'
 import { serverUrl, paymentServerUrl } from '../util/app'
 import styles from '../static/styles/wxpay.module.scss'
-import $ from 'jquery'
+import QRCode from 'qrcode'
 
 interface Props extends SingletonRouter {
   orderId: string
@@ -68,12 +68,12 @@ const WXpay = ({ orderId }: Props) => {
       setPaymentInfo(paymentInfo)
       // qrCodeUrl
       // console.log(paymentInfo);
-
-      $('#wxqrcode-display').qrcode({
-        width: 200,
-        height: 200,
-        text: paymentInfo.qrCodeUrl,
+      var canvas = document.getElementById('wxqrcode-display')
+      QRCode.toCanvas(canvas, paymentInfo.qrCodeUrl, function (error) {
+        if (error) console.error(error)
+        console.log('success!');
       })
+
     } else {
       message.error(res.data.msg)
     }
@@ -194,10 +194,10 @@ const WXpay = ({ orderId }: Props) => {
                             <div
                               className={`${styles['ep-wxpay-qrcode-wrap']}`}
                             >
-                              <div
+                              <canvas
                                 id="wxqrcode-display"
                                 className={`${styles['wxqrcode-display']}`}
-                              ></div>
+                              ></canvas>
                             </div>
 
                             <div
