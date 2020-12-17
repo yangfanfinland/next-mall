@@ -3,7 +3,7 @@ import HtmlHead from '../components/HtmlHead'
 import SearchArea from '../components/SearchArea'
 import { withRouter, SingletonRouter } from 'next/router'
 import { useSelector } from 'react-redux'
-import { serverUrl, paymentServerUrl } from '../util/app'
+import { serverUrl } from '../util/app'
 import axios from 'axios'
 import { message } from 'antd'
 import styles from '../static/styles/alipay.module.scss'
@@ -14,10 +14,8 @@ interface Props extends SingletonRouter {
 }
 
 const Alipay = ({ orderId, amount }: Props) => {
-  const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
   const user = useSelector((store) => store.user)
-  const [paymentInfo, setPaymentInfo] = useState<any>()
 
   useEffect(() => {
     judgeUserLoginStatus()
@@ -53,16 +51,14 @@ const Alipay = ({ orderId, amount }: Props) => {
           'success?orderId=' + orderId + '&orderAmount=' + amount
       }
     } else {
-      alert(res.data.msg)
+      message.error(res.data.msg)
     }
   }
 
   const judgeUserLoginStatus = () => {
     if (user && user.id) {
-      setUserIsLogin(true)
       setUserInfo(user)
     } else {
-      setUserIsLogin(false)
       setUserInfo({})
     }
   }
@@ -71,11 +67,11 @@ const Alipay = ({ orderId, amount }: Props) => {
     <>
       <HtmlHead title={'阿里支付'} />
       <SearchArea />
-      <div className="hd">
+      <div className={`${styles.hd} contentWidth`}>
         <div className="hd-main">
           <div className="ep-hd-info">
             <div className="ep-logo">
-              <img src="images/logobig.png" alt="慕课网 - 天天吃货" />
+              <img src="/static/images/logobig.png" alt="天天吃货" />
             </div>
             <div className="ep-order-status">
               <span className="page-title">订单支付</span>
@@ -86,13 +82,13 @@ const Alipay = ({ orderId, amount }: Props) => {
           </div>
         </div>
       </div>
-      <div className="bd">
+      <div className={`${styles.bd} contentWidth`}>
         <div className="bd-main">
           <div className="ep-wrapper">
             <div className="ep-pay-step ep-step-channel bd-main-container">
               <div className="ep-order-detail">
                 <div>
-                  <img src="img/loading.gif" />
+                  <img src="/static/images/loading.gif" />
                   <span className="hit-words">
                     订单[<em>{orderId}</em>
                     ]正在支付中，请耐心等待...

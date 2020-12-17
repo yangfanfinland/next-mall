@@ -14,7 +14,6 @@ interface Props extends SingletonRouter {
 }
 
 const WXpay = ({ orderId }: Props) => {
-  const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
   const user = useSelector((store) => store.user)
   const [paymentInfo, setPaymentInfo] = useState<any>()
@@ -38,10 +37,8 @@ const WXpay = ({ orderId }: Props) => {
 
   const judgeUserLoginStatus = () => {
     if (user && user.id) {
-      setUserIsLogin(true)
       setUserInfo(user)
     } else {
-      setUserIsLogin(false)
       setUserInfo({})
     }
   }
@@ -115,71 +112,104 @@ const WXpay = ({ orderId }: Props) => {
     <>
       <HtmlHead title={'微信支付'} />
       <SearchArea />
+      <div className={`${styles.hd} contentWidth`}>
+        <div className="hd-main">
+          <div className="ep-hd-info">
+            <div className="ep-logo">
+              <img src="/static/images/logobig.png" alt="天天吃货" />
+            </div>
+            <div className="ep-order-status">
+              <span className="page-title">订单支付</span>
+            </div>
+          </div>
+          <div className="user-info">
+            {userInfo && <p>账号：{userInfo.nickname}</p>}
+          </div>
+        </div>
+      </div>
       <div className={`${styles.bd} contentWidth`}>
-        <div className={`${styles["bd-main"]}`}>
-          <div className={`${styles["ep-wrapper"]}`}>
+        <div className={`${styles['bd-main']}`}>
+          <div className={`${styles['ep-wrapper']}`}>
             <div
-              className={`${styles["ep-pay-step"]} ${styles["ep-step-channel"]} ${styles["bd-main-container"]}`}
+              className={`${styles['ep-pay-step']} ${styles['ep-step-channel']} ${styles['bd-main-container']}`}
             >
-              <div className={`${styles["ep-order-detail"]}`}>
+              <div className={`${styles['ep-order-detail']}`}>
                 <div>
-                  <div className={`${styles["ep-order-tit"]}`}>
+                  <div className={`${styles['ep-order-tit']}`}>
                     <dl>
                       <dt>商品订单：</dt>
                       <dd>{orderId}</dd>
                     </dl>
                   </div>
-                  <div className={`${styles["ep-order-tit"]}`}>
+                  <div className={`${styles['ep-order-tit']}`}>
                     <span>
                       支付金额：
-                      <em className={`${styles["rmb"]}`}>
+                      <em className={`${styles['rmb']}`}>
                         <i>¥</i>
-                        {
-                          paymentInfo? (<>{paymentInfo.amount / 100}</>) : <>0.00</>
-                        }
-                        
+                        {paymentInfo ? (
+                          <>{paymentInfo.amount / 100}</>
+                        ) : (
+                          <>0.00</>
+                        )}
                       </em>
                     </span>
                   </div>
                 </div>
               </div>
-              <div className={`${styles["ep-pay-method"]} ${styles["ep-pay-methods"]}`}>
+              <div
+                className={`${styles['ep-pay-method']} ${styles['ep-pay-methods']}`}
+              >
                 <dl>
-                  <span className={`${styles["pay-method"]}`}>
-                    <dt className={`${styles["pay-words"]}`}>支付方式：</dt>
+                  <span className={`${styles['pay-method']}`}>
+                    <dt className={`${styles['pay-words']}`}>支付方式：</dt>
 
-                    <div className={`${styles["ep-pay-method-list-tit"]}`}>
+                    <div className={`${styles['ep-pay-method-list-tit']}`}>
                       <ul>
                         <li
-                          className={`${styles["selected"]}`}
+                          className={`${styles['selected']}`}
                           data-type="wechat"
                           title="微信支付"
                         >
-                          <span className={`${styles["ep-icon"]} ${styles["ep-icon-wxpay"]}`}></span>
-                          <span className={`${styles["ep-pay-method-name"]}`}>微信支付</span>
-                          <i className={`${styles["ep-icon"]} ${styles["ep-icon-selected"]}`}></i>
+                          <span
+                            className={`${styles['ep-icon']} ${styles['ep-icon-wxpay']}`}
+                          ></span>
+                          <span className={`${styles['ep-pay-method-name']}`}>
+                            微信支付
+                          </span>
+                          <i
+                            className={`${styles['ep-icon']} ${styles['ep-icon-selected']}`}
+                          ></i>
                         </li>
                       </ul>
                     </div>
                   </span>
 
-                  <dd className={`${styles["pay-channel"]}`}>
-                    <div className={`${styles["ep-pay-method-list-con"]}`}>
-                      <div className={`${styles["con"]} ${styles["channel-wechat show"]}`}>
-                        <div className={`${styles["clearfix"]}`}>
-                          <div className={`${styles["fl"]}`}>
-                            <div className={`${styles["ep-wxpay-qrcode-wrap"]}`}>
+                  <dd className={`${styles['pay-channel']}`}>
+                    <div className={`${styles['ep-pay-method-list-con']}`}>
+                      <div
+                        className={`${styles['con']} ${styles['channel-wechat show']}`}
+                      >
+                        <div className={`${styles['clearfix']}`}>
+                          <div className={`${styles['fl']}`}>
+                            <div
+                              className={`${styles['ep-wxpay-qrcode-wrap']}`}
+                            >
                               <div
-                                id="wxqrcode-display" className={`${styles["wxqrcode-display"]}`}
+                                id="wxqrcode-display"
+                                className={`${styles['wxqrcode-display']}`}
                               ></div>
                             </div>
 
-                            <div className={`${styles["ep-wxpay-qrcode-notice"]}`}>
+                            <div
+                              className={`${styles['ep-wxpay-qrcode-notice']}`}
+                            >
                               请打开手机微信，扫一扫完成支付
                             </div>
                           </div>
-                          <div className={`${styles["fl"]} ${styles["ep-wxpay-qrcode-tip"]}`}>
-                            <img src="img/ep_sys_wx_tip.jpg" />
+                          <div
+                            className={`${styles['fl']} ${styles['ep-wxpay-qrcode-tip']}`}
+                          >
+                            <img src="/static/images/ep_sys_wx_tip.jpg" />
                           </div>
                         </div>
                       </div>
