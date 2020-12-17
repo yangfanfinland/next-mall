@@ -113,7 +113,7 @@ const WXpay = ({ orderId }: Props) => {
 
   return (
     <>
-      <HtmlHead title={'商品详情'} />
+      <HtmlHead title={'微信支付'} />
       <SearchArea />
       <div className={`${styles.bd} contentWidth`}>
         <div className={`${styles["bd-main"]}`}>
