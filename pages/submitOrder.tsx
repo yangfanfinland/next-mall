@@ -115,7 +115,7 @@ const SubmitOrder = () => {
         // 支付宝支付直接跳转
         window.open('alipayTempTransit?orderId=' + orderId, '_blank')
         window.location.href =
-          'alipay.html?orderId=' + orderId + '&amount=' + totalAmount
+          'alipay?orderId=' + orderId + '&amount=' + totalAmount
         // const newWindow = window.open();
         // 弹出的新窗口进行支付
         // newWindow.location = "alipayTempTransit.html?orderId=" + orderId;
