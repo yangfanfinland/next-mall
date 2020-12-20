@@ -15,12 +15,12 @@ const SubmitOrder = () => {
   const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
   const [orderItemList, setOrderItemList] = useState([])
-  const [choosedAddressId, setChoosedAddressId] = useState('')
+  const [confirmAddress, setChoosedAddress] = useState<any>()
   const [choosedPayMethod, setChoosedPayMethod] = useState(0)
   const [orderId, setOrderId] = useState('')
   const user = useSelector((store) => store.user)
-  const [orderRemarker, setOrderRemarker] = useState("")
-  const [totalAmount, setTotalAmount] = useState()
+  const [orderRemarker, setOrderRemarker] = useState('')
+  const [totalAmount, setTotalAmount] = useState(0)
 
   useEffect(() => {
     judgeUserLoginStatus()
@@ -38,7 +38,7 @@ const SubmitOrder = () => {
 
   const handleChooseAddress = (choosedAddress) => {
     console.log('choosed address', choosedAddress)
-    setChoosedAddressId(choosedAddress)
+    setChoosedAddress(choosedAddress ? choosedAddress : null)
   }
 
   const handleChoosePayment = (choosedPayment) => {
@@ -47,9 +47,9 @@ const SubmitOrder = () => {
   }
 
   const handleGoods = (goods) => {
-      console.log('goods', goods)
-      setOrderItemList(goods.orderItemList)
-      setTotalAmount(goods.totalAmount)
+    console.log('goods', goods)
+    setOrderItemList(goods.orderItemList)
+    setTotalAmount(goods.totalAmount)
   }
 
   const submitOrder = async () => {
@@ -69,11 +69,7 @@ const SubmitOrder = () => {
     }
 
     // 判断选中的地址id不能为空
-    if (
-      choosedAddressId == null ||
-      choosedAddressId == undefined ||
-      choosedAddressId == ''
-    ) {
+    if (!confirmAddress) {
       message.warning('请选择收货地址！')
       return
     }
@@ -91,7 +87,7 @@ const SubmitOrder = () => {
       {
         userId: userInfo.id,
         itemSpecIds: itemSpecIds,
-        addressId: choosedAddressId,
+        addressId: confirmAddress.id,
         payMethod: choosedPayMethod,
         leftMsg: orderRemarker,
       },
@@ -116,13 +112,6 @@ const SubmitOrder = () => {
         window.open('alipayTempTransit?orderId=' + orderId, '_blank')
         window.location.href =
           'alipay?orderId=' + orderId + '&amount=' + totalAmount
-        // const newWindow = window.open();
-        // 弹出的新窗口进行支付
-        // newWindow.location = "alipayTempTransit.html?orderId=" + orderId;
-        // this.$nextTick(()=> {
-        // 	// 当前页面跳转后会轮训支付结果
-        // 	newWindow.location.href = "alipay.html?orderId=" + orderId;
-        // })
       } else {
         message.warning('目前只支持微信或支付宝支付！')
       }
@@ -139,10 +128,78 @@ const SubmitOrder = () => {
         <Address chooseAddressCallback={handleChooseAddress} />
         <Payment choosePaymentCallback={handleChoosePayment} />
         <GoodsArea goodsCallback={handleGoods} />
-        <div className={`contentWidth tr`}>
+        {/* <div className={`contentWidth tr`}>
           <a className={`${styles.submitOrder}`} onClick={submitOrder}>
             提交订单
           </a>
+        </div> */}
+
+        <div className={`${styles['order-go']} ${styles['clearfix']}`}>
+          <div className={`${styles['pay-confirm']} ${styles['clearfix']}`}>
+            <div className={`${styles.box}`}>
+              <div className={`${styles.realPay}`}>
+                <em className={`${styles.t}`}>实付款：</em>
+                <span className={`${styles['price g_price']}`}>
+                  <em className={`${styles['style-large-bold-red']}`}>
+                    {
+                      totalAmount? <>¥{totalAmount / 100}</> : <>¥0</>
+                    }
+                  </em>
+                </span>
+              </div>
+
+              {confirmAddress && (
+                <div className={`${styles['pay-address']}`}>
+                  <p className={`${styles['buy-footer-address']}`}>
+                    <span
+                      className={`${styles['buy-line-title']} ${styles['buy-line-title-type']}`}
+                    >
+                      寄送至：
+                    </span>
+                    <span className={`${styles['buy--address-detail']}`}>
+                      <span className={`${styles['province']}`}>
+                        {confirmAddress.province}
+                      </span>
+                      <span className={`${styles['city']}`}>
+                        {confirmAddress.city}
+                      </span>
+                      <span className={`${styles['dist']}`}>
+                        {confirmAddress.district}
+                      </span>
+                      <span className={`${styles['street']}`}>
+                        {confirmAddress.detail}
+                      </span>
+                    </span>
+                  </p>
+                  <p className={`${styles['buy-footer-address']}`}>
+                    <span className={`${styles['buy-line-title']}`}>
+                      收货人：
+                    </span>
+                    <span className={`${styles['buy-address-detail']}`}>
+                      <span className={`${styles['buy-user']}`}>
+                        {confirmAddress.receiver}
+                      </span>
+                      <span className={`${styles['buy-phone']}`}>
+                        {confirmAddress.mobile}
+                      </span>
+                    </span>
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div className={`${styles['submitOrder']}`}>
+              <div className={`${styles['go-btn-wrap']}`}>
+                <a
+                  onClick={submitOrder}
+                  className={`${styles['btn-go']}`}
+                  title="点击此按钮，提交订单"
+                >
+                  提交订单
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
@@ -150,8 +207,6 @@ const SubmitOrder = () => {
 }
 
 SubmitOrder.getInitialProps = async ({ ctx }) => {
-  const { selectedItemSpecIds } = ctx.query
-
   let itemInfo
 
   return {

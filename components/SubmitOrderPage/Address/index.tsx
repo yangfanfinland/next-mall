@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import AddressModal from '../../AddressModal'
-import { serverUrl, getCookie, checkMobile } from '../../../util/app'
+import { serverUrl, checkMobile } from '../../../util/app'
 import { cities } from '../../../util/cities'
 import axios from 'axios'
 import { message } from 'antd'
 import { useSelector } from 'react-redux'
 import styles from './index.module.scss'
 
-const Address = ({ chooseAddressCallback }: {chooseAddressCallback?: (choosedAddress) => void}) => {
+const Address = ({
+  chooseAddressCallback,
+}: {
+  chooseAddressCallback?: (choosedAddress) => void
+}) => {
   const [visible, setVisible] = useState(false)
   const [addressList, setAddressList] = useState([])
   const [userIsLogin, setUserIsLogin] = useState(false)
@@ -50,34 +54,32 @@ const Address = ({ chooseAddressCallback }: {chooseAddressCallback?: (choosedAdd
   const renderUserAddressList = async () => {
     // 请求后端获得最新数据
     axios.defaults.withCredentials = true
-    await axios
-      .post(
-        serverUrl + '/address/list?userId=' + userInfo.id,
-        {},
-        {
-          headers: {
-            headerUserId: userInfo.id,
-            headerUserToken: userInfo.userUniqueToken,
-          },
-        }
-      )
-      .then((res) => {
-        if (res.data.status == 200) {
-          var addressList = res.data.data
+    const res = await axios.post(
+      serverUrl + '/address/list?userId=' + userInfo.id,
+      {},
+      {
+        headers: {
+          headerUserId: userInfo.id,
+          headerUserToken: userInfo.userUniqueToken,
+        },
+      }
+    )
 
-          setAddressList(addressList)
+    if (res.data.status == 200) {
+      var addressList = res.data.data
 
-          // 设置默认应该选中的地址id
-          setDefaultChoosedAddressId(addressList)
+      setAddressList(addressList)
 
-          // 清空地址内容
-          flushAddressForm()
-        } else if (res.data.status == 500) {
-          message.error(res.data.msg)
-        } else {
-          message.error(res.data.msg)
-        }
-      })
+      // 设置默认应该选中的地址id
+      setDefaultChoosedAddressId(addressList)
+
+      // 清空地址内容
+      flushAddressForm()
+    } else if (res.data.status == 500) {
+      message.error(res.data.msg)
+    } else {
+      message.error(res.data.msg)
+    }
   }
 
   const flushAddressForm = () => {
@@ -131,24 +133,23 @@ const Address = ({ chooseAddressCallback }: {chooseAddressCallback?: (choosedAdd
 
   const chooseAddress = (choosedAddressId) => {
     setChoosedAddressId(choosedAddressId)
-    chooseAddressCallback(choosedAddressId)
-
     // 确认地址动态改变
     renderConfirmAddress(choosedAddressId)
   }
 
   const renderConfirmAddress = (addressId) => {
     // 提交订单的确认地址要跟着动态改变
-    var tempConfirmAddress = null;
-    for (var i = 0 ; i < addressList.length ; i ++) {
-      var tmpAddress = addressList[i];
+    var tempConfirmAddress = null
+    for (var i = 0; i < addressList.length; i++) {
+      var tmpAddress = addressList[i]
       if (tmpAddress.id == addressId) {
-        tempConfirmAddress = tmpAddress;
-        break;
+        tempConfirmAddress = tmpAddress
+        break
       }
     }
     // 赋值
-    setConfirmAddress(tempConfirmAddress);
+    setConfirmAddress(tempConfirmAddress)
+    chooseAddressCallback(tempConfirmAddress)
   }
 
   const setDefaultChoosedAddressId = (addressList) => {
@@ -165,7 +166,6 @@ const Address = ({ chooseAddressCallback }: {chooseAddressCallback?: (choosedAdd
           choosedAddressId == ''
         ) {
           setChoosedAddressId(address.id)
-          chooseAddressCallback(address.id)
         }
         break
       }
@@ -173,6 +173,7 @@ const Address = ({ chooseAddressCallback }: {chooseAddressCallback?: (choosedAdd
 
     // 赋值
     setConfirmAddress(tempConfirmAddress)
+    chooseAddressCallback(tempConfirmAddress)
   }
 
   const editAddress = (addressId) => {
@@ -246,70 +247,66 @@ const Address = ({ chooseAddressCallback }: {chooseAddressCallback?: (choosedAdd
 
     // 地址id为空，则新增地址，否则更新地址
     if (addressId == '' || addressId == undefined || addressId == null) {
-      axios
-        .post(
-          serverUrl + '/address/add',
-          {
-            userId: userInfo.id,
-            receiver: receiver,
-            mobile: mobile,
-            province: prov,
-            city: city,
-            district: district,
-            detail: detail,
+      const res = await axios.post(
+        serverUrl + '/address/add',
+        {
+          userId: userInfo.id,
+          receiver: receiver,
+          mobile: mobile,
+          province: prov,
+          city: city,
+          district: district,
+          detail: detail,
+        },
+        {
+          headers: {
+            headerUserId: userInfo.id,
+            headerUserToken: userInfo.userUniqueToken,
           },
-          {
-            headers: {
-              headerUserId: userInfo.id,
-              headerUserToken: userInfo.userUniqueToken,
-            },
-          }
-        )
-        .then((res) => {
-          if (res.data.status == 200) {
-            closeAddressDialog()
-            renderUserAddressList()
+        }
+      )
 
-            // 设置更新地址的id为空
-            setUpdatedAddressId('')
-          } else if (res.data.status == 500) {
-            message.error(res.data.msg)
-          }
-        })
+      if (res.data.status == 200) {
+        closeAddressDialog()
+        renderUserAddressList()
+
+        // 设置更新地址的id为空
+        setUpdatedAddressId('')
+      } else if (res.data.status == 500) {
+        message.error(res.data.msg)
+      }
     } else {
-      axios
-        .post(
-          serverUrl + '/address/update',
-          {
-            addressId: addressId,
-            userId: userInfo.id,
-            receiver: receiver,
-            mobile: mobile,
-            province: prov,
-            city: city,
-            district: district,
-            detail: detail,
+      const res = await axios.post(
+        serverUrl + '/address/update',
+        {
+          addressId: addressId,
+          userId: userInfo.id,
+          receiver: receiver,
+          mobile: mobile,
+          province: prov,
+          city: city,
+          district: district,
+          detail: detail,
+        },
+        {
+          headers: {
+            headerUserId: userInfo.id,
+            headerUserToken: userInfo.userUniqueToken,
           },
-          {
-            headers: {
-              headerUserId: userInfo.id,
-              headerUserToken: userInfo.userUniqueToken,
-            },
-          }
-        )
-        .then((res) => {
-          if (res.data.status == 200) {
-            closeAddressDialog()
-            renderUserAddressList()
-          } else if (res.data.status == 500) {
-            message.error(res.data.msg)
-          }
-        })
+        }
+      )
+
+      if (res.data.status == 200) {
+        closeAddressDialog()
+        renderUserAddressList()
+      } else if (res.data.status == 500) {
+        message.error(res.data.msg)
+      }
     }
   }
 
   // 删除地址
-  const deleteAddress = (addressId) => {
+  const deleteAddress = async (addressId) => {
     var isDel = window.confirm('确认删除改地址吗')
     if (!isDel) {
       return
@@ -318,7 +315,7 @@ const Address = ({ chooseAddressCallback }: {chooseAddressCallback?: (choosedAdd
     // 如果删除的地址是默认地址或者选中地址，则choosedAddressId和defaultAddressId要设置为空
     if (addressId == choosedAddressId) {
       setChoosedAddressId('')
-      chooseAddressCallback('')
+      chooseAddressCallback(null)
     }
 
     if (addressId == defaultAddressId) {
@@ -326,55 +323,51 @@ const Address = ({ chooseAddressCallback }: {chooseAddressCallback?: (choosedAdd
     }
 
     axios.defaults.withCredentials = true
-    axios
-      .post(
-        serverUrl +
-          '/address/delete?userId=' +
-          userInfo.id +
-          '&addressId=' +
-          addressId,
-        {},
-        {
-          headers: {
-            headerUserId: userInfo.id,
-            headerUserToken: userInfo.userUniqueToken,
-          },
-        }
-      )
-      .then((res) => {
-        if (res.data.status == 200) {
-          renderUserAddressList()
-        } else {
-          message.error(res.data.msg)
-        }
-      })
+    const res = await axios.post(
+      serverUrl +
+        '/address/delete?userId=' +
+        userInfo.id +
+        '&addressId=' +
+        addressId,
+      {},
+      {
+        headers: {
+          headerUserId: userInfo.id,
+          headerUserToken: userInfo.userUniqueToken,
+        },
+      }
+    )
+
+    if (res.data.status == 200) {
+      renderUserAddressList()
+    } else {
+      message.error(res.data.msg)
+    }
   }
 
   // 设置默认地址
-  const setDefaultAddress = (addressId) => {
+  const setDefaultAddress = async (addressId) => {
     axios.defaults.withCredentials = true
-    axios
-      .post(
-        serverUrl +
-          '/address/setDefalut?userId=' +
-          userInfo.id +
-          '&addressId=' +
-          addressId,
-        {},
-        {
-          headers: {
-            headerUserId: userInfo.id,
-            headerUserToken: userInfo.userUniqueToken,
-          },
-        }
-      )
-      .then((res) => {
-        if (res.data.status == 200) {
-          renderUserAddressList()
-        } else {
-          alert(res.data.msg)
-        }
-      })
+    const res = await axios.post(
+      serverUrl +
+        '/address/setDefalut?userId=' +
+        userInfo.id +
+        '&addressId=' +
+        addressId,
+      {},
+      {
+        headers: {
+          headerUserId: userInfo.id,
+          headerUserToken: userInfo.userUniqueToken,
+        },
+      }
+    )
+
+    if (res.data.status == 200) {
+      renderUserAddressList()
+    } else {
+      alert(res.data.msg)
+    }
   }
 
   const closeAddressDialog = () => {
@@ -391,7 +384,9 @@ const Address = ({ chooseAddressCallback }: {chooseAddressCallback?: (choosedAdd
         {addressList.map((address, aindex) => {
           return (
             <div
-              className={`${styles.item} ${address.id === choosedAddressId ? styles.active : ''}`}
+              className={`${styles.item} ${
+                address.id === choosedAddressId ? styles.active : ''
+              }`}
               key={aindex}
               onClick={() => chooseAddress(address.id)}
             >
