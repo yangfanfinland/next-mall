@@ -247,7 +247,7 @@ const Shopcart = () => {
   }
 
   const goLogin = () => {
-    window.location.href = "login?returnUrl=shopcart.html";
+    window.location.href = "user/login?returnUrl=shopcart";
   }
 
   const handleBuyNumberChange = (specId, value) => {

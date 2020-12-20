@@ -1,9 +1,181 @@
 @import './color';
 
-.ep-pay-step {
-  display: block;
+.hd {
+  height: 60px;
+  color: #000;
+  background-color: #fff;
+  .hd-main {
+    width: 1080px;
+    height: 100%;
+    margin: 0 auto;
+    .ep-hd-info {
+      float: left;
+      height: 100%;
+      font-size: 0;
+      .ep-logo {
+        float: left;
+        img {
+          height: 60px;
+          max-width: 100%;
+          vertical-align: middle;
+        }
+      }
+      .ep-order-status {
+        float: left;
+        margin: 16px 0 0 20px;
+        padding-left: 20px;
+        border-left: 1px solid #f0f0f0;
+        line-height: 26px;
+        font-size: 16px;
+        .page-title {
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 26px;
+        }
+      }
+    }
+    .user-info {
+      float: right;
+      margin-top: 20px;
+    }
+  }
 }
 
-.wxqrcode-display {
-  margin-bottom: 10px;
+.bd {
+  padding: 40px 0 200px;
+  .bd-main {
+    width: 1080px;
+    margin: 0 auto;
+    background: #fff;
+    .ep-wrapper {
+      position: relative;
+      margin-left: 0;
+      .bd-main-container {
+        padding: 50px 270px 330px 250px;
+        .ep-order-detail {
+          padding: 10px 0 20px;
+          border-bottom: 1px solid #f3f3f3;
+          .ep-order-tit {
+            position: relative;
+            dl {
+              padding-bottom: 12px;
+              dt {
+                font-size: 14px;
+                float: left;
+                color: #000;
+                font-weight: 700;
+              }
+              dd {
+                color: #707070;
+                font-size: 14px;
+              }
+            }
+            span {
+              font-size: 15px;
+              color: #000;
+              font-weight: 700;
+              em {
+                margin: 0 8px 0 4px;
+                color: #0ac265;
+                font-weight: 400;
+                font-size: 24px;
+                i {
+                  font-size: 18px;
+                }
+              }
+            }
+          }
+        }
+        .ep-pay-method {
+          padding-top: 20px;
+          dl {
+            .pay-method {
+              display: flex;
+              flex-direction: row;
+              margin-top: 10px;
+              dt {
+                color: #000;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 25px;
+              }
+              .ep-pay-method-list-tit {
+                margin-bottom: 25px;
+                ul {
+                  zoom: 1;
+                  clear: both;
+                  li {
+                    position: relative;
+                    font-size: 0;
+                    display: block;
+                    float: left;
+                    width: 130px;
+                    height: 44px;
+                    line-height: 42px;
+                    text-align: center;
+                    box-sizing: border-box;
+                    border: 1px solid #dedede;
+                    cursor: pointer;
+                    .ep-icon-wxpay {
+                      margin-right: 4px;
+                      display: inline-block;
+                      color: #707070;
+                      font-size: 14px;
+                      line-height: 25px;
+                      vertical-align: middle;
+                    }
+                    .ep-pay-method-name {
+                      transition: color 0.1s ease-in;
+                      display: inline-block;
+                      color: #707070;
+                      font-size: 14px;
+                      line-height: 25px;
+                      vertical-align: middle;
+                    }
+                  }
+                }
+              }
+            }
+            .pay-channel {
+              padding-left: 0;
+              float: none;
+              margin-top: 10px;
+              .clearfix {
+                zoom: 1;
+                clear: both;
+                .fl {
+                  float: left;
+                  .ep-wxpay-qrcode-wrap {
+                    width: 196px;
+                    height: 196px;
+                    margin-bottom: 10px;
+                    .wxqrcode-display {
+                      margin-bottom: 10px;
+                    }
+                  }
+                  .ep-wxpay-qrcode-notice {
+                    height: 30px;
+                    line-height: 30px;
+                    background-color: #00c800;
+                    font-size: 12px;
+                    color: #fff;
+                    text-align: center;
+                    margin-bottom: 20px;
+                  }
+                }
+              }
+              .ep-wxpay-qrcode-tip {
+                margin-left: 40px;
+                margin-top: -10px;
+                img {
+                  max-width: 100%;
+                  vertical-align: middle;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

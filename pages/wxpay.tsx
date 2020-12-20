@@ -71,9 +71,8 @@ const WXpay = ({ orderId }: Props) => {
       var canvas = document.getElementById('wxqrcode-display')
       QRCode.toCanvas(canvas, paymentInfo.qrCodeUrl, function (error) {
         if (error) console.error(error)
-        console.log('success!');
+        console.log('success!')
       })
-
     } else {
       message.error(res.data.msg)
     }
@@ -111,23 +110,22 @@ const WXpay = ({ orderId }: Props) => {
   return (
     <>
       <HtmlHead title={'微信支付'} />
-      <SearchArea />
-      <div className={`${styles.hd} contentWidth`}>
-        <div className="hd-main">
-          <div className="ep-hd-info">
-            <div className="ep-logo">
+      <div className={`${styles.hd}`}>
+        <div className={`${styles['hd-main']}`}>
+          <div className={`${styles['ep-hd-info']}`}>
+            <div className={`${styles['ep-logo']}`}>
               <img src="/static/images/logobig.png" alt="天天吃货" />
             </div>
-            <div className="ep-order-status">
-              <span className="page-title">订单支付</span>
+            <div className={`${styles['ep-order-status']}`}>
+              <span className={`${styles['page-title']}`}>订单支付</span>
             </div>
           </div>
-          <div className="user-info">
+          <div className={`${styles['user-info']}`}>
             {userInfo && <p>账号：{userInfo.nickname}</p>}
           </div>
         </div>
       </div>
-      <div className={`${styles.bd} contentWidth`}>
+      <div className={`${styles.bd}`}>
         <div className={`${styles['bd-main']}`}>
           <div className={`${styles['ep-wrapper']}`}>
             <div
