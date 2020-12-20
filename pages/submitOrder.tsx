@@ -134,7 +134,7 @@ const SubmitOrder = () => {
           </a>
         </div> */}
 
-        <div className={`${styles['order-go']} ${styles['clearfix']}`}>
+        <div className={`contentWidth ${styles['order-go']} ${styles['clearfix']}`}>
           <div className={`${styles['pay-confirm']} ${styles['clearfix']}`}>
             <div className={`${styles.box}`}>
               <div className={`${styles.realPay}`}>
