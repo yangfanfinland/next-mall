@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Checkbox, message } from 'antd'
 import InputBuyNumber from '../../InputBuyNumber'
 import {
-  getCookie,
   setCookie,
   deleteCookie,
   getShopcartList,

@@ -1,15 +1,70 @@
-.ep-pay-step {
-  padding: 30px 270px 30px 250px;
-  display: block;
+.hd {
+  height: 60px;
+  color: #000;
+  background-color: #fff;
+  .hd-main {
+    width: 1080px;
+    height: 100%;
+    margin: 0 auto;
+    .ep-hd-info {
+      float: left;
+      height: 100%;
+      font-size: 0;
+      .ep-logo {
+        float: left;
+        img {
+          height: 60px;
+          max-width: 100%;
+          vertical-align: middle;
+        }
+      }
+      .ep-order-status {
+        float: left;
+        margin: 16px 0 0 20px;
+        padding-left: 20px;
+        border-left: 1px solid #f0f0f0;
+        line-height: 26px;
+        font-size: 16px;
+        .page-title {
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 26px;
+        }
+      }
+    }
+    .user-info {
+      float: right;
+      margin-top: 20px;
+    }
+  }
 }
 
-.ep-order-detail {
-  img {
-    height: 90px;
-  }
-  .hit-words {
-    em {
-      color: #0ac265;
+.bd {
+  padding: 40px 0 200px;
+  .bd-main {
+    width: 1080px;
+    margin: 0 auto;
+    background: #fff;
+    .ep-wrapper {
+      position: relative;
+      margin-left: 0;
+      .bd-main-container {
+        padding: 50px 270px 330px 250px;
+        .ep-order-detail {
+          padding: 10px 0 20px;
+          border-bottom: 1px solid #f3f3f3;
+          img {
+            height: 90px;
+            max-width: 100%;
+            vertical-align: middle;
+            .hit-words {
+              em {
+                color: rgb(10, 194, 101);
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
