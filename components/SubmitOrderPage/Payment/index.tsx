@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './index.less'
 
 const Payment = ({choosePaymentCallback}: {choosePaymentCallback?: (choosedPayment) => void}) => {

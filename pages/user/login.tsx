@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { getUrlParam, serverUrl } from '../../util/app'
+import { getUrlParam } from '../../util/app'
 import axios from 'axios'
 import LoginForm from '../../components/User/LoginForm'
 import { message } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Router from 'next/router'
 import { request } from '../../lib/api'
 

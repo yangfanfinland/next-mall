@@ -1,7 +1,5 @@
 import React, { useEffect } from "react"
-import {Button, Cascader, Checkbox, Col, Form, Input, Modal, Row} from "antd"
-import styles from './index.less'
-
+import {Button, Col, Form, Input, Modal, Row} from "antd"
 
 const formItemLayout = {
     labelCol: {

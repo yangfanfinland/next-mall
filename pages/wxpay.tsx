@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import HtmlHead from '../components/HtmlHead'
-import SearchArea from '../components/SearchArea'
 import { withRouter, SingletonRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import axios from 'axios'

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import UserCenterNav from '../../components/UserCenterNav'
 import HtmlHead from '../../components/HtmlHead'
 import SearchArea from '../../components/SearchArea'

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Input, message } from 'antd'
 import {
-  serverUrl,
   getUrlParam,
   goErrorPage,
   getShopcartList,

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { Radio, message } from "antd"
+import React, { useState } from "react"
+import { message } from "antd"
 import InputBuyNumber from "../../InputBuyNumber"
 import { ShopcartItem } from '../../../util/app'
 import styles from './index.less'
