@@ -6,7 +6,7 @@ import { getCookie } from '../../util/app'
 import { useIntl } from 'react-intl'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../store/store'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const menu = (
   <Menu>

@@ -16,7 +16,7 @@ import {
   getShopcartItemCounts,
   ShopcartItem,
 } from '../util/app'
-import styles from '../static/styles/item.module.scss'
+import styles from '../static/styles/item.less'
 
 interface Props extends SingletonRouter {
   itemInfo: any

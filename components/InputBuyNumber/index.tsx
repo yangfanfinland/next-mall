@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Input, message } from 'antd'
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const InputBuyNumber = ({
   stock,

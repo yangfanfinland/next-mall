@@ -8,7 +8,7 @@ import { serverUrl, getCookie, shopServerUrl } from '../../util/app'
 import axios from 'axios'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
-import styles from '../../static/styles/order.module.scss'
+import styles from '../../static/styles/order.less'
 
 const { TabPane } = Tabs
 

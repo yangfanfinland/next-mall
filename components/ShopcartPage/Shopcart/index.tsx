@@ -11,7 +11,7 @@ import {
 } from '../../../util/app'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const Shopcart = () => {
   const [userIsLogin, setUserIsLogin] = useState(false)

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { shopServerUrl } from '../../../util/app'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const OrderList = ({
   myOrderList,

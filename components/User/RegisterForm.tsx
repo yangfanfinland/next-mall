@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, Form, Input } from "antd"
 import Router from "next/router"
 import { UserAddOutlined, KeyOutlined } from '@ant-design/icons'
-import styles from './styles.module.scss'
+import styles from './styles.less'
 
 const layout = {
     labelCol: {span: 8},

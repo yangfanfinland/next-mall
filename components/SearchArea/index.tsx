@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchBar from '../SearchBar'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const SearchArea = ({ keywords, noSearch = false }: { keywords?: string, noSearch?: boolean }) => {
     return (

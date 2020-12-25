@@ -1,5 +1,5 @@
 import React from "react"
-import styles from './UserLayout.module.scss'
+import styles from './UserLayout.less'
 import Warranty from "../Warranty"
 
 const UserLayout = ({children}) => {

@@ -5,7 +5,7 @@ import { cities } from '../../../util/cities'
 import axios from 'axios'
 import { message } from 'antd'
 import { useSelector } from 'react-redux'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const Address = ({
   chooseAddressCallback,

@@ -1,6 +1,6 @@
 import Header from '../Header'
 import Footer from '../Footer'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const Layout = ({children}) => {
     return (

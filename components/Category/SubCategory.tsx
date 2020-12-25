@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from "next/link"
-import styles from './SubCategory.module.scss'
+import styles from './SubCategory.less'
 
 const SubCategory = ({ subCategoryList = [] }) => {
     return (

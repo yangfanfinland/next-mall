@@ -3,7 +3,7 @@ import UserCenterNav from '../../components/UserCenterNav'
 import HtmlHead from '../../components/HtmlHead'
 import SearchArea from '../../components/SearchArea'
 import Address from '../../components/SubmitOrderPage/Address'
-import styles from '../../static/styles/address.module.scss'
+import styles from '../../static/styles/address.less'
 
 const DeliveryAddress = () => {
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Pagination, message } from "antd"
-import styles from './index.module.scss'
+import styles from './index.less'
 import axios from 'axios'
 import { serverUrl } from '../../../util/app'
 import moment from 'moment'

@@ -1,4 +1,4 @@
-@import "../../static/styles/color";
+@import url("../../static/styles/color");
 
 .searchBar {
   display: flex;
@@ -7,7 +7,7 @@
   width: 510px;
   height: 40px;
   background: rgba(255, 255, 255, 1);
-  border: 2px solid $primary-color;
+  border: 2px solid @primary-color;
   border-radius: 20px;
 
   .searchIcon {
@@ -17,7 +17,7 @@
     margin-left: 8px;
     align-items: center;
     justify-content: center;
-    color: $primary-color;
+    color: @primary-color;
   }
 
   .searchInput {
@@ -32,7 +32,7 @@
   .searchBtn {
     width: 80px;
     height: 40px;
-    background: $primary-color;
+    background: @primary-color;
     border-radius: 20px;
     font-size: 18px;
     color: #fff;

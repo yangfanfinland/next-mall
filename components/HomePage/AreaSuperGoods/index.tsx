@@ -1,7 +1,7 @@
 import React from 'react'
 import { Progress } from 'antd'
 import PriceShow from '../../PriceShow'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const AreaSuperGoods = () => {
     const test = new Array(9).fill(1);

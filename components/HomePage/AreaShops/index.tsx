@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const AreaShops = () => {
     const test = new Array(4).fill(1);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const Payment = ({choosePaymentCallback}: {choosePaymentCallback?: (choosedPayment) => void}) => {
   const [payMethod, setPayMethod] = useState(0)

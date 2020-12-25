@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { message } from 'antd'
 import { serverUrl, paymentServerUrl } from '../util/app'
-import styles from '../static/styles/wxpay.module.scss'
+import styles from '../static/styles/wxpay.less'
 import QRCode from 'qrcode'
 
 interface Props extends SingletonRouter {

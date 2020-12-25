@@ -1,6 +1,6 @@
 import React from 'react'
 import Category from '../Category'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 /**
  * banner顶上的导航

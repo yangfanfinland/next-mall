@@ -3,7 +3,7 @@ import HtmlHead from '../components/HtmlHead'
 import SearchArea from '../components/SearchArea'
 import { withRouter, SingletonRouter } from 'next/router'
 import { useSelector } from 'react-redux'
-import styles from '../static/styles/success.module.scss'
+import styles from '../static/styles/success.less'
 
 interface Props extends SingletonRouter {
   orderId: string

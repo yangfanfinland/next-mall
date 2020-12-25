@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const NavArr = [
   { value: '0', label: '个人资料' },

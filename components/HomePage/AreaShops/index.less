@@ -1,5 +1,5 @@
-@import '../../../static/styles/common';
-@import '../../../static/styles/color';
+@import url('../../../static/styles/common');
+@import url('../../../static/styles/color');
 
 .item {
   width: 247px;
@@ -32,7 +32,7 @@
     border-top-right-radius: 15px;
     color: #ffffff;
     font-size: 16px;
-    background: $primary-color;
+    background: @primary-color;
     opacity: 0.5;
     text-align: center;
     margin-top: 10px;
@@ -49,6 +49,6 @@
     padding: 0 20px;
     margin-top: 60px;
     font-size: 18px;
-    @include ellipBlock(50px, 2);
+    .ellipBlock(50px, 2);
   }
 }

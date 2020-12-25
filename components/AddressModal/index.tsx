@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import {Button, Cascader, Checkbox, Col, Form, Input, Modal, Row} from "antd"
-import styles from './index.module.scss'
+import styles from './index.less'
 
 
 const formItemLayout = {

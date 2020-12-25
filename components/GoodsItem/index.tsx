@@ -1,6 +1,6 @@
 import React from 'react'
 import { ShoppingCartOutlined } from '@ant-design/icons/lib/icons'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const GoodsItem = ({ item, myClassName }: { item; myClassName?: string }) => {
   return (

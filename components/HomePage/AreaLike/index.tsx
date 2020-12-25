@@ -1,6 +1,6 @@
 import React from 'react'
 import GoodsItem from '../GoodsItem'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const AreaLike = ({ likeItemList }) => {
     return (

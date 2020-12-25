@@ -6,7 +6,7 @@ import { serverUrl, getCookie, getUrlParam } from '../../util/app'
 import axios from 'axios'
 import { message } from 'antd'
 import { useSelector } from 'react-redux'
-import styles from '../../static/styles/doComment.module.scss'
+import styles from '../../static/styles/doComment.less'
 
 const DoComment = () => {
   const [orderItemList, setOrderItemList] = useState([])

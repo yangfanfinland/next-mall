@@ -1,6 +1,6 @@
 import React from 'react'
 import { Breadcrumb, Menu, Select } from 'antd'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const BreadcrumbNav = ({
   showTotal = true,

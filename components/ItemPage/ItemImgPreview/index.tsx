@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react"
 import { DownOutlined, UpOutlined } from '@ant-design/icons'
 import imageScale from "../../../util/imageScale"
-import styles from './index.module.scss'
+import styles from './index.less'
 
 
 

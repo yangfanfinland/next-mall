@@ -1,4 +1,4 @@
-@import "../../static/styles/color";
+@import url('./color');
 
 .topTab {
   height: 40px;
@@ -34,9 +34,14 @@
 
         &:hover {
           background: #fff;
-          color: $primary-color;
+          color: @primary-color;
         }
       }
     }
   }
+}
+
+.homeContent {
+  background: #f8f8f8;
+  padding: 40px 0 0;
 }

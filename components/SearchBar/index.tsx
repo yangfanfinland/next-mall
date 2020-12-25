@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { SearchOutlined } from '@ant-design/icons'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const SearchBar = ({ defaultValue = "" }) => {
   const [keywords, setKeywords] = useState(defaultValue)

@@ -12,7 +12,7 @@ import AreaSuperGoods from '../components/HomePage/AreaSuperGoods'
 import AreaShops from '../components/HomePage/AreaShops'
 import AreaSpecial from '../components/HomePage/AreaSpecial'
 import AreaLike from '../components/HomePage/AreaLike'
-import styles from '../static/styles/index.module.scss'
+import styles from '../static/styles/index.less'
 import { useRouter } from "next/router"
 import { useIntl } from "react-intl"
 

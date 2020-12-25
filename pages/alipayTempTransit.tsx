@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { paymentServerUrl } from '../util/app'
 import axios from 'axios'
 import { message } from 'antd'
-import styles from '../static/styles/alipayTempTransit.module.scss'
+import styles from '../static/styles/alipayTempTransit.less'
 
 interface Props extends SingletonRouter {
   orderId: string

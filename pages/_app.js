@@ -6,14 +6,14 @@ import withRedux from '../util/with-redux'
 import { ConfigProvider } from 'antd'
 import { IntlProvider } from 'react-intl'
 import * as locales from '../content/locale'
-// 处理对象嵌套
+// 处理对象嵌套F
 import Flat from 'flat'
 import _ZH from '../locales/zh-CN'
 import _EN from '../locales/en-US'
 
-import '../static/styles/base.scss'
-import 'antd/dist/antd.css'
-import '../static/styles/globals.scss'
+import '../static/styles/base.less'
+// import 'antd/dist/antd.css'
+import '../static/styles/globals.less'
 
 // function MyApp({ Component, pageProps }) {
 //   return <Component {...pageProps} />

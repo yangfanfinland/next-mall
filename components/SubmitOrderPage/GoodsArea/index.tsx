@@ -6,7 +6,7 @@ import {
   goErrorPage,
   getShopcartList,
 } from '../../../util/app'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const GoodsArea = ({ goodsCallback }: { goodsCallback?: (goods) => void} ) => {
   const [orderItemList, setOrderItemList] = useState([])

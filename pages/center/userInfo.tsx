@@ -7,7 +7,7 @@ import { serverUrl, getCookie, checkEmail, checkMobile } from '../../util/app'
 import axios from 'axios'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
-import styles from '../../static/styles/userInfo.module.scss'
+import styles from '../../static/styles/userInfo.less'
 
 const layout = {
   labelCol: { span: 4 },

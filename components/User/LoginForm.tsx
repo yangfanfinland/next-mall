@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Form, Input } from "antd"
-import styles from './styles.module.scss'
+import styles from './styles.less'
 import { useIntl } from "react-intl"
 import { UserAddOutlined, KeyOutlined } from '@ant-design/icons'
 

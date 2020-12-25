@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Radio } from 'antd'
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const FilterBar = ({ onSort }) => {
   return (

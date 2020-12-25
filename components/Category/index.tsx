@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from './index.module.scss'
+import styles from './index.less'
 import SubCategory from './SubCategory'
 import axios from 'axios'
 import { serverUrl } from '../../util/app'

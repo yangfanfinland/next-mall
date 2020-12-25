@@ -9,7 +9,7 @@ import { serverUrl, getCookie } from '../util/app'
 import axios from 'axios'
 import { Pagination, message } from 'antd'
 import { useSelector } from 'react-redux'
-import styles from '../static/styles/catItems.module.scss'
+import styles from '../static/styles/catItems.less'
 
 interface Props extends SingletonRouter {
   grid: any

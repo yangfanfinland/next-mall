@@ -1,4 +1,4 @@
-@import '../../static/styles/color';
+@import url('../../static/styles/color');
 
 .person {
   border-bottom: 1px solid #f5f8fa;
@@ -35,10 +35,10 @@
 
     &:hover,
     &.active {
-      border-left: 3px solid $primary-color;
+      border-left: 3px solid @primary-color;
 
       a {
-        color: $primary-color;
+        color: @primary-color;
       }
     }
 

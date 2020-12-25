@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const GoodsItem = ({ item, rightGap = 8, myClassName, myStyle }: { item, rightGap?: number, myClassName?: string, myStyle?: any }) => {
     return (

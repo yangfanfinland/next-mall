@@ -1,5 +1,5 @@
-@import '../../static/styles/color';
-@import '../../static/styles/common';
+@import url('../../static/styles/color');
+@import url('../../static/styles/common');
 
 .footer {
   margin-top: 20px;
@@ -7,7 +7,7 @@
   display: block;
   position: relative;
   padding: 7px 0px 9px;
-  border-top: 2px solid $primary-color;
+  border-top: 2px solid @primary-color;
 }
 
 .footer-hd {
@@ -16,7 +16,7 @@
     line-height: 27px;
     border-bottom: 1px solid #DDD;
     text-align: left;
-    @include center();
+    .center();
   }
 
   a {
@@ -45,6 +45,6 @@
     margin-bottom: 8px;
     line-height: 27px;
     text-align: left;
-    @include center();
+    .center();
   }
 }

@@ -1,18 +1,18 @@
-@mixin ellipBlock($height: 52px, $lineClamp: 3) {
+.ellipBlock(@height: 52px, @lineClamp: 3) {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: $lineClamp;
-  height: $height;
+  -webkit-line-clamp: @lineClamp;
+  height: @height;
   overflow: hidden;
 }
 
-@mixin break() {
+.break() {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-@mixin center {
+.center {
   display: flex;
   justify-content: center;
   align-items: center;

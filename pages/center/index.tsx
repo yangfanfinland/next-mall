@@ -7,7 +7,7 @@ import { serverUrl, getCookie } from '../../util/app'
 import axios from 'axios'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
-import styles from '../../static/styles/center.module.scss'
+import styles from '../../static/styles/center.less'
 
 const Index = () => {
   const [orderTrendList, setOrderTrendList] = useState([])

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Radio, message } from "antd"
 import InputBuyNumber from "../../InputBuyNumber"
 import { ShopcartItem } from '../../../util/app'
-import styles from './index.module.scss'
+import styles from './index.less'
 
 const ItemSpecification = ({ item, specification, addToCartCallback }) => {
     const [ selectedSku, setSelectedSku ] = useState(specification[0])

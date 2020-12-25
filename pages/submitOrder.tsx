@@ -8,7 +8,7 @@ import { message } from 'antd'
 import Address from '../components/SubmitOrderPage/Address'
 import Payment from '../components/SubmitOrderPage/Payment'
 import GoodsArea from '../components/SubmitOrderPage/GoodsArea'
-import styles from '../static/styles/submitOrder.module.scss'
+import styles from '../static/styles/submitOrder.less'
 import { useSelector } from 'react-redux'
 
 const SubmitOrder = () => {
