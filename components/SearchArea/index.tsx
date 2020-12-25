@@ -7,7 +7,7 @@ const SearchArea = ({ keywords, noSearch = false }: { keywords?: string, noSearc
         <div className={`bw`}>
             <div className={`${styles.searchWrap} contentWidth`}>
                 <a className={styles.logoWrap}>
-                    <img src="/static/images/logobig.png" alt="多米电商"/>
+                    <img src="/static/images/logobig.png" alt="米桶电商"/>
                 </a>
                 {
                     !noSearch &&

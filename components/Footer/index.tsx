@@ -19,7 +19,7 @@ const Footer = () => {
 		</div>
 		<div className={styles["footer-bd"]}>
 			<p>
-				<em>© 2020 yangfanyuanhang.com 多米电商 版权所有</em>
+				<em>© 2020 yangfanyuanhang.com 米桶电商 版权所有</em>
 			</p>
 		</div>
 	</div>

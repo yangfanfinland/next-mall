@@ -83,7 +83,7 @@ const Comment = () => {
 
   return (
     <>
-      <HtmlHead title={'多米电商 - 个人中心'} />
+      <HtmlHead title={'米桶电商 - 个人中心'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="comment" />

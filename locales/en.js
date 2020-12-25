@@ -1,6 +1,6 @@
 export default {
   header: {
-    welcome: 'Welcome to Tomi e-commerce',
+    welcome: 'Welcome to MiTong e-commerce',
     login: 'Login',
     register: 'Register',
     myOrder: 'My order',
@@ -15,6 +15,6 @@ export default {
     loginBtn: 'Login',
     registerLink: 'Register',
   },
-  'home.title': 'Tomi e-commerce - Home',
+  'home.title': 'MiTong e-commerce - Home',
   dynamicName: ' Dynamic Value：{val}',
 }
