@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import HtmlHead from '../components/HtmlHead'
 import SearchArea from '../components/SearchArea'
 import { withRouter } from 'next/router'
-import axios from 'axios'
-import { serverUrl } from '../util/app'
+import { createOrder } from "../api/api"
 import { message } from 'antd'
 import Address from '../components/SubmitOrderPage/Address'
 import Payment from '../components/SubmitOrderPage/Payment'
@@ -81,26 +80,21 @@ const SubmitOrder = () => {
     }
 
     // 买家备注可以为空
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl + '/orders/create',
-      {
-        userId: userInfo.id,
-        itemSpecIds: itemSpecIds,
-        addressId: confirmAddress.id,
-        payMethod: choosedPayMethod,
-        leftMsg: orderRemarker,
+    const res = await createOrder({
+      userId: userInfo.id,
+      itemSpecIds: itemSpecIds,
+      addressId: confirmAddress.id,
+      payMethod: choosedPayMethod,
+      leftMsg: orderRemarker,
+    }, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
       },
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    })
 
-    if (res.data.status == 200) {
-      const orderId = res.data.data
+    if (res.status == 200) {
+      const orderId = res.data
       // 判断是否微信还是支付宝支付
       if (choosedPayMethod == 1) {
         // 微信支付则跳转到微信支付页面，并且获得支付二维码
@@ -116,7 +110,7 @@ const SubmitOrder = () => {
         message.warning('目前只支持微信或支付宝支付！')
       }
     } else {
-      message.error(res.data.msg)
+      message.error((res as any).msg)
     }
   }
 

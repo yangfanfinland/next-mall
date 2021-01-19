@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import AddressModal from '../../AddressModal'
-import { serverUrl, checkMobile } from '../../../util/app'
+import { checkMobile } from '../../../util/app'
 import { cities } from '../../../util/cities'
-import axios from 'axios'
 import { message } from 'antd'
 import { useSelector } from 'react-redux'
+import { getAddressListApi, addAddressApi, updateAddressApi, deleteAddressApi, setDefaultAddressApi } from '../../../api/api'
 import styles from './index.less'
 
 const Address = ({
@@ -53,20 +53,15 @@ const Address = ({
 
   const renderUserAddressList = async () => {
     // 请求后端获得最新数据
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl + '/address/list?userId=' + userInfo.id,
-      {},
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await getAddressListApi(userInfo.id, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
-      const addressList = res.data.data
+    if (res.status == 200) {
+      const addressList = res.data
 
       setAddressList(addressList)
 
@@ -75,10 +70,8 @@ const Address = ({
 
       // 清空地址内容
       flushAddressForm()
-    } else if (res.data.status == 500) {
-      message.error(res.data.msg)
     } else {
-      message.error(res.data.msg)
+      message.error((res as any).msg)
     }
   }
 
@@ -241,14 +234,11 @@ const Address = ({
     }
 
     // 添加新地址
-    axios.defaults.withCredentials = true
-
     const addressId = updatedAddressId
 
     // 地址id为空，则新增地址，否则更新地址
     if (addressId == '' || addressId == undefined || addressId == null) {
-      const res = await axios.post(
-        serverUrl + '/address/add',
+      const res = await addAddressApi(
         {
           userId: userInfo.id,
           receiver: receiver,
@@ -266,18 +256,17 @@ const Address = ({
         }
       )
 
-      if (res.data.status == 200) {
+      if (res.status == 200) {
         closeAddressDialog()
         renderUserAddressList()
 
         // 设置更新地址的id为空
         setUpdatedAddressId('')
-      } else if (res.data.status == 500) {
-        message.error(res.data.msg)
+      } else if (res.status == 500) {
+        message.error((res as any).msg)
       }
     } else {
-      const res = await axios.post(
-        serverUrl + '/address/update',
+      const res = await updateAddressApi(
         {
           addressId: addressId,
           userId: userInfo.id,
@@ -296,11 +285,11 @@ const Address = ({
         }
       )
 
-      if (res.data.status == 200) {
+      if (res.status == 200) {
         closeAddressDialog()
         renderUserAddressList()
-      } else if (res.data.status == 500) {
-        message.error(res.data.msg)
+      } else if (res.status == 500) {
+        message.error((res as any).msg)
       }
     }
   }
@@ -322,51 +311,33 @@ const Address = ({
       setDefaultAddressId('')
     }
 
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl +
-        '/address/delete?userId=' +
-        userInfo.id +
-        '&addressId=' +
-        addressId,
-      {},
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await deleteAddressApi(userInfo.id, addressId, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
+    if (res.status == 200) {
       renderUserAddressList()
     } else {
-      message.error(res.data.msg)
+      message.error((res as any).msg)
     }
   }
 
   // 设置默认地址
   const setDefaultAddress = async (addressId) => {
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl +
-        '/address/setDefalut?userId=' +
-        userInfo.id +
-        '&addressId=' +
-        addressId,
-      {},
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await setDefaultAddressApi(userInfo.id, addressId, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
+    if (res.status == 200) {
       renderUserAddressList()
     } else {
-      alert(res.data.msg)
+      message.error((res as any).msg)
     }
   }
 

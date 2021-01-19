@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter, SingletonRouter } from 'next/router'
 import { useSelector } from 'react-redux'
-import { serverUrl } from '../util/app'
-import axios from 'axios'
 import { message } from 'antd'
+import { getPaidOrderInfo } from "../api/api"
 import styles from '../static/styles/alipay.less'
 
 interface Props extends SingletonRouter {
@@ -29,17 +28,12 @@ const Alipay = ({ orderId, amount }: Props) => {
 
   const checkPayResult = async () => {
     // 发起请求获得微信支付扫描二维码
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl + '/orders/getPaidOrderInfo?orderId=' + orderId,
-      {},
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await getPaidOrderInfo(orderId, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
     if (res.data.status == 200) {
       const orderStatus = res.data.data

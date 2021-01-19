@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Pagination, message } from "antd"
 import styles from './index.less'
-import axios from 'axios'
-import { serverUrl } from '../../../util/app'
+import { getCommentLevel, getComments } from "../../../api/api"
 import moment from 'moment'
 
 const ItemComment = ({ item }) => {
@@ -28,37 +27,21 @@ const ItemComment = ({ item }) => {
 
   const renderCommentLevelCounts = async (itemId) => {
     let countsVO
-    axios.defaults.withCredentials = true
-    const res = await axios.get(
-      serverUrl + '/items/commentLevel?itemId=' + itemId,
-      {}
-    )
+    const res = await getCommentLevel(itemId)
 
-    if (res.data.status == 200) {
-      countsVO = res.data.data
+    if (res.status == 200) {
+      countsVO = res.data
       setCountsVO(countsVO)
-    } else if (res.data.status == 500) {
-      message.error(res.data.msg)
+    } else if (res.status == 500) {
+      message.error((res as any).msg)
     }
   }
 
   const renderComments = async (itemId, level, page, pageSize) => {
-    axios.defaults.withCredentials = true
-    const res = await axios.get(
-      serverUrl +
-        '/items/comments?itemId=' +
-        itemId +
-        '&level=' +
-        level +
-        '&page=' +
-        page +
-        '&pageSize=' +
-        pageSize,
-      {}
-    )
+    const res = await getComments(itemId, level, page, pageSize)
 
-    if (res.data.status == 200) {
-      const grid = res.data.data
+    if (res.status == 200) {
+      const grid = res.data
       const commentList = grid.rows
 
       for (let i = 0; i < commentList.length; i++) {
@@ -74,8 +57,8 @@ const ItemComment = ({ item }) => {
 
       setMaxPage(maxPage)
       setTotal(total)
-    } else if (res.data.status == 500) {
-      message.error(res.data.msg)
+    } else if (res.status == 500) {
+      message.error((res as any).msg)
     }
   }
 
