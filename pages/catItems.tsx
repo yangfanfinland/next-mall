@@ -5,8 +5,7 @@ import SearchArea from '../components/SearchArea'
 import BreadcrumbNav from '../components/BreadcrumbNav'
 import FilterBar from '../components/FilterBar'
 import GoodsList from '../components/GoodsList'
-import { serverUrl } from '../util/app'
-import axios from 'axios'
+import { getCategotyItems, getSearchItems } from "../api/api"
 import { Pagination, message } from 'antd'
 import { useSelector } from 'react-redux'
 import styles from '../static/styles/catItems.less'
@@ -34,55 +33,27 @@ const catItems = ({ grid, searchType, catId, pageSize, keywords }: Props) => {
   }, [])
 
   const searchInBackend = async (keywords, sort, page, pageSize) => {
-    axios.defaults.withCredentials = true
-    await axios
-      .get(
-        serverUrl +
-          '/items/search?keywords=' +
-          keywords +
-          '&sort=' +
-          sort +
-          '&page=' +
-          page +
-          '&pageSize=' +
-          pageSize,
-        {}
-      )
-      .then((res) => {
-        if (res.data.status == 200) {
-          var grid = res.data.data
-          setItemsList(grid.rows)
-          setMaxPage(grid.total)
-          setTotal(grid.records)
-        } else if (res.data.status == 500) {
-          message.error(res.data.msg)
-          return
-        }
-      })
-  }
-
-  const searchCatItemsInBackend = async (catId, sort, page, pageSize) => {
-    axios.defaults.withCredentials = true
-    const res = await axios.get(
-      serverUrl +
-        '/items/catItems?catId=' +
-        catId +
-        '&sort=' +
-        sort +
-        '&page=' +
-        page +
-        '&pageSize=' +
-        pageSize,
-      {}
-    )
-
-    if (res.data.status == 200) {
-      var grid = res.data.data
+    const res = await getSearchItems(keywords, sort, page, pageSize)
+    if (res.status == 200) {
+      var grid = res.data
       setItemsList(grid.rows)
       setMaxPage(grid.total)
       setTotal(grid.records)
-    } else if (res.data.status == 500) {
-      message.error(res.data.msg)
+    } else if (res.status == 500) {
+      message.error((res as any).msg)
+      return
+    }
+  }
+
+  const searchCatItemsInBackend = async (catId, sort, page, pageSize) => {
+    const res = await getCategotyItems(catId, sort, page, pageSize)
+    if (res.status == 200) {
+      var grid = res.data
+      setItemsList(grid.rows)
+      setMaxPage(grid.total)
+      setTotal(grid.records)
+    } else if (res.status == 500) {
+      message.error((res as any).msg)
       return
     }
   }
@@ -155,44 +126,23 @@ catItems.getInitialProps = async ({ ctx }) => {
     keywords,
   } = ctx.query
 
-  let grid, url
-  axios.defaults.withCredentials = true
+  let grid, res
   if (searchType == 'catItems') {
-    url =
-      serverUrl +
-      '/items/' +
-      searchType +
-      '?catId=' +
-      catId +
-      '&sort=' +
-      sort +
-      '&page=' +
-      page +
-      '&pageSize=' +
-      pageSize
+    res = await getCategotyItems(catId, sort, page, pageSize)
   }
   if (searchType == 'searchItems') {
-    url =
-      serverUrl +
-      '/items/search?keywords=' +
-      encodeURIComponent(keywords) +
-      '&sort=' +
-      sort +
-      '&page=' +
-      page +
-      '&pageSize=' +
-      pageSize
+    res = await getSearchItems(keywords, sort, page, pageSize)
   }
-  const res = await axios.get(url, {})
-  if (res.data.status == 200) {
-    grid = res.data.data
+  if (res.status == 200) {
+    grid = res.data
   }
+
   return {
     grid,
     searchType: searchType,
     catId: catId,
-	pageSize: pageSize,
-	keywords: keywords
+    pageSize: pageSize,
+    keywords: keywords,
   }
 }
 

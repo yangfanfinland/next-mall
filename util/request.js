@@ -24,6 +24,7 @@ request.interceptors.response.use(response => {
 
 // request interceptors
 request.interceptors.request.use(config => {
+    config.withCredentials = true
     return {
         ...config,
         headers: {
