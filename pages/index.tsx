@@ -1,6 +1,4 @@
 import React from 'react'
-import axios from 'axios'
-import { serverUrl } from '../util/app'
 import HtmlHead from '../components/HtmlHead'
 import SearchArea from '../components/SearchArea'
 import TopNav from '../components/TopNav'
@@ -12,6 +10,7 @@ import AreaSuperGoods from '../components/HomePage/AreaSuperGoods'
 import AreaShops from '../components/HomePage/AreaShops'
 import AreaSpecial from '../components/HomePage/AreaSpecial'
 import AreaLike from '../components/HomePage/AreaLike'
+import { getCategoriesApi, getSixNewItemsByCategoryId } from "../api/api"
 import styles from '../static/styles/index.less'
 import { useRouter } from "next/router"
 import { useIntl } from "react-intl"
@@ -53,16 +52,16 @@ Home.getInitialProps = async ({ ctx, reduxStore }) => {
   const { user } = reduxStore.getState()
   let categoryList;
   let likeItemList = [];
-  const res = await axios.get(serverUrl + '/index/cats', {})
-  if (res.data.status == 200) {
-    categoryList = res.data.data
+  const res = await getCategoriesApi();
+  if (res.status == 200) {
+    categoryList = res.data
   }
 
   if (Array.isArray(categoryList)) {
     for (const category of categoryList) {
-      const res = await axios.get(serverUrl + '/index/sixNewItems/' + category.id, {})
-      if (res.data.status == 200) {
-          const itemTemp = res.data.data
+      const res = await getSixNewItemsByCategoryId(category.id)
+      if (res.status == 200) {
+          const itemTemp = res.data
           likeItemList.push(itemTemp[0])
       }
     }
