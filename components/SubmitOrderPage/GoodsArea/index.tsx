@@ -16,7 +16,7 @@ const GoodsArea = ({ goodsCallback }: { goodsCallback?: (goods) => void} ) => {
   }, [])
 
   const renderOrderInfoList = () => {
-    var selectedItemSpecIds = getUrlParam('selectedItemSpecIds')
+    const selectedItemSpecIds = getUrlParam('selectedItemSpecIds')
     if (
       selectedItemSpecIds == null ||
       selectedItemSpecIds == '' ||
@@ -25,14 +25,14 @@ const GoodsArea = ({ goodsCallback }: { goodsCallback?: (goods) => void} ) => {
       goErrorPage()
     }
 
-    var specIdsArray = new Array()
+    let specIdsArray = new Array()
     specIdsArray = selectedItemSpecIds.split(',')
 
-    var orderItemList = []
-    var totalAmount = 0
-    for (var i = 0; i < specIdsArray.length; i++) {
-      var tmpSpecId = specIdsArray[i]
-      var orderItem = getItemFromCookieShopcartList(tmpSpecId)
+    let orderItemList = []
+    let totalAmount = 0
+    for (let i = 0; i < specIdsArray.length; i++) {
+      const tmpSpecId = specIdsArray[i]
+      const orderItem = getItemFromCookieShopcartList(tmpSpecId)
       orderItemList.push(orderItem)
       totalAmount += orderItem.priceDiscount * orderItem.buyCounts
     }
@@ -48,7 +48,7 @@ const GoodsArea = ({ goodsCallback }: { goodsCallback?: (goods) => void} ) => {
   }
 
   const getItemFromCookieShopcartList = (specId) => {
-    var shopcartList = getShopcartList()
+    const shopcartList = getShopcartList()
 
     if (
       shopcartList == null ||
@@ -58,8 +58,8 @@ const GoodsArea = ({ goodsCallback }: { goodsCallback?: (goods) => void} ) => {
       // goErrorPage()
     }
 
-    for (var i = 0; i < shopcartList.length; i++) {
-      var tmpSpecId = shopcartList[i].specId
+    for (let i = 0; i < shopcartList.length; i++) {
+      const tmpSpecId = shopcartList[i].specId
       if (tmpSpecId == specId) {
         return shopcartList[i]
       }

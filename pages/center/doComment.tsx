@@ -19,7 +19,7 @@ const DoComment = () => {
   const user = useSelector((store) => store.user)
 
   useEffect(() => {
-    var orderId = getUrlParam('orderId')
+    const orderId = getUrlParam('orderId')
     setOrderId(orderId)
     judgeUserLoginStatus()
   }, [])
@@ -47,9 +47,9 @@ const DoComment = () => {
     )
 
     if (res.data.status == 200) {
-      var tempOrderItemList = res.data.data
+      const tempOrderItemList = res.data.data
 
-      for (var i = 0; i < tempOrderItemList.length; i++) {
+      for (let i = 0; i < tempOrderItemList.length; i++) {
         tempOrderItemList[i].commentLevel = 0
         tempOrderItemList[i].commentId = 0
       }
@@ -63,8 +63,8 @@ const DoComment = () => {
   const saveComments = async () => {
     // 判断每项元素是否有评论等级
     // 判断每项元素是否包含评论内容
-    for (var i = 0; i < orderItemList.length; i++) {
-      var tempItem = orderItemList[i]
+    for (let i = 0; i < orderItemList.length; i++) {
+      const tempItem = orderItemList[i]
       if (
         tempItem.commentLevel == '' ||
         tempItem.commentLevel == undefined ||
@@ -108,9 +108,9 @@ const DoComment = () => {
   }
 
   const makeCommentContent = (e, orderItemId) => {
-    var tempOrderItemList = orderItemList
-    for (var i = 0; i < tempOrderItemList.length; i++) {
-      var tempId = tempOrderItemList[i].id
+    let tempOrderItemList = orderItemList
+    for (let i = 0; i < tempOrderItemList.length; i++) {
+      const tempId = tempOrderItemList[i].id
       if (tempId == orderItemId) {
         tempOrderItemList[i].content = e.target.value
       }
@@ -121,9 +121,9 @@ const DoComment = () => {
   }
 
   const makeComment = (orderItemId, level) => {
-    var tempOrderItemList = orderItemList
-    for (var i = 0; i < tempOrderItemList.length; i++) {
-      var tempId = tempOrderItemList[i].id
+    let tempOrderItemList = orderItemList
+    for (let i = 0; i < tempOrderItemList.length; i++) {
+      const tempId = tempOrderItemList[i].id
       if (tempId == orderItemId) {
         tempOrderItemList[i].commentLevel = level
       }

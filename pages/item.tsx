@@ -56,7 +56,7 @@ const Item = ({ itemInfo }: Props) => {
   }
 
   const handleAddToCart = async (shopcartItem: ShopcartItem) => {
-    var shopcartCounts = getShopcartItemCounts()
+    const shopcartCounts = getShopcartItemCounts()
     if (shopcartCounts >= 8) {
       message.info('您购物车中的食物太多啦~请把它们带回家吧~！')
       return

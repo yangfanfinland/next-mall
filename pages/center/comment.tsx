@@ -48,12 +48,12 @@ const Comment = () => {
     )
 
     if (res.data.status == 200) {
-      var grid = res.data.data
-      var tempMyCommentList = grid.rows
+      const grid = res.data.data
+      let tempMyCommentList = grid.rows
 
-      for (var i = 0; i < tempMyCommentList.length; i++) {
-        var date = tempMyCommentList[i].createdTime
-        var formatedTime = moment(date).format('YYYY年MM月DD日 h:mm:ss')
+      for (let i = 0; i < tempMyCommentList.length; i++) {
+        const date = tempMyCommentList[i].createdTime
+        const formatedTime = moment(date).format('YYYY年MM月DD日 h:mm:ss')
         tempMyCommentList[i].createdTime = formatedTime
       }
 

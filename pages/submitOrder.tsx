@@ -59,9 +59,9 @@ const SubmitOrder = () => {
       return
     }
     // 拼接规格ids
-    var itemSpecIds = ''
-    for (var i = 0; i < orderItemList.length; i++) {
-      var tmpSpecId = orderItemList[i].specId
+    let itemSpecIds = ''
+    for (let i = 0; i < orderItemList.length; i++) {
+      const tmpSpecId = orderItemList[i].specId
       itemSpecIds += tmpSpecId
       if (i < orderItemList.length - 1) {
         itemSpecIds += ','
@@ -100,7 +100,7 @@ const SubmitOrder = () => {
     )
 
     if (res.data.status == 200) {
-      var orderId = res.data.data
+      const orderId = res.data.data
       // 判断是否微信还是支付宝支付
       if (choosedPayMethod == 1) {
         // 微信支付则跳转到微信支付页面，并且获得支付二维码

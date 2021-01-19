@@ -66,7 +66,7 @@ const Address = ({
     )
 
     if (res.data.status == 200) {
-      var addressList = res.data.data
+      const addressList = res.data.data
 
       setAddressList(addressList)
 
@@ -92,8 +92,8 @@ const Address = ({
   }
 
   useEffect(() => {
-    for (var i in arr) {
-      var obj = arr[i]
+    for (let i in arr) {
+      const obj = arr[i]
       if (obj.name == prov) {
         setCityArr(obj.sub)
         break
@@ -106,8 +106,8 @@ const Address = ({
   }, [cityArr])
 
   const updateCity = () => {
-    for (var i in arr) {
-      var obj = arr[i]
+    for (let i in arr) {
+      const obj = arr[i]
       if (obj.name == prov) {
         setCityArr(obj.sub)
         break
@@ -117,8 +117,8 @@ const Address = ({
   }
 
   const updateDistrict = () => {
-    for (var i in cityArr) {
-      var obj = cityArr[i]
+    for (let i in cityArr) {
+      const obj = cityArr[i]
       if (obj.name == city) {
         setDistrictArr(obj.sub)
         break
@@ -139,9 +139,9 @@ const Address = ({
 
   const renderConfirmAddress = (addressId) => {
     // 提交订单的确认地址要跟着动态改变
-    var tempConfirmAddress = null
-    for (var i = 0; i < addressList.length; i++) {
-      var tmpAddress = addressList[i]
+    let tempConfirmAddress = null
+    for (let i = 0; i < addressList.length; i++) {
+      const tmpAddress = addressList[i]
       if (tmpAddress.id == addressId) {
         tempConfirmAddress = tmpAddress
         break
@@ -153,9 +153,9 @@ const Address = ({
   }
 
   const setDefaultChoosedAddressId = (addressList) => {
-    var tempConfirmAddress = {}
-    for (var i = 0; i < addressList.length; i++) {
-      var address = addressList[i]
+    let tempConfirmAddress = {}
+    for (let i = 0; i < addressList.length; i++) {
+      const address = addressList[i]
       if (address.isDefault == 1) {
         setDefaultAddressId(address.id)
         tempConfirmAddress = address
@@ -178,9 +178,9 @@ const Address = ({
 
   const editAddress = (addressId) => {
     // 获得编辑的地址内容
-    var updateAddress = null
-    for (var i = 0; i < addressList.length; i++) {
-      var tmpAddress = addressList[i]
+    let updateAddress = null
+    for (let i = 0; i < addressList.length; i++) {
+      const tmpAddress = addressList[i]
       if (tmpAddress.id == addressId) {
         updateAddress = tmpAddress
         break
@@ -205,7 +205,7 @@ const Address = ({
   }
 
   const saveNewAddressOrUpdate = async (values) => {
-    var receiver = values.receiver
+    const receiver = values.receiver
     if (receiver == null || receiver == '' || receiver == undefined) {
       message.warning('收货人姓名不能为空')
       return
@@ -215,7 +215,7 @@ const Address = ({
       return
     }
 
-    var mobile = values.mobile
+    const mobile = values.mobile
     if (mobile == null || mobile == '' || mobile == undefined) {
       message.warning('手机不能为空')
       return
@@ -230,11 +230,11 @@ const Address = ({
       return
     }
 
-    var prov = values.prov
-    var city = values.city
-    var district = values.district
+    const prov = values.prov
+    const city = values.city
+    const district = values.district
 
-    var detail = values.detail
+    const detail = values.detail
     if (detail == null || detail == '' || detail == undefined) {
       message.warning('详细地址不能为空')
       return
@@ -243,7 +243,7 @@ const Address = ({
     // 添加新地址
     axios.defaults.withCredentials = true
 
-    var addressId = updatedAddressId
+    const addressId = updatedAddressId
 
     // 地址id为空，则新增地址，否则更新地址
     if (addressId == '' || addressId == undefined || addressId == null) {
@@ -307,7 +307,7 @@ const Address = ({
 
   // 删除地址
   const deleteAddress = async (addressId) => {
-    var isDel = window.confirm('确认删除改地址吗')
+    const isDel = window.confirm('确认删除改地址吗')
     if (!isDel) {
       return
     }

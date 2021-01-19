@@ -5,11 +5,10 @@ import {
   setCookie,
   deleteCookie,
   getShopcartList,
-  serverUrl,
   ShopcartItem,
   addItemToShopcart,
 } from '../../../util/app'
-import axios from 'axios'
+import { deleteFromShopcart, refreshShopcart } from '../../../api/api'
 import { useSelector } from 'react-redux'
 import styles from './index.less'
 
@@ -31,7 +30,6 @@ const Shopcart = () => {
     reCalItemsCountsAndAmount()
   }, [specIds])
 
-
   const judgeUserLoginStatus = () => {
     if (user && user.id) {
       setUserIsLogin(true)
@@ -42,8 +40,8 @@ const Shopcart = () => {
     }
   }
 
-  const renderShopcart = () => {
-    var shopcartList = getShopcartList()
+  const renderShopcart = async () => {
+    let shopcartList = getShopcartList()
 
     if (shopcartList.length <= 0) {
       return
@@ -51,9 +49,9 @@ const Shopcart = () => {
 
     // 刷新购物车中价格，以防长时间未登录网址，价格发生变动
     // 拼接规格ids
-    var itemSpecIds = ''
-    for (var i = 0; i < shopcartList.length; i++) {
-      var tmpSpecId = shopcartList[i].specId
+    let itemSpecIds = ''
+    for (let i = 0; i < shopcartList.length; i++) {
+      let tmpSpecId = shopcartList[i].specId
       itemSpecIds += tmpSpecId
       if (i < shopcartList.length - 1) {
         itemSpecIds += ','
@@ -62,49 +60,46 @@ const Shopcart = () => {
     // 1001，2002，3003，4004
 
     // 请求后端获得最新数据
-    axios.defaults.withCredentials = true
-    axios
-      .get(serverUrl + '/items/refresh?itemSpecIds=' + itemSpecIds, {})
-      .then((res) => {
-        if (res.data.status == 200) {
-          var newItemList = res.data.data
-          // 删除现有购物车cookie
-          deleteCookie('shopcart')
-          // 拿到最新商品数据以后，重新组合成购物车数据
-          for (var i = 0; i < newItemList.length; i++) {
-            var tmpNewItem = newItemList[i]
-            var tmpNewItemSpecId = tmpNewItem.specId
-            var buyCounts = getBuyCountsFromCookieShopcartList(
-              shopcartList,
-              tmpNewItemSpecId
-            )
+    const res = await refreshShopcart(itemSpecIds)
 
-            // 构建购物车商品对象
-            var shopcartItem = new ShopcartItem(
-              tmpNewItem.itemId,
-              tmpNewItem.itemImgUrl,
-              tmpNewItem.itemName,
-              tmpNewItem.specId,
-              tmpNewItem.specName,
-              buyCounts,
-              tmpNewItem.priceDiscount,
-              tmpNewItem.priceNormal
-            )
-            // 添加商品至购物车list
-            addItemToShopcart(shopcartItem)
-          }
-          // 重新获取cookie中的商品list渲染到页面
-          shopcartList = getShopcartList()
-          setShopcartList(shopcartList)
-        } else if (res.data.status == 500) {
-          message.error(res.data.msg)
-        }
-      })
+    if (res.status == 200) {
+      const newItemList = res.data
+      // 删除现有购物车cookie
+      deleteCookie('shopcart')
+      // 拿到最新商品数据以后，重新组合成购物车数据
+      for (let i = 0; i < newItemList.length; i++) {
+        const tmpNewItem = newItemList[i]
+        const tmpNewItemSpecId = tmpNewItem.specId
+        const buyCounts = getBuyCountsFromCookieShopcartList(
+          shopcartList,
+          tmpNewItemSpecId
+        )
+
+        // 构建购物车商品对象
+        const shopcartItem = new ShopcartItem(
+          tmpNewItem.itemId,
+          tmpNewItem.itemImgUrl,
+          tmpNewItem.itemName,
+          tmpNewItem.specId,
+          tmpNewItem.specName,
+          buyCounts,
+          tmpNewItem.priceDiscount,
+          tmpNewItem.priceNormal
+        )
+        // 添加商品至购物车list
+        addItemToShopcart(shopcartItem)
+      }
+      // 重新获取cookie中的商品list渲染到页面
+      shopcartList = getShopcartList()
+      setShopcartList(shopcartList)
+    } else if (res.status == 500) {
+      message.error((res as any).msg)
+    }
   }
 
   const getBuyCountsFromCookieShopcartList = (shopcartList, specId) => {
-    for (var i = 0; i < shopcartList.length; i++) {
-      var tmpSpecId = shopcartList[i].specId
+    for (let i = 0; i < shopcartList.length; i++) {
+      const tmpSpecId = shopcartList[i].specId
       if (tmpSpecId == specId) {
         return shopcartList[i].buyCounts
       }
@@ -112,16 +107,16 @@ const Shopcart = () => {
   }
 
   // 从购物车中删除商品
-  const delFromCart = (specId) => {
-    var bool = window.confirm('确认从购物车中移除该商品吗？')
+  const delFromCart = async (specId) => {
+    const bool = window.confirm('确认从购物车中移除该商品吗？')
     if (!bool) {
       return
     }
 
     // 删除cookie中的商品
-    var shopcartList = getShopcartList()
-    for (var i = 0; i < shopcartList.length; i++) {
-      var tmpItem = shopcartList[i]
+    let shopcartList = getShopcartList()
+    for (let i = 0; i < shopcartList.length; i++) {
+      const tmpItem = shopcartList[i]
       if (tmpItem.specId == specId) {
         shopcartList.splice(i, 1)
         break
@@ -133,8 +128,8 @@ const Shopcart = () => {
 
     // 清除选中项
     const clonedSpecIds = [...specIds]
-    for (var i = 0; i < specIds.length; i++) {
-      var tmpSpecId = specIds[i]
+    for (let i = 0; i < specIds.length; i++) {
+      const tmpSpecId = specIds[i]
       if (specId == tmpSpecId) {
         setSpecIds(clonedSpecIds.splice(i, 1))
       }
@@ -142,28 +137,17 @@ const Shopcart = () => {
 
     // 如果用户是已经登录状态，需要再把redis中的购物车商品删除
     if (userIsLogin) {
-      axios.defaults.withCredentials = true
-      axios
-        .post(
-          serverUrl +
-            '/shopcart/del?userId=' +
-            userInfo.id +
-            '&itemSpecId=' +
-            specId,
-          {},
-          {
-            headers: {
-              headerUserId: userInfo.id,
-              headerUserToken: userInfo.userUniqueToken,
-            },
-          }
-        )
-        .then((res) => {
-          if (res.data.status == 200) {
-          } else if (res.data.status == 500) {
-            message.error(res.data.msg)
-          }
-        })
+      const res = await deleteFromShopcart(userInfo.id, specId, {
+        headers: {
+          headerUserId: userInfo.id,
+          headerUserToken: userInfo.userUniqueToken,
+        },
+      })
+
+      if (res.status == 200) {
+      } else if (res.status == 500) {
+        message.error((res as any).msg)
+      }
     }
   }
 
@@ -176,14 +160,14 @@ const Shopcart = () => {
       // 把specIds和cookie中的购物车进行对比
       setAllSelectedCounts(specIds.length)
 
-      var shopcartList = getShopcartList()
+      const shopcartList = getShopcartList()
 
-      var totalAmount = 0
-      for (var i = 0; i < shopcartList.length; i++) {
-        var tmpItem = shopcartList[i]
+      let totalAmount = 0
+      for (let i = 0; i < shopcartList.length; i++) {
+        const tmpItem = shopcartList[i]
 
-        for (var j = 0; j < specIds.length; j++) {
-          var selectSpecId = specIds[j]
+        for (let j = 0; j < specIds.length; j++) {
+          const selectSpecId = specIds[j]
           if (tmpItem.specId == selectSpecId) {
             totalAmount += tmpItem.priceDiscount * tmpItem.buyCounts
           }
@@ -220,7 +204,7 @@ const Shopcart = () => {
 
   const goPay = () => {
     // href={'/submitOrder'}
-    var shopcartList = getShopcartList()
+    const shopcartList = getShopcartList()
     if (shopcartList.length <= 0) {
       message.info('购物车中没有商品，无法结算')
       return
@@ -233,10 +217,10 @@ const Shopcart = () => {
 
     // 判断是否登录
     if (userIsLogin) {
-      var specIdsStr = specIds.toString()
+      const specIdsStr = specIds.toString()
       window.location.href = 'submitOrder?selectedItemSpecIds=' + specIdsStr
     } else {
-      var bool = window.confirm('请登录/注册后再进行结算操作噢~！')
+      const bool = window.confirm('请登录/注册后再进行结算操作噢~！')
       if (!bool) {
         return
       } else {
@@ -246,15 +230,15 @@ const Shopcart = () => {
   }
 
   const goLogin = () => {
-    window.location.href = "user/login?returnUrl=shopcart";
+    window.location.href = 'user/login?returnUrl=shopcart'
   }
 
   const handleBuyNumberChange = (specId, value) => {
-    var shopcartList = getShopcartList()
-    for (var i = 0; i < shopcartList.length; i++) {
-      var tmpItem = shopcartList[i]
+    const shopcartList = getShopcartList()
+    for (let i = 0; i < shopcartList.length; i++) {
+      const tmpItem = shopcartList[i]
       if (tmpItem.specId == specId) {
-        tmpItem.buyCounts = value;
+        tmpItem.buyCounts = value
         break
       }
     }
@@ -304,7 +288,12 @@ const Shopcart = () => {
                     {cartItem.priceNormal / 100}
                   </div>
                   <div className={`${styles.goodsNum} fl`}>
-                    <InputBuyNumber defaultValue={cartItem.buyCounts} onChange={(value) => handleBuyNumberChange(cartItem.specId, value)} />
+                    <InputBuyNumber
+                      defaultValue={cartItem.buyCounts}
+                      onChange={(value) =>
+                        handleBuyNumberChange(cartItem.specId, value)
+                      }
+                    />
                   </div>
                   <div className={`${styles.goodsSale} fl`}>
                     {(cartItem.priceDiscount / 100) * cartItem.buyCounts}

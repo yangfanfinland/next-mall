@@ -61,9 +61,9 @@ const ItemComment = ({ item }) => {
       const grid = res.data.data
       const commentList = grid.rows
 
-      for (var i = 0; i < commentList.length; i++) {
-        var date = commentList[i].createdTime
-        var formatedTime = moment(date).format('YYYY年MM月DD日 h:mm:ss')
+      for (let i = 0; i < commentList.length; i++) {
+        const date = commentList[i].createdTime
+        const formatedTime = moment(date).format('YYYY年MM月DD日 h:mm:ss')
         commentList[i].createdTime = formatedTime
       }
 

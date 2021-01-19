@@ -42,7 +42,7 @@ const Alipay = ({ orderId, amount }: Props) => {
     )
 
     if (res.data.status == 200) {
-      var orderStatus = res.data.data
+      const orderStatus = res.data.data
 
       if (orderStatus.orderStatus == 20) {
         window.location.href =

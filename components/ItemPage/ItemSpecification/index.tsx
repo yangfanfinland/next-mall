@@ -23,7 +23,7 @@ const ItemSpecification = ({ item, specification, addToCartCallback }) => {
         }
 
         // 构建购物车商品对象
-        var shopcartItem = new ShopcartItem(
+        const shopcartItem = new ShopcartItem(
             item.id,
             "",
             item.itemName,

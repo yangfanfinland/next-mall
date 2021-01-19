@@ -63,11 +63,11 @@ const WXpay = ({ orderId }: Props) => {
     console.log(userInfo, res)
 
     if (res.data.status == 200) {
-      var paymentInfo = res.data.data
+      const paymentInfo = res.data.data
       setPaymentInfo(paymentInfo)
       // qrCodeUrl
       // console.log(paymentInfo);
-      var canvas = document.getElementById('wxqrcode-display')
+      const canvas = document.getElementById('wxqrcode-display')
       QRCode.toCanvas(canvas, paymentInfo.qrCodeUrl, function (error) {
         if (error) console.error(error)
         console.log('success!')
@@ -93,7 +93,7 @@ const WXpay = ({ orderId }: Props) => {
     )
 
     if (res.data.status == 200) {
-      var orderStatus = res.data.data
+      const orderStatus = res.data.data
       if (orderStatus.orderStatus == 20) {
         window.location.href =
           'success.html?orderId=' +

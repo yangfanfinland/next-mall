@@ -31,7 +31,7 @@ export default function Login() {
     // const res = await axios.post(serverUrl + '/passport/login', userBO)
     const res = await request({ method: "POST", url: '/auth/passport/login', data: userBO })
     if (res.data.status == 200) {
-      var user = res.data
+      const user = res.data
       dispatch({ type: 'LOGIN', user: { ...user.data } })
       if (returnUrl != null && returnUrl != undefined && returnUrl != '') {
         Router.push(returnUrl)

@@ -38,7 +38,7 @@ export default function Register() {
             return;
         }
 
-        var userBO = {
+        const userBO = {
             username: values.username,
             password: values.password,
             confirmPassword: values.confirmPassword
@@ -49,7 +49,7 @@ export default function Register() {
         setLoading(true)
         const res = await axios.post(serverUrl + '/passport/regist', userBO)
         if (res.data.status == 200) {
-            var user = res.data
+            const user = res.data
             setLoading(false)
             if (returnUrl != null && returnUrl != undefined && returnUrl != '') {
                 window.location.href = returnUrl;

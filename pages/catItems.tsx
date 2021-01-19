@@ -35,7 +35,7 @@ const catItems = ({ grid, searchType, catId, pageSize, keywords }: Props) => {
   const searchInBackend = async (keywords, sort, page, pageSize) => {
     const res = await getSearchItems(keywords, sort, page, pageSize)
     if (res.status == 200) {
-      var grid = res.data
+      const grid = res.data
       setItemsList(grid.rows)
       setMaxPage(grid.total)
       setTotal(grid.records)
@@ -48,7 +48,7 @@ const catItems = ({ grid, searchType, catId, pageSize, keywords }: Props) => {
   const searchCatItemsInBackend = async (catId, sort, page, pageSize) => {
     const res = await getCategotyItems(catId, sort, page, pageSize)
     if (res.status == 200) {
-      var grid = res.data
+      const grid = res.data
       setItemsList(grid.rows)
       setMaxPage(grid.total)
       setTotal(grid.records)

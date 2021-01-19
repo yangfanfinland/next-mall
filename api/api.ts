@@ -54,3 +54,21 @@ export const getItemInfo = async (itemId: string) => {
 export const addToShopcart = async (userId: string, shopcartItem: any, config: any) => {
     return request.post(`/shopcart/add?userId=${userId}`, shopcartItem, config)
 }
+
+/**
+ * Delete item from shopping cart
+ * @param userId Login user Id
+ * @param specId Specification Id
+ * @param config Axios request config
+ */
+export const deleteFromShopcart = async (userId: string, specId: string, config: any) => {
+    return request.post(`/shopcart/del?userId=${userId}&itemSpecId=${specId}`, {}, config)
+}
+
+/**
+ * Refresh shopcart
+ * @param itemSpecIds item specification id list
+ */
+export const refreshShopcart = async (itemSpecIds: string) => {
+    return request.get(`/items/refresh?itemSpecIds=${itemSpecIds}`)
+}

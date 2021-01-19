@@ -80,22 +80,22 @@ const Index = () => {
     )
 
     if (res.data.status == 200) {
-      var grid = res.data.data
-      var tempOrderTrendList = grid.rows
+      const grid = res.data.data
+      let tempOrderTrendList = grid.rows
 
-      for (var i = 0; i < tempOrderTrendList.length; i++) {
-        var payTimeTmp = tempOrderTrendList[i].payTime
-        var formatedPayTime = moment(payTimeTmp).format(
+      for (let i = 0; i < tempOrderTrendList.length; i++) {
+        const payTimeTmp = tempOrderTrendList[i].payTime
+        const formatedPayTime = moment(payTimeTmp).format(
           'YYYY年MM月DD日 h:mm:ss'
         )
 
-        var deliverTimeTmp = tempOrderTrendList[i].deliverTime
-        var formatedDeliverTime = moment(deliverTimeTmp).format(
+        const deliverTimeTmp = tempOrderTrendList[i].deliverTime
+        const formatedDeliverTime = moment(deliverTimeTmp).format(
           'YYYY年MM月DD日 h:mm:ss'
         )
 
-        var successTimeTmp = tempOrderTrendList[i].successTime
-        var formatedSuccessTime = moment(successTimeTmp).format(
+        const successTimeTmp = tempOrderTrendList[i].successTime
+        const formatedSuccessTime = moment(successTimeTmp).format(
           'YYYY年MM月DD日 h:mm:ss'
         )
 
@@ -113,10 +113,10 @@ const Index = () => {
   }
 
   const renderCalendar = () => {
-    var yearMonth = moment(new Date()).format('YYYY年MM月')
-    var day = moment(new Date()).format('DD')
-    var localMoment = moment().locale('zh-cn')
-    var weekDay = localMoment.format('dddd')
+    const yearMonth = moment(new Date()).format('YYYY年MM月')
+    const day = moment(new Date()).format('DD')
+    const localMoment = moment().locale('zh-cn')
+    const weekDay = localMoment.format('dddd')
 
     setYearMonth(yearMonth)
     setDay(day)

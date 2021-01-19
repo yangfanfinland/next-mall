@@ -57,7 +57,7 @@ const UserInfo = () => {
     )
 
     if (res.data.status == 200) {
-      var userInfoMore = res.data.data
+      const userInfoMore = res.data.data
       setUserInfoMore(userInfoMore)
     } else {
       message.error(res.data.msg)
@@ -94,7 +94,7 @@ const UserInfo = () => {
 
   const saveUserInfo = async (values) => {
 
-    var nickname = values.nickname
+    const nickname = values.nickname
     if (nickname == null || nickname == '' || nickname == undefined) {
       message.warning('昵称不能为空')
       return
@@ -104,7 +104,7 @@ const UserInfo = () => {
       return
     }
 
-    var realname = values.realname
+    const realname = values.realname
     if (realname != null && realname != '' && realname != undefined) {
       if (realname.length > 12) {
         message.warning('真实姓名长度不能超过12位')
@@ -114,7 +114,7 @@ const UserInfo = () => {
 
     console.log(values)
 
-    var mobile = values.mobile
+    const mobile = values.mobile
     if (mobile != null && mobile != '' && mobile != undefined) {
       if (mobile.length != 11) {
         message.warning('手机号长度为11位')
@@ -127,7 +127,7 @@ const UserInfo = () => {
       }
     }
 
-    var email = values.email
+    const email = values.email
     if (email != null && email != '' && email != undefined) {
       if (!checkEmail(email)) {
         message.warning('请输入有效的邮箱地址！')

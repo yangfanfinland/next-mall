@@ -50,7 +50,7 @@ const AlipayTempTransit = ({ orderId }: Props) => {
     )
 
     if (res.data.status == 200) {
-      var alipayForm = res.data.data
+      const alipayForm = res.data.data
       console.log(alipayForm)
       document.write(alipayForm)
       // setAlipayForm(alipayForm)

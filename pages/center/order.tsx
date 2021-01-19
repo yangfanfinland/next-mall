@@ -65,12 +65,12 @@ const Order = () => {
     )
 
     if (res.data.status == 200) {
-      var grid = res.data.data
+      const grid = res.data.data
       setMyOrderList(grid.rows)
 
-      for (var i = 0; i < myOrderList.length; i++) {
-        var date = myOrderList[i].createdTime
-        var formatedTime = moment(date).format('YYYY年MM月DD日 h:mm:ss')
+      for (let i = 0; i < myOrderList.length; i++) {
+        const date = myOrderList[i].createdTime
+        const formatedTime = moment(date).format('YYYY年MM月DD日 h:mm:ss')
         myOrderList[i].createdTime = formatedTime
       }
       console.log(myOrderList)
@@ -98,7 +98,7 @@ const Order = () => {
   }
 
   const deleteOrder = async (orderId) => {
-    var confirm = window.confirm('确认删除吗？')
+    const confirm = window.confirm('确认删除吗？')
     if (!confirm) {
       return false
     }
@@ -127,7 +127,7 @@ const Order = () => {
   }
 
   const confirmReceive = async (orderId) => {
-    var confirm = window.confirm('确认收货吗？')
+    const confirm = window.confirm('确认收货吗？')
     if (!confirm) {
       return false
     }

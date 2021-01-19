@@ -14,7 +14,7 @@ const Category = ({ hoverShow = false, categoryList=[] }) => {
     const getSubCategoryList = async (rootCatId) => {
         const res = await axios.get(serverUrl + '/index/subCat/' + rootCatId, {});
         if (res.data.status == 200) {
-            var catList = res.data.data
+            const catList = res.data.data
             setSubCategoryList(catList)
         }
     }
