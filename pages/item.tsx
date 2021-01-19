@@ -8,14 +8,13 @@ import ItemImgPreview from '../components/ItemPage/ItemImgPreview'
 import ItemSpecification from '../components/ItemPage/ItemSpecification'
 import ItemDetails from '../components/ItemPage/ItemDetails'
 import ItemComment from '../components/ItemPage/ItemComment'
-import axios from 'axios'
 import { useSelector } from 'react-redux'
 import {
-  serverUrl,
   addItemToShopcart,
   getShopcartItemCounts,
   ShopcartItem,
 } from '../util/app'
+import { getItemInfo, addToShopcart } from '../api/api'
 import styles from '../static/styles/item.less'
 
 interface Props extends SingletonRouter {
@@ -26,14 +25,19 @@ const { TabPane } = Tabs
 
 const Item = ({ itemInfo }: Props) => {
   console.log(itemInfo)
-  const { item, itemParams, itemImgList, itemSpecList, parentCatList } = itemInfo
+  const {
+    item,
+    itemParams,
+    itemImgList,
+    itemSpecList,
+    parentCatList,
+  } = itemInfo
   const [userIsLogin, setUserIsLogin] = useState(false)
   const [userInfo, setUserInfo] = useState<any>()
   const [shopcartItemCounts, setShopcartItemCounts] = useState(0)
   const user = useSelector((store) => store.user)
 
   useEffect(() => {
-    // 通过cookie判断用户是否登录
     judgeUserLoginStatus()
   }, [item.id])
 
@@ -52,7 +56,6 @@ const Item = ({ itemInfo }: Props) => {
   }
 
   const handleAddToCart = async (shopcartItem: ShopcartItem) => {
-    // 由于cookie大小限制为4k，另外课程第一阶段是没有redis的，所以相关暂存性内容会存入到cookie中
     var shopcartCounts = getShopcartItemCounts()
     if (shopcartCounts >= 8) {
       message.info('您购物车中的食物太多啦~请把它们带回家吧~！')
@@ -60,28 +63,22 @@ const Item = ({ itemInfo }: Props) => {
     }
     shopcartItem.itemImgUrl = itemImgList[0].url
 
-    // 添加商品至购物车list
+    // Add products to shopping cart list
     addItemToShopcart({ ...shopcartItem })
 
     // 购物车应该在登录/注册的时候同步
-
     // 判断当前用户是否登录，如果登录，则把购物车数据发送至后端（后端需要合并已存在的商品）
     if (userIsLogin) {
-      axios.defaults.withCredentials = true
-      const res = await axios.post(
-        serverUrl + '/shopcart/add?userId=' + userInfo.id,
-        shopcartItem,
-        {
-          headers: {
-            headerUserId: userInfo.id,
-            headerUserToken: userInfo.userUniqueToken,
-          },
-        }
-      )
+      const res = await addToShopcart(userInfo.id, shopcartItem, {
+        headers: {
+          headerUserId: userInfo.id,
+          headerUserToken: userInfo.userUniqueToken,
+        },
+      })
 
-      if (res.data.status == 200) {
-      } else if (res.data.status == 500) {
-        message.error(res.data.msg)
+      if (res.status == 200) {
+      } else if (res.status == 500) {
+        message.error((res as any).msg)
       }
     }
 
@@ -128,14 +125,13 @@ const Item = ({ itemInfo }: Props) => {
 
 Item.getInitialProps = async ({ ctx }) => {
   const { itemId } = ctx.query
-  // const itemId = 'cake-1001'
 
   let itemInfo
-  const res = await axios.get(serverUrl + '/items/info/' + itemId, {})
-  if (res.data.status == 200) {
-    itemInfo = res.data.data
-  } else if (res.data.status == 500) {
-    message.error(res.data.msg)
+  const res = await getItemInfo(itemId)
+  if (res.status == 200) {
+    itemInfo = res.data
+  } else if (res.status == 500) {
+    message.error((res as any).msg)
   }
 
   return {

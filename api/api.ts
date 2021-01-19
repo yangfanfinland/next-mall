@@ -36,3 +36,21 @@ export const getCategotyItems = async (catId: number, sort: string, page: number
 export const getSearchItems = async (keywords: string, sort: string, page: number, pageSize: number) => {
     return request.get(`/items/search?keywords=${encodeURIComponent(keywords)}&sort=${sort}&page=${page}&pageSize=${pageSize}`)
 }
+
+/**
+ * Get item info
+ * @param itemId Item id
+ */
+export const getItemInfo = async (itemId: string) => {
+    return request.get(`/items/info/${itemId}`)
+}
+
+/**
+ * Add item to shopping cart
+ * @param userId Login user Id
+ * @param shopcartItem shopcart item
+ * @param config Axios request config
+ */
+export const addToShopcart = async (userId: string, shopcartItem: any, config: any) => {
+    return request.post(`/shopcart/add?userId=${userId}`, shopcartItem, config)
+}

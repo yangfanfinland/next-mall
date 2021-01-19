@@ -100,7 +100,7 @@ const ItemSpecification = ({ item, specification, addToCartCallback }) => {
                 </div>
             </div>
             <div className={styles.buyBtnWrap}>
-                <a className={`${styles.buyBtn} ${styles.buyNow}`}>立即购买</a>
+                {/* <a className={`${styles.buyBtn} ${styles.buyNow}`}>立即购买</a> */}
                 <a className={`${styles.buyBtn} ${styles.addCar}`} onClick={addToCart} >加入购物车</a>
             </div>
         </div>

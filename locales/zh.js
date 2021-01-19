@@ -1,6 +1,6 @@
 export default {
   header: {
-    welcome: '米桶电商欢迎你',
+    welcome: '宜选商城欢迎你',
     login: '登陆',
     register: '注册',
     myOrder: '我的订单',
@@ -15,6 +15,6 @@ export default {
     loginBtn: '登陆',
     registerLink: '注册',
   },
-  'home.title': '米桶电商 - 首页',
+  'home.title': '宜选商城 - 首页',
   dynamicName: ' 动态赋值：{val}',
 }
