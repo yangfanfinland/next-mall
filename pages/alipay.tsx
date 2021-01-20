@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { withRouter, SingletonRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import { message } from 'antd'
-import { getPaidOrderInfo } from "../api/api"
+import { getPaidOrderInfoApi } from "../api/api"
 import styles from '../static/styles/alipay.less'
 
 interface Props extends SingletonRouter {
@@ -28,7 +28,7 @@ const Alipay = ({ orderId, amount }: Props) => {
 
   const checkPayResult = async () => {
     // 发起请求获得微信支付扫描二维码
-    const res = await getPaidOrderInfo(orderId, {
+    const res = await getPaidOrderInfoApi(orderId, {
       headers: {
         headerUserId: userInfo.id,
         headerUserToken: userInfo.userUniqueToken,

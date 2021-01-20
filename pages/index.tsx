@@ -10,7 +10,7 @@ import AreaSuperGoods from '../components/HomePage/AreaSuperGoods'
 import AreaShops from '../components/HomePage/AreaShops'
 import AreaSpecial from '../components/HomePage/AreaSpecial'
 import AreaLike from '../components/HomePage/AreaLike'
-import { getCategoriesApi, getSixNewItemsByCategoryId } from "../api/api"
+import { getCategoriesApi, getSixNewItemsByCategoryIdApi } from "../api/api"
 import styles from '../static/styles/index.less'
 import { useRouter } from "next/router"
 import { useIntl } from "react-intl"
@@ -59,7 +59,7 @@ Home.getInitialProps = async ({ ctx, reduxStore }) => {
 
   if (Array.isArray(categoryList)) {
     for (const category of categoryList) {
-      const res = await getSixNewItemsByCategoryId(category.id)
+      const res = await getSixNewItemsByCategoryIdApi(category.id)
       if (res.status == 200) {
           const itemTemp = res.data
           likeItemList.push(itemTemp[0])

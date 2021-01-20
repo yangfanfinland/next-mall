@@ -3,8 +3,8 @@ import { Form, Input, message, Button, Radio, DatePicker } from 'antd'
 import UserCenterNav from '../../components/UserCenterNav'
 import HtmlHead from '../../components/HtmlHead'
 import SearchArea from '../../components/SearchArea'
-import { serverUrl, checkEmail, checkMobile } from '../../util/app'
-import axios from 'axios'
+import { checkEmail, checkMobile } from '../../util/app'
+import { getUserInfoApi, uploadFaceApi, updateUserInfoApi } from '../../api/api'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
 import styles from '../../static/styles/userInfo.less'
@@ -14,7 +14,7 @@ const layout = {
   wrapperCol: { span: 20 },
 }
 
-const dateFormat = "YYYY-MM-DD"
+const dateFormat = 'YYYY-MM-DD'
 
 const UserInfo = () => {
   const [userIsLogin, setUserIsLogin] = useState(false)
@@ -45,22 +45,18 @@ const UserInfo = () => {
 
   const renderUserInfo = async () => {
     // 请求后端获得最新数据
-    axios.defaults.withCredentials = true
-    const res = await axios.get(
-      serverUrl + '/center/userInfo?userId=' + userInfo.id,
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await getUserInfoApi(userInfo.id, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
-      const userInfoMore = res.data.data
+    if (res.status == 200) {
+      const userInfoMore = res.data
       setUserInfoMore(userInfoMore)
     } else {
-      message.error(res.data.msg)
+      message.error((res as any).msg)
     }
   }
 
@@ -71,29 +67,23 @@ const UserInfo = () => {
     multiForm.append('file', f, f.name) //append 向form表单添加数据
 
     // 请求后端获得最新数据
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl + '/userInfo/uploadFace?userId=' + userInfo.id,
-      multiForm,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await uploadFaceApi(userInfo.id, multiForm, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
+    if (res.status == 200) {
       message.success('头像上传成功!')
       window.location.reload()
     } else {
-      message.error(res.data.msg)
+      message.error((res as any).msg)
     }
   }
 
   const saveUserInfo = async (values) => {
-
     const nickname = values.nickname
     if (nickname == null || nickname == '' || nickname == undefined) {
       message.warning('昵称不能为空')
@@ -136,29 +126,24 @@ const UserInfo = () => {
     }
 
     // 请求后端获得最新数据
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl + '/userInfo/update?userId=' + userInfo.id,
-      values,
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await updateUserInfoApi(userInfo.id, values, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
+    if (res.status == 200) {
       message.success('用户信息修改成功!')
       window.location.reload()
     } else {
-      message.error(res.data.msg)
+      message.error((res as any).msg)
     }
   }
 
   return (
     <>
-      <HtmlHead title={'米桶电商 - 个人中心'} />
+      <HtmlHead title={'宜选商城 - 个人中心'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="userInfo" />
@@ -224,7 +209,7 @@ const UserInfo = () => {
                     {
                       type: 'object',
                       required: true,
-                      message: 'Please select time!'
+                      message: 'Please select time!',
                     },
                   ]}
                   initialValue={moment(userInfoMore.birthday)}

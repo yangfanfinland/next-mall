@@ -4,8 +4,12 @@ import HtmlHead from '../../components/HtmlHead'
 import SearchArea from '../../components/SearchArea'
 import OrderList from '../../components/UserCenterPage/OrderList'
 import { Tabs, message, Pagination } from 'antd'
-import { serverUrl, shopServerUrl } from '../../util/app'
-import axios from 'axios'
+import { shopServerUrl } from '../../util/app'
+import {
+  getOrderListApi,
+  deleteOrderApi,
+  confirmReceiveApi,
+} from '../../api/api'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
 import styles from '../../static/styles/order.less'
@@ -44,18 +48,11 @@ const Order = () => {
 
   const renderOrderList = async (orderStatus, page, pageSize) => {
     // 请求后端获得最新数据
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl +
-        '/myorders/query?userId=' +
-        userInfo.id +
-        '&orderStatus=' +
-        orderStatus +
-        '&page=' +
-        page +
-        '&pageSize=' +
-        pageSize,
-      {},
+    const res = await getOrderListApi(
+      userInfo.id,
+      orderStatus,
+      page,
+      pageSize,
       {
         headers: {
           headerUserId: userInfo.id,
@@ -64,8 +61,8 @@ const Order = () => {
       }
     )
 
-    if (res.data.status == 200) {
-      const grid = res.data.data
+    if (res.status == 200) {
+      const grid = res.data
       setMyOrderList(grid.rows)
 
       for (let i = 0; i < myOrderList.length; i++) {
@@ -77,8 +74,8 @@ const Order = () => {
 
       setMaxPage(grid.total) // 获得总页数
       setTotal(grid.records) // 获得总记录数
-    } else if (res.data.status == 500) {
-      message.error(res.data.msg)
+    } else if (res.status == 500) {
+      message.error((res as any).msg)
     }
   }
 
@@ -103,26 +100,17 @@ const Order = () => {
       return false
     }
 
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl +
-        '/myorders/delete?userId=' +
-        userInfo.id +
-        '&orderId=' +
-        orderId,
-      {},
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await deleteOrderApi(userInfo.id, orderId, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
+    if (res.status == 200) {
       await renderOrderList(orderStatus, page, pageSize)
-    } else if (res.data.status == 500) {
-      message.error(res.data.msg)
+    } else if (res.status == 500) {
+      message.error((res as any).msg)
     }
   }
 
@@ -132,26 +120,17 @@ const Order = () => {
       return false
     }
 
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl +
-        '/myorders/confirmReceive?userId=' +
-        userInfo.id +
-        '&orderId=' +
-        orderId,
-      {},
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await confirmReceiveApi(userInfo.id, orderId, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
+    if (res.status == 200) {
       renderOrderList(orderStatus, page, pageSize)
-    } else if (res.data.status == 500) {
-      message.error(res.data.msg)
+    } else if (res.status == 500) {
+      message.error((res as any).msg)
     }
   }
 
@@ -176,7 +155,7 @@ const Order = () => {
 
   return (
     <>
-      <HtmlHead title={'米桶电商 - 个人中心'} />
+      <HtmlHead title={'宜选商城 - 个人中心'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="order" />

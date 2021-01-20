@@ -8,7 +8,7 @@ import styles from '../../static/styles/address.less'
 const DeliveryAddress = () => {
   return (
     <>
-      <HtmlHead title={'米桶电商 - 个人中心'} />
+      <HtmlHead title={'宜选商城 - 个人中心'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="address" />

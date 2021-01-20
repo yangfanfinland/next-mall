@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import HtmlHead from '../components/HtmlHead'
 import SearchArea from '../components/SearchArea'
 import { withRouter } from 'next/router'
-import { createOrder } from "../api/api"
+import { createOrderApi } from "../api/api"
 import { message } from 'antd'
 import Address from '../components/SubmitOrderPage/Address'
 import Payment from '../components/SubmitOrderPage/Payment'
@@ -80,7 +80,7 @@ const SubmitOrder = () => {
     }
 
     // 买家备注可以为空
-    const res = await createOrder({
+    const res = await createOrderApi({
       userId: userInfo.id,
       itemSpecIds: itemSpecIds,
       addressId: confirmAddress.id,

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import UserCenterNav from '../../components/UserCenterNav'
 import HtmlHead from '../../components/HtmlHead'
 import SearchArea from '../../components/SearchArea'
-import { serverUrl, getUrlParam } from '../../util/app'
-import axios from 'axios'
+import { getUrlParam } from '../../util/app'
+import { doCommentApi, saveCommentApi } from '../../api/api'
 import { message } from 'antd'
 import { useSelector } from 'react-redux'
 import styles from '../../static/styles/doComment.less'
@@ -15,7 +15,7 @@ const DoComment = () => {
   const [orderId, setOrderId] = useState('')
 
   const [level, setLevel] = useState(0)
-  const [content, setContent] = useState("")
+  const [content, setContent] = useState('')
   const user = useSelector((store) => store.user)
 
   useEffect(() => {
@@ -30,24 +30,15 @@ const DoComment = () => {
   }, [userInfo, orderId])
 
   const renderItemComment = async (orderId) => {
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl +
-        '/mycomments/pending?userId=' +
-        userInfo.id +
-        '&orderId=' +
-        orderId,
-      {},
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await doCommentApi(userInfo.id, orderId, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
-      const tempOrderItemList = res.data.data
+    if (res.status == 200) {
+      const tempOrderItemList = res.data
 
       for (let i = 0; i < tempOrderItemList.length; i++) {
         tempOrderItemList[i].commentLevel = 0
@@ -55,8 +46,8 @@ const DoComment = () => {
       }
 
       setOrderItemList(tempOrderItemList)
-    } else if (res.data.status == 500) {
-      message.error(res.data.msg)
+    } else if (res.status == 500) {
+      message.error((res as any).msg)
     }
   }
 
@@ -83,27 +74,18 @@ const DoComment = () => {
       }
     }
 
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl +
-        '/mycomments/saveList?userId=' +
-        userInfo.id +
-        '&orderId=' +
-        orderId,
-      orderItemList,
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await saveCommentApi(userInfo.id, orderId, orderItemList, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
+    if (res.status == 200) {
       message.success('评论成功！')
       window.location.href = '/center/order'
-    } else if (res.data.status == 500) {
-      message.error(res.data.msg)
+    } else if (res.status == 500) {
+      message.error((res as any).msg)
     }
   }
 
@@ -145,7 +127,7 @@ const DoComment = () => {
 
   return (
     <>
-      <HtmlHead title={'米桶电商 - 个人中心'} />
+      <HtmlHead title={'宜选商城 - 个人中心'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="comment" />
@@ -153,7 +135,10 @@ const DoComment = () => {
           <div className={`${styles['user-comment']}`}>
             <div className={`${styles['am-padding']}`}>
               <div className={`${styles['am-fl']}`}>
-                <strong className={`${styles['am-text-danger']}`}>发表评论</strong> / <small>Make&nbsp;Comments</small>
+                <strong className={`${styles['am-text-danger']}`}>
+                  发表评论
+                </strong>{' '}
+                / <small>Make&nbsp;Comments</small>
               </div>
             </div>
 
@@ -196,19 +181,40 @@ const DoComment = () => {
                         id={'good_' + orderItem.id}
                         onClick={() => makeComment(orderItem.id, 1)}
                       >
-                        <i className={orderItem.commentLevel == 1 ? `${styles['op1']} ${styles['active']}`: `${styles['op1']}`}></i>好评
+                        <i
+                          className={
+                            orderItem.commentLevel == 1
+                              ? `${styles['op1']} ${styles['active']}`
+                              : `${styles['op1']}`
+                          }
+                        ></i>
+                        好评
                       </li>
                       <li
                         id={'normal_' + orderItem.id}
                         onClick={() => makeComment(orderItem.id, 2)}
                       >
-                        <i className={orderItem.commentLevel == 2 ? `${styles['op2']} ${styles['active']}`: `${styles['op2']}`}></i>中评
+                        <i
+                          className={
+                            orderItem.commentLevel == 2
+                              ? `${styles['op2']} ${styles['active']}`
+                              : `${styles['op2']}`
+                          }
+                        ></i>
+                        中评
                       </li>
                       <li
                         id={'bad_' + orderItem.id}
                         onClick={() => makeComment(orderItem.id, 3)}
                       >
-                        <i className={orderItem.commentLevel == 3 ? `${styles['op3']} ${styles['active']}`: `${styles['op3']}`}></i>差评
+                        <i
+                          className={
+                            orderItem.commentLevel == 3
+                              ? `${styles['op3']} ${styles['active']}`
+                              : `${styles['op3']}`
+                          }
+                        ></i>
+                        差评
                       </li>
                     </div>
                   </div>

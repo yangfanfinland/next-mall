@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Carousel } from 'antd'
-import { getCarousel } from '../../api/api'
+import { getCarouselApi } from '../../api/api'
 
 const MyCarousel = () => {
   const [carousel, setCarousel] = useState([])
 
   useEffect(() => {
-    getCarousel().then((res) => {
+    getCarouselApi().then((res) => {
       if (res.status == 200) {
         const carouselList = res.data
         setCarousel(carouselList)

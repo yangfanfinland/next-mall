@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Pagination, message } from "antd"
 import styles from './index.less'
-import { getCommentLevel, getComments } from "../../../api/api"
+import { getCommentLevelApi, getCommentsApi } from "../../../api/api"
 import moment from 'moment'
 
 const ItemComment = ({ item }) => {
@@ -27,7 +27,7 @@ const ItemComment = ({ item }) => {
 
   const renderCommentLevelCounts = async (itemId) => {
     let countsVO
-    const res = await getCommentLevel(itemId)
+    const res = await getCommentLevelApi(itemId)
 
     if (res.status == 200) {
       countsVO = res.data
@@ -38,7 +38,7 @@ const ItemComment = ({ item }) => {
   }
 
   const renderComments = async (itemId, level, page, pageSize) => {
-    const res = await getComments(itemId, level, page, pageSize)
+    const res = await getCommentsApi(itemId, level, page, pageSize)
 
     if (res.status == 200) {
       const grid = res.data

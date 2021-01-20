@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import UserCenterNav from '../../components/UserCenterNav'
 import HtmlHead from '../../components/HtmlHead'
 import SearchArea from '../../components/SearchArea'
-import { serverUrl } from '../../util/app'
-import axios from 'axios'
+import { getMyCommentListApi } from '../../api/api'
 import styles from '../../static/styles/comment.less'
 import { message, Pagination } from 'antd'
 import { useSelector } from 'react-redux'
@@ -29,26 +28,15 @@ const Comment = () => {
   }, [userInfo])
 
   const renderMyCommentList = async (page, pageSize) => {
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl +
-        '/mycomments/query?userId=' +
-        userInfo.id +
-        '&page=' +
-        page +
-        '&pageSize=' +
-        pageSize,
-      {},
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await getMyCommentListApi(userInfo.id, page, pageSize, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
-      const grid = res.data.data
+    if (res.status == 200) {
+      const grid = res.data
       let tempMyCommentList = grid.rows
 
       for (let i = 0; i < tempMyCommentList.length; i++) {
@@ -61,8 +49,8 @@ const Comment = () => {
 
       setMaxPage(grid.total) // 获得总页数
       setTotal(grid.records) // 获得总记录数
-    } else if (res.data.status == 500) {
-      message.error(res.data.msg)
+    } else if (res.status == 500) {
+      message.error((res as any).msg)
     }
   }
 
@@ -83,7 +71,7 @@ const Comment = () => {
 
   return (
     <>
-      <HtmlHead title={'米桶电商 - 个人中心'} />
+      <HtmlHead title={'宜选商城 - 个人中心'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="comment" />

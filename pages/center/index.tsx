@@ -3,8 +3,7 @@ import { message, Pagination } from 'antd'
 import UserCenterNav from '../../components/UserCenterNav'
 import HtmlHead from '../../components/HtmlHead'
 import SearchArea from '../../components/SearchArea'
-import { serverUrl } from '../../util/app'
-import axios from 'axios'
+import { getOrderStatusCountsApi, getOrderTrendApi } from '../../api/api'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
 import styles from '../../static/styles/center.less'
@@ -35,23 +34,17 @@ const Index = () => {
   }, [userInfo])
 
   const renderOrderStatusCounts = async () => {
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl + '/myorders/statusCounts?userId=' + userInfo.id,
-      {},
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await getOrderStatusCountsApi(userInfo.id, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
-      setOrderStatusCounts(res.data.data)
+    if (res.status == 200) {
+      setOrderStatusCounts(res.data)
     } else {
-      alert(res.data.msg)
-      console.log(res.data.msg)
+      message.error((res as any).msg)
     }
   }
 
@@ -61,26 +54,15 @@ const Index = () => {
   }
 
   const renderOrderTrend = async (page, pageSize) => {
-    axios.defaults.withCredentials = true
-    const res = await axios.post(
-      serverUrl +
-        '/myorders/trend?userId=' +
-        userInfo.id +
-        '&page=' +
-        page +
-        '&pageSize=' +
-        pageSize,
-      {},
-      {
-        headers: {
-          headerUserId: userInfo.id,
-          headerUserToken: userInfo.userUniqueToken,
-        },
-      }
-    )
+    const res = await getOrderTrendApi(userInfo.id, page, pageSize, {
+      headers: {
+        headerUserId: userInfo.id,
+        headerUserToken: userInfo.userUniqueToken,
+      },
+    })
 
-    if (res.data.status == 200) {
-      const grid = res.data.data
+    if (res.status == 200) {
+      const grid = res.data
       let tempOrderTrendList = grid.rows
 
       for (let i = 0; i < tempOrderTrendList.length; i++) {
@@ -108,7 +90,7 @@ const Index = () => {
       setMaxPage(grid.total)
       setTotal(grid.records)
     } else {
-      message.error(res.data.msg)
+      message.error((res as any).msg)
     }
   }
 
@@ -135,7 +117,7 @@ const Index = () => {
 
   return (
     <>
-      <HtmlHead title={'米桶电商 - 个人中心'} />
+      <HtmlHead title={'宜选商城 - 个人中心'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="center" />

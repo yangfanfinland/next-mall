@@ -14,7 +14,7 @@ import {
   getShopcartItemCounts,
   ShopcartItem,
 } from '../util/app'
-import { getItemInfo, addToShopcart } from '../api/api'
+import { getItemInfoApi, addToShopcartApi } from '../api/api'
 import styles from '../static/styles/item.less'
 
 interface Props extends SingletonRouter {
@@ -69,7 +69,7 @@ const Item = ({ itemInfo }: Props) => {
     // 购物车应该在登录/注册的时候同步
     // 判断当前用户是否登录，如果登录，则把购物车数据发送至后端（后端需要合并已存在的商品）
     if (userIsLogin) {
-      const res = await addToShopcart(userInfo.id, shopcartItem, {
+      const res = await addToShopcartApi(userInfo.id, shopcartItem, {
         headers: {
           headerUserId: userInfo.id,
           headerUserToken: userInfo.userUniqueToken,
@@ -127,7 +127,7 @@ Item.getInitialProps = async ({ ctx }) => {
   const { itemId } = ctx.query
 
   let itemInfo
-  const res = await getItemInfo(itemId)
+  const res = await getItemInfoApi(itemId)
   if (res.status == 200) {
     itemInfo = res.data
   } else if (res.status == 500) {

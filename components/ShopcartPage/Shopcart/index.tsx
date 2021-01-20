@@ -8,7 +8,7 @@ import {
   ShopcartItem,
   addItemToShopcart,
 } from '../../../util/app'
-import { deleteFromShopcart, refreshShopcart } from '../../../api/api'
+import { deleteFromShopcartApi, refreshShopcartApi } from '../../../api/api'
 import { useSelector } from 'react-redux'
 import styles from './index.less'
 
@@ -60,7 +60,7 @@ const Shopcart = () => {
     // 1001，2002，3003，4004
 
     // 请求后端获得最新数据
-    const res = await refreshShopcart(itemSpecIds)
+    const res = await refreshShopcartApi(itemSpecIds)
 
     if (res.status == 200) {
       const newItemList = res.data
@@ -137,7 +137,7 @@ const Shopcart = () => {
 
     // 如果用户是已经登录状态，需要再把redis中的购物车商品删除
     if (userIsLogin) {
-      const res = await deleteFromShopcart(userInfo.id, specId, {
+      const res = await deleteFromShopcartApi(userInfo.id, specId, {
         headers: {
           headerUserId: userInfo.id,
           headerUserToken: userInfo.userUniqueToken,

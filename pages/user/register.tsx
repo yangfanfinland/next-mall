@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { getUrlParam, serverUrl } from '../../util/app'
+import { getUrlParam } from '../../util/app'
 import RegisterForm from "../../components/User/RegisterForm"
-import axios from 'axios'
+import { registerUserApi } from "../../api/api"
 import { message } from "antd"
 
 export default function Register() {
@@ -45,10 +45,9 @@ export default function Register() {
         };
 
         // form提交
-        axios.defaults.withCredentials = true;
         setLoading(true)
-        const res = await axios.post(serverUrl + '/passport/regist', userBO)
-        if (res.data.status == 200) {
+        const res = await registerUserApi(userBO)
+        if (res.status == 200) {
             const user = res.data
             setLoading(false)
             if (returnUrl != null && returnUrl != undefined && returnUrl != '') {
@@ -56,8 +55,8 @@ export default function Register() {
             } else {
                 window.location.href = "/";
             }
-        } else if (res.data.status == 500) {
-            message.error(res.data.msg)
+        } else if (res.status == 500) {
+            message.error((res as any).msg)
             setLoading(false)
             return;
         }

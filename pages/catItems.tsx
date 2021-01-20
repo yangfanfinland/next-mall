@@ -5,7 +5,7 @@ import SearchArea from '../components/SearchArea'
 import BreadcrumbNav from '../components/BreadcrumbNav'
 import FilterBar from '../components/FilterBar'
 import GoodsList from '../components/GoodsList'
-import { getCategotyItems, getSearchItems } from "../api/api"
+import { getCategotyItemsApi, getSearchItemsApi } from "../api/api"
 import { Pagination, message } from 'antd'
 import { useSelector } from 'react-redux'
 import styles from '../static/styles/catItems.less'
@@ -33,7 +33,7 @@ const catItems = ({ grid, searchType, catId, pageSize, keywords }: Props) => {
   }, [])
 
   const searchInBackend = async (keywords, sort, page, pageSize) => {
-    const res = await getSearchItems(keywords, sort, page, pageSize)
+    const res = await getSearchItemsApi(keywords, sort, page, pageSize)
     if (res.status == 200) {
       const grid = res.data
       setItemsList(grid.rows)
@@ -46,7 +46,7 @@ const catItems = ({ grid, searchType, catId, pageSize, keywords }: Props) => {
   }
 
   const searchCatItemsInBackend = async (catId, sort, page, pageSize) => {
-    const res = await getCategotyItems(catId, sort, page, pageSize)
+    const res = await getCategotyItemsApi(catId, sort, page, pageSize)
     if (res.status == 200) {
       const grid = res.data
       setItemsList(grid.rows)
@@ -128,10 +128,10 @@ catItems.getInitialProps = async ({ ctx }) => {
 
   let grid, res
   if (searchType == 'catItems') {
-    res = await getCategotyItems(catId, sort, page, pageSize)
+    res = await getCategotyItemsApi(catId, sort, page, pageSize)
   }
   if (searchType == 'searchItems') {
-    res = await getSearchItems(keywords, sort, page, pageSize)
+    res = await getSearchItemsApi(keywords, sort, page, pageSize)
   }
   if (res.status == 200) {
     grid = res.data

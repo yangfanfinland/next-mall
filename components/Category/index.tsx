@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './index.less'
 import SubCategory from './SubCategory'
-import { getSubCategories } from '../../api/api'
+import { getSubCategoriesApi } from '../../api/api'
 
 const Category = ({ hoverShow = false, categoryList = [] }) => {
   const [subCategoryList, setSubCategoryList] = useState()
@@ -11,9 +11,9 @@ const Category = ({ hoverShow = false, categoryList = [] }) => {
   }
 
   const getSubCategoryList = async (rootCatId) => {
-    const res = await getSubCategories(rootCatId)
-    if (res.data.status == 200) {
-      const catList = res.data.data
+    const res = await getSubCategoriesApi(rootCatId)
+    if (res.status == 200) {
+      const catList = res.data
       setSubCategoryList(catList)
     }
   }
