@@ -1,5 +1,5 @@
-@import url("../../static/styles/icon");
-@import url("../../static/styles/color");
+@import url('../../static/styles/icon');
+@import url('../../static/styles/color');
 
 .category {
   float: left;
@@ -13,11 +13,11 @@
   overflow: visible;
 
   &.hoverCategory {
-	&:hover {
-	  .hideCategory {
-		display: block;
-	  }
-	}
+    &:hover {
+      .hideCategory {
+        display: block;
+      }
+    }
   }
 }
 
@@ -30,21 +30,21 @@
   border-bottom: 1px solid @primary-color;
 
   .lineicon {
-	display: inline-block;
-	*zoom: 1;
-	*display: inline;
-	margin: 0 24px 0 15px;
-	width: 15px;
-	height: 12px;
-	overflow: hidden;
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+    margin: 0 24px 0 15px;
+    width: 15px;
+    height: 12px;
+    overflow: hidden;
 
-	i {
-	  width: 15px;
-	  height: 0;
-	  border-top: 2px solid #ddd;
-	  display: block;
-	  margin-bottom: 3px;
-	}
+    i {
+      width: 15px;
+      height: 0;
+      border-top: 2px solid #ddd;
+      display: block;
+      margin-bottom: 3px;
+    }
   }
 }
 
@@ -53,64 +53,64 @@
   background: rgba(9, 7, 35, 0.8);
 
   &.hideCategory {
-	display: none;
+    display: none;
   }
 
   //height: 500px;
 
   .categoryItem {
-	padding-left: 10px;
-	width: 160px;
-	height: 40px;
-	cursor: pointer;
-	text-align: left;
-	padding-right: 3px;
-	border-bottom: 1px solid rgba(0, 125, 198, 0.1);
+    padding-left: 10px;
+    width: 160px;
+    height: 40px;
+    cursor: pointer;
+    text-align: left;
+    padding-right: 3px;
+    border-bottom: 1px solid rgba(0, 125, 198, 0.1);
 
-	&:last-child {
-	  border-bottom: none;
-	}
+    &:last-child {
+      border-bottom: none;
+    }
 
-	&:hover {
-	  background: @primary-color;
-	  border-bottom: 1px solid @primary-color;
+    &:hover {
+      background: @primary-color;
+      border-bottom: 1px solid @primary-color;
 
-	  .subCategory {
-		display: block;
-	  }
-	}
+      .subCategory {
+        display: block;
+      }
+    }
 
-	.categoryIcon {
-	  display: inline-block;
-	  width: 18px;
-	  height: 18px;
-	  vertical-align: middle;
-	  margin: 0 24px 0 5px;
+    .categoryIcon {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      margin: 0 24px 0 5px;
 
-	  &.categoryCos {
-		background: url("/static/images/category_cos.png") no-repeat center;
-	  }
+      &.categoryCos {
+        background: url('/static/images/category_cos.png') no-repeat center;
+      }
 
-	  &.categoryMotherBaby {
-		background: url("/static/images/category_mother_baby.png") no-repeat center;
-	  }
-	}
+      &.categoryMotherBaby {
+        background: url('/static/images/category_mother_baby.png') no-repeat
+          center;
+      }
+    }
 
-	.categoryName {
-	  display: inline-block;
-	  width: 80px;
-	}
+    .categoryName {
+      display: inline-block;
+      width: 80px;
+    }
 
-	.iconArrow {
-	  display: inline-block;
-	  .iconArrowR()
-	}
+    .iconArrow {
+      display: inline-block;
+      .iconArrowR();
+    }
   }
 }
 
-
 .subCategory {
-  transition: height .4s;
+  transition: height 0.4s;
   position: absolute;
   z-index: 75;
   top: 40px;

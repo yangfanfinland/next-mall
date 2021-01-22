@@ -76,7 +76,7 @@ const UserInfo = () => {
     })
 
     if (res.status == 200) {
-      message.success('头像上传成功!')
+      message.success('Upload avatar succeed!')
       window.location.reload()
     } else {
       message.error((res as any).msg)
@@ -86,18 +86,18 @@ const UserInfo = () => {
   const saveUserInfo = async (values) => {
     const nickname = values.nickname
     if (nickname == null || nickname == '' || nickname == undefined) {
-      message.warning('昵称不能为空')
+      message.warning('Nickname cannot be empty')
       return
     }
     if (nickname.length > 12) {
-      message.warning('昵称长度不能超过12位')
+      message.warning('Nickname max length is 12')
       return
     }
 
     const realname = values.realname
     if (realname != null && realname != '' && realname != undefined) {
       if (realname.length > 12) {
-        message.warning('真实姓名长度不能超过12位')
+        message.warning('Realname max length is 12')
         return
       }
     }
@@ -107,12 +107,12 @@ const UserInfo = () => {
     const mobile = values.mobile
     if (mobile != null && mobile != '' && mobile != undefined) {
       if (mobile.length != 11) {
-        message.warning('手机号长度为11位')
+        message.warning('Mobile max length is 11')
         return
       }
 
       if (!checkMobile(mobile)) {
-        message.warning('请输入有效的手机号码！')
+        message.warning('Fill in valid mobile please')
         return
       }
     }
@@ -120,7 +120,7 @@ const UserInfo = () => {
     const email = values.email
     if (email != null && email != '' && email != undefined) {
       if (!checkEmail(email)) {
-        message.warning('请输入有效的邮箱地址！')
+        message.warning('Fill in valid email please')
         return
       }
     }
@@ -134,7 +134,7 @@ const UserInfo = () => {
     })
 
     if (res.status == 200) {
-      message.success('用户信息修改成功!')
+      message.success('Edit user info successfully')
       window.location.reload()
     } else {
       message.error((res as any).msg)
@@ -143,7 +143,7 @@ const UserInfo = () => {
 
   return (
     <>
-      <HtmlHead title={'宜选商城 - 个人中心'} />
+      <HtmlHead title={'YiXuan mall - Personal center'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="userInfo" />
@@ -168,7 +168,7 @@ const UserInfo = () => {
               <div className={`${styles['info-m']}`}>
                 <div>
                   <b>
-                    用户名：<i>{userInfo.username}</i>
+                    Username: <i>{userInfo.username}</i>
                   </b>
                 </div>
               </div>
@@ -177,7 +177,7 @@ const UserInfo = () => {
               <Form {...layout} name="nest-messages" onFinish={saveUserInfo}>
                 <Form.Item
                   name="nickname"
-                  label="昵称"
+                  label="Nickname"
                   rules={[{ required: true }]}
                   initialValue={userInfoMore.nickname}
                 >
@@ -185,7 +185,7 @@ const UserInfo = () => {
                 </Form.Item>
                 <Form.Item
                   name="realname"
-                  label="真实姓名"
+                  label="Realname"
                   rules={[{ required: true }]}
                   initialValue={userInfoMore.realname}
                 >
@@ -193,18 +193,18 @@ const UserInfo = () => {
                 </Form.Item>
                 <Form.Item
                   name="sex"
-                  label="性别"
+                  label="Sex"
                   initialValue={userInfoMore.sex}
                 >
                   <Radio.Group>
-                    <Radio value={1}>男</Radio>
-                    <Radio value={0}>女</Radio>
-                    <Radio value={2}>保密</Radio>
+                    <Radio value={1}>Man</Radio>
+                    <Radio value={0}>Woman</Radio>
+                    <Radio value={2}>Secret</Radio>
                   </Radio.Group>
                 </Form.Item>
                 <Form.Item
                   name="birthday"
-                  label="生日"
+                  label="Birthday"
                   rules={[
                     {
                       type: 'object',
@@ -218,7 +218,7 @@ const UserInfo = () => {
                 </Form.Item>
                 <Form.Item
                   name="mobile"
-                  label="手机"
+                  label="Mobile"
                   rules={[{ required: true }]}
                   initialValue={userInfoMore.mobile}
                 >
@@ -226,7 +226,7 @@ const UserInfo = () => {
                 </Form.Item>
                 <Form.Item
                   name="email"
-                  label="电子邮件"
+                  label="Email"
                   rules={[{ type: 'email' }]}
                   initialValue={userInfoMore.email}
                 >
@@ -234,7 +234,7 @@ const UserInfo = () => {
                 </Form.Item>
                 <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                   <Button type="primary" htmlType="submit">
-                    保存修改
+                    Save
                   </Button>
                 </Form.Item>
               </Form>

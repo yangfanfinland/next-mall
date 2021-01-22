@@ -5,7 +5,7 @@ import SearchArea from '../components/SearchArea'
 import BreadcrumbNav from '../components/BreadcrumbNav'
 import FilterBar from '../components/FilterBar'
 import GoodsList from '../components/GoodsList'
-import { getCategotyItemsApi, getSearchItemsApi } from "../api/api"
+import { getCategotyItemsApi, getSearchItemsApi } from '../api/api'
 import { Pagination, message } from 'antd'
 import { useSelector } from 'react-redux'
 import styles from '../static/styles/catItems.less'
@@ -63,13 +63,14 @@ const catItems = ({ grid, searchType, catId, pageSize, keywords }: Props) => {
 
     if (searchType == 'searchItems') {
       if (keywords == null || keywords == undefined || keywords == '') {
-        message.warning('搜索内容不能为空')
+        message.warning('Search keyword cannot be empty')
         return
       }
       await searchInBackend(keywords, sort, 1, 20)
-    } else if (searchType == 'catItems') {
+    }
+    if (searchType == 'catItems') {
       if (catId == null || catId == undefined) {
-        message.warning('分类不能为空')
+        message.warning('Category cannot be empty')
         return
       }
       await searchCatItemsInBackend(catId, sort, 1, 20)
@@ -91,14 +92,15 @@ const catItems = ({ grid, searchType, catId, pageSize, keywords }: Props) => {
 
     if (searchType == 'searchItems') {
       await searchInBackend(keywords, sort, page, pageSize)
-    } else if (searchType == 'catItems') {
+    }
+    if (searchType == 'catItems') {
       await searchCatItemsInBackend(catId, sort, page, pageSize)
     }
   }
 
   return (
     <>
-      <HtmlHead title={'商品列表'} />
+      <HtmlHead title={'Product list'} />
       <SearchArea keywords={keywords} />
       <BreadcrumbNav items={null} />
       <FilterBar onSort={chooseSort} />

@@ -108,19 +108,19 @@ const WXpay = ({ orderId }: Props) => {
 
   return (
     <>
-      <HtmlHead title={'微信支付'} />
+      <HtmlHead title={'Wechat payment'} />
       <div className={`${styles.hd}`}>
         <div className={`${styles['hd-main']}`}>
           <div className={`${styles['ep-hd-info']}`}>
             <div className={`${styles['ep-logo']}`}>
-              <img src="/static/images/logobig.png" alt="天天吃货" />
+              <img src="/static/images/logobig.png" alt="YiXuan mall" />
             </div>
             <div className={`${styles['ep-order-status']}`}>
-              <span className={`${styles['page-title']}`}>订单支付</span>
+              <span className={`${styles['page-title']}`}>Order payment</span>
             </div>
           </div>
           <div className={`${styles['user-info']}`}>
-            {userInfo && <p>账号：{userInfo.nickname}</p>}
+            {userInfo && <p>Account: {userInfo.nickname}</p>}
           </div>
         </div>
       </div>
@@ -134,15 +134,15 @@ const WXpay = ({ orderId }: Props) => {
                 <div>
                   <div className={`${styles['ep-order-tit']}`}>
                     <dl>
-                      <dt>商品订单：</dt>
+                      <dt>Order Id: </dt>
                       <dd>{orderId}</dd>
                     </dl>
                   </div>
                   <div className={`${styles['ep-order-tit']}`}>
                     <span>
-                      支付金额：
+                      Total:
                       <em className={`${styles['rmb']}`}>
-                        <i>¥</i>
+                        <i>€</i>
                         {paymentInfo ? (
                           <>{paymentInfo.amount / 100}</>
                         ) : (
@@ -158,20 +158,20 @@ const WXpay = ({ orderId }: Props) => {
               >
                 <dl>
                   <span className={`${styles['pay-method']}`}>
-                    <dt className={`${styles['pay-words']}`}>支付方式：</dt>
+                    <dt className={`${styles['pay-words']}`}>Payment</dt>
 
                     <div className={`${styles['ep-pay-method-list-tit']}`}>
                       <ul>
                         <li
                           className={`${styles['selected']}`}
                           data-type="wechat"
-                          title="微信支付"
+                          title="Wechat payment"
                         >
                           <span
                             className={`${styles['ep-icon']} ${styles['ep-icon-wxpay']}`}
                           ></span>
                           <span className={`${styles['ep-pay-method-name']}`}>
-                            微信支付
+                            Wechat payment
                           </span>
                           <i
                             className={`${styles['ep-icon']} ${styles['ep-icon-selected']}`}
@@ -200,7 +200,7 @@ const WXpay = ({ orderId }: Props) => {
                             <div
                               className={`${styles['ep-wxpay-qrcode-notice']}`}
                             >
-                              请打开手机微信，扫一扫完成支付
+                              Open mobile wechat to scan
                             </div>
                           </div>
                           <div

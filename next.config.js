@@ -11,17 +11,6 @@ const themeVariables = lessToJS(
   fs.readFileSync(path.resolve(__dirname, './util/antd.less'), 'utf8')
 )
 
-const nextConfig = {
-  i18n: {
-    // These are all the locales you want to support in
-    // your application
-    locales: ['en', 'zh', 'fi'],
-    // This is the default locale you want to be used when visiting
-    // a non-locale prefixed path e.g. `/hello`
-    defaultLocale: 'zh',
-  },
-}
-
 module.exports = withPlugins([withLess, withCss], {
   i18n: {
     // These are all the locales you want to support in
@@ -29,7 +18,7 @@ module.exports = withPlugins([withLess, withCss], {
     locales: ['en', 'zh', 'fi'],
     // This is the default locale you want to be used when visiting
     // a non-locale prefixed path e.g. `/hello`
-    defaultLocale: 'zh',
+    defaultLocale: 'en',
   },
   lessLoaderOptions: {
     javascriptEnabled: true,

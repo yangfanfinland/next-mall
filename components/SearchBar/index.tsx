@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { SearchOutlined } from '@ant-design/icons'
 import styles from './index.less'
 
-const SearchBar = ({ defaultValue = "" }) => {
+const SearchBar = ({ defaultValue = '' }) => {
   const [keywords, setKeywords] = useState(defaultValue)
 
   const handleKeywordsChanged = (e) => {
@@ -17,14 +17,14 @@ const SearchBar = ({ defaultValue = "" }) => {
         value={keywords}
         type="text"
         className={styles.searchInput}
-        placeholder={'搜索'}
+        placeholder={'Search'}
       />
       <a
         href={`/catItems?searchType=searchItems&keywords=${keywords}`}
         target="_blank"
         className={styles.searchBtn}
       >
-        搜索
+        Search
       </a>
     </div>
   )

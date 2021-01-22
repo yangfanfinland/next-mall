@@ -31,28 +31,28 @@ const Success = ({ orderId, orderAmount }: Props) => {
 
   const goUserCenter = () => {
     if (!userIsLogin) {
-        window.location.href = "login?returnUrl=" +  "/center";
+      window.location.href = 'login?returnUrl=' + '/center'
     } else {
-        window.location.href = "/center";
+      window.location.href = '/center'
     }
   }
 
   return (
     <>
-      <HtmlHead title={'成功'} />
+      <HtmlHead title={'Succeed'} />
       <SearchArea />
       <div className="hd">
         <div className="hd-main">
           <div className="ep-hd-info">
             <div className="ep-logo">
-              <img src="images/logobig.png" alt="慕课网 - 天天吃货" />
+              <img src="images/logobig.png" alt="YiXuan mall" />
             </div>
             <div className="ep-order-status">
-              <span className="page-title">订单支付</span>
+              <span className="page-title">Order payment</span>
             </div>
           </div>
           <div className="user-info">
-            {userInfo && <p>账号：{userInfo.nickname}</p>}
+            {userInfo && <p>Account: {userInfo.nickname}</p>}
           </div>
         </div>
       </div>
@@ -61,27 +61,27 @@ const Success = ({ orderId, orderAmount }: Props) => {
           <div className="paid-info">
             <div className="first-line">
               <img src="img/success.png" className="paid-success"></img>
-              <span className="success-words">支付成功！</span>
+              <span className="success-words">Payment succeed!</span>
             </div>
             <div className="second-line">
-              <p className="order-words">商品订单：{orderId}</p>
+              <p className="order-words">Order Id: {orderId}</p>
               <p className="order-words">
-                支付金额：
+                Total:
                 <em className="rmb">
-                  <i>¥</i>
+                  <i>€</i>
                   {orderAmount / 100}
                 </em>
               </p>
               <p className="order-words gray-words">
-                若有疑问请与客服联系，我们将会尽快为您提供帮助与服务。
+                Contact our service for help
               </p>
               <p className="order-words gray-words">
-                客服邮箱：service@yangfanyuanhang.com
+                Service: service@miyixuan.com
               </p>
             </div>
             <div className="third-line">
               <button className="go-center" onClick={goUserCenter}>
-                查看我的订单
+                View my order
               </button>
             </div>
           </div>

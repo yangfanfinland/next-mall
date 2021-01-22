@@ -28,7 +28,7 @@ const Category = ({ hoverShow = false, categoryList = [] }) => {
           <i />
           <i />
         </div>
-        <span>所有分类</span>
+        <span>Categories</span>
       </div>
       <ul
         className={`${styles.categoryList} ${

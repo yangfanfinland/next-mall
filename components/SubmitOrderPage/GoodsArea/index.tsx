@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Input, message } from 'antd'
-import {
-  getUrlParam,
-  goErrorPage,
-  getShopcartList,
-} from '../../../util/app'
+import { getUrlParam, goErrorPage, getShopcartList } from '../../../util/app'
 import styles from './index.less'
 
-const GoodsArea = ({ goodsCallback }: { goodsCallback?: (goods) => void} ) => {
+const GoodsArea = ({ goodsCallback }: { goodsCallback?: (goods) => void }) => {
   const [orderItemList, setOrderItemList] = useState([])
   const [totalAmount, setTotalAmount] = useState(0)
 
@@ -42,7 +38,7 @@ const GoodsArea = ({ goodsCallback }: { goodsCallback?: (goods) => void} ) => {
     goodsCallback({ orderItemList, totalAmount })
 
     if (orderItemList.length <= 0) {
-      message.error('没有商品信息，或订单已经提交')
+      message.error('No product info or order submitted already')
       window.location.href = 'shopcart.html'
     }
   }
@@ -68,13 +64,13 @@ const GoodsArea = ({ goodsCallback }: { goodsCallback?: (goods) => void} ) => {
 
   return (
     <div className={`contentWidth ${styles.goodsAreaPage}`}>
-      <div className={`${styles.title}`}>确认订单信息</div>
+      <div className={`${styles.title}`}>Confirm order info</div>
       <div className={`${styles.payTable}`}>
         <div className={`${styles.header} fcb`}>
-          <span className={`${styles.goodsInfo} fl`}>商品信息</span>
-          <span className={`${styles.goodsPrice} fl`}>单价(元)</span>
-          <span className={`${styles.goodsNum} fl`}>数量</span>
-          <span className={`${styles.money} fl`}>金额(元)</span>
+          <span className={`${styles.goodsInfo} fl`}>Product info</span>
+          <span className={`${styles.goodsPrice} fl`}>Price(€)</span>
+          <span className={`${styles.goodsNum} fl`}>Amount</span>
+          <span className={`${styles.money} fl`}>Sub total(€)</span>
         </div>
 
         {orderItemList &&
@@ -89,7 +85,7 @@ const GoodsArea = ({ goodsCallback }: { goodsCallback?: (goods) => void} ) => {
                 <div className={`${styles.goodsName} fl`}>
                   {orderItem.itemName}
                   <div>
-                    <span>规格：{orderItem.specName} </span>
+                    <span>Specification: {orderItem.specName} </span>
                   </div>
                 </div>
                 {/* <div className={`${styles.size} fl`}>
@@ -115,14 +111,14 @@ const GoodsArea = ({ goodsCallback }: { goodsCallback?: (goods) => void} ) => {
 
         <div className={`${styles.msgWrap} fcb`}>
           <div className={`fl fcb`}>
-            <span className={`${styles.msgTitle} fl`}>给商家留言：</span>
+            <span className={`${styles.msgTitle} fl`}>Message to shop: </span>
             <div className={`fl ${styles.msgText}`}>
-              <Input.TextArea rows={2} placeholder={'选填，最多200字'} />
+              <Input.TextArea rows={2} placeholder={'Optional, maximum 200'} />
             </div>
           </div>
           <div className={`fr`}>
-            <span>合计(包邮)：</span>
-            <span className={`f20 fwb red`}>¥{totalAmount / 100}</span>
+            <span>Total: </span>
+            <span className={`f20 fwb red`}>€{totalAmount / 100}</span>
           </div>
         </div>
       </div>

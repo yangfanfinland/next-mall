@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import HtmlHead from '../components/HtmlHead'
 import SearchArea from '../components/SearchArea'
 import { withRouter } from 'next/router'
-import { createOrderApi } from "../api/api"
+import { createOrderApi } from '../api/api'
 import { message } from 'antd'
 import Address from '../components/SubmitOrderPage/Address'
 import Payment from '../components/SubmitOrderPage/Payment'
@@ -54,7 +54,7 @@ const SubmitOrder = () => {
   const submitOrder = async () => {
     // 判断提交的商品不能为空
     if (orderItemList.length <= 0) {
-      message.warning('没有商品信息，订单无法提交~！')
+      message.warning('No product info to checkout')
       return
     }
     // 拼接规格ids
@@ -69,29 +69,32 @@ const SubmitOrder = () => {
 
     // 判断选中的地址id不能为空
     if (!confirmAddress) {
-      message.warning('请选择收货地址！')
+      message.warning('Select receive address please')
       return
     }
 
     // 判断支付方式不能为空
     if (choosedPayMethod != 1 && choosedPayMethod != 2) {
-      message.warning('请选择支付方式！')
+      message.warning('Select payment please')
       return
     }
 
     // 买家备注可以为空
-    const res = await createOrderApi({
-      userId: userInfo.id,
-      itemSpecIds: itemSpecIds,
-      addressId: confirmAddress.id,
-      payMethod: choosedPayMethod,
-      leftMsg: orderRemarker,
-    }, {
-      headers: {
-        headerUserId: userInfo.id,
-        headerUserToken: userInfo.userUniqueToken,
+    const res = await createOrderApi(
+      {
+        userId: userInfo.id,
+        itemSpecIds: itemSpecIds,
+        addressId: confirmAddress.id,
+        payMethod: choosedPayMethod,
+        leftMsg: orderRemarker,
       },
-    })
+      {
+        headers: {
+          headerUserId: userInfo.id,
+          headerUserToken: userInfo.userUniqueToken,
+        },
+      }
+    )
 
     if (res.status == 200) {
       const orderId = res.data
@@ -107,7 +110,7 @@ const SubmitOrder = () => {
         window.location.href =
           'alipay?orderId=' + orderId + '&amount=' + totalAmount
       } else {
-        message.warning('目前只支持微信或支付宝支付！')
+        message.warning('Only support Wechat and Ali payment')
       }
     } else {
       message.error((res as any).msg)
@@ -116,7 +119,7 @@ const SubmitOrder = () => {
 
   return (
     <>
-      <HtmlHead title={'提交订单'} />
+      <HtmlHead title={'Submit order'} />
       <SearchArea noSearch={true} />
       <div className={`bw`}>
         <Address chooseAddressCallback={handleChooseAddress} />
@@ -128,16 +131,16 @@ const SubmitOrder = () => {
           </a>
         </div> */}
 
-        <div className={`contentWidth ${styles['order-go']} ${styles['clearfix']}`}>
+        <div
+          className={`contentWidth ${styles['order-go']} ${styles['clearfix']}`}
+        >
           <div className={`${styles['pay-confirm']} ${styles['clearfix']}`}>
             <div className={`${styles.box}`}>
               <div className={`${styles.realPay}`}>
-                <em className={`${styles.t}`}>实付款：</em>
+                <em className={`${styles.t}`}>Total: </em>
                 <span className={`${styles['price g_price']}`}>
                   <em className={`${styles['style-large-bold-red']}`}>
-                    {
-                      totalAmount? <>¥{totalAmount / 100}</> : <>¥0</>
-                    }
+                    {totalAmount ? <>¥{totalAmount / 100}</> : <>€0</>}
                   </em>
                 </span>
               </div>
@@ -148,7 +151,7 @@ const SubmitOrder = () => {
                     <span
                       className={`${styles['buy-line-title']} ${styles['buy-line-title-type']}`}
                     >
-                      寄送至：
+                      Delivery to:
                     </span>
                     <span className={`${styles['buy--address-detail']}`}>
                       <span className={`${styles['province']}`}>
@@ -167,7 +170,7 @@ const SubmitOrder = () => {
                   </p>
                   <p className={`${styles['buy-footer-address']}`}>
                     <span className={`${styles['buy-line-title']}`}>
-                      收货人：
+                      Receiver:
                     </span>
                     <span className={`${styles['buy-address-detail']}`}>
                       <span className={`${styles['buy-user']}`}>
@@ -187,9 +190,9 @@ const SubmitOrder = () => {
                 <a
                   onClick={submitOrder}
                   className={`${styles['btn-go']}`}
-                  title="点击此按钮，提交订单"
+                  title="Click to submit order"
                 >
-                  提交订单
+                  Submit order
                 </a>
               </div>
             </div>

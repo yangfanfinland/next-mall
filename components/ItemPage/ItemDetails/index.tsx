@@ -7,24 +7,24 @@ const ItemDetails = ({ item, itemParams }) => {
       <div className="">
         <div className="">
           <div className="">
-            <h4>产品参数：</h4>
+            <h4>Product parameters:</h4>
           </div>
           <ul className={`${styles.J_AttrUL}`}>
-            <li title="">产地:&nbsp;{itemParams.producPlace}</li>
-            <li title="">品牌名:&nbsp;{itemParams.brand}</li>
-            <li title="">生产厂名:&nbsp;{itemParams.factoryName}</li>
-            <li title="">生产厂址:&nbsp;{itemParams.factoryAddress}</li>
-            <li title="">包装方式:&nbsp;{itemParams.packagingMethod}</li>
-            <li title="">保质期:&nbsp;{itemParams.footPeriod}</li>
-            <li title="">规格重量:&nbsp;{itemParams.weight}</li>
-            <li title="">储存方法:&nbsp;{itemParams.storageMethod}</li>
-            <li title="">食用方式:&nbsp;{itemParams.eatMethod}</li>
+            <li title="">Origin:&nbsp;{itemParams.producPlace}</li>
+            <li title="">Brand:&nbsp;{itemParams.brand}</li>
+            <li title="">Manufacturer:&nbsp;{itemParams.factoryName}</li>
+            <li title="">Address:&nbsp;{itemParams.factoryAddress}</li>
+            <li title="">Packing:&nbsp;{itemParams.packagingMethod}</li>
+            <li title="">Best-before:&nbsp;{itemParams.footPeriod}</li>
+            <li title="">Weight:&nbsp;{itemParams.weight}</li>
+            <li title="">Storage:&nbsp;{itemParams.storageMethod}</li>
+            <li title="">Edible method:&nbsp;{itemParams.eatMethod}</li>
           </ul>
         </div>
 
         <div className="details">
           <div className="attr-list-hd after-market-hd">
-            <h4>商品细节</h4>
+            <h4>Product detail</h4>
           </div>
           <div
             className="twlistNews"

@@ -61,7 +61,7 @@ const InputBuyNumber = ({
         value={value}
         onChange={handleOnChange}
       />
-      {stock && <span>库存{stock}件</span>}
+      {stock && <span> Store {stock}</span>}
     </div>
   )
 }

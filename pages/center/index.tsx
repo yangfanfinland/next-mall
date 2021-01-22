@@ -68,17 +68,17 @@ const Index = () => {
       for (let i = 0; i < tempOrderTrendList.length; i++) {
         const payTimeTmp = tempOrderTrendList[i].payTime
         const formatedPayTime = moment(payTimeTmp).format(
-          'YYYY年MM月DD日 h:mm:ss'
+          'YYYY-MM-DD h:mm:ss'
         )
 
         const deliverTimeTmp = tempOrderTrendList[i].deliverTime
         const formatedDeliverTime = moment(deliverTimeTmp).format(
-          'YYYY年MM月DD日 h:mm:ss'
+          'YYYY-MM-DD h:mm:ss'
         )
 
         const successTimeTmp = tempOrderTrendList[i].successTime
         const formatedSuccessTime = moment(successTimeTmp).format(
-          'YYYY年MM月DD日 h:mm:ss'
+          'YYYY-MM-DD h:mm:ss'
         )
 
         tempOrderTrendList[i].payTime = formatedPayTime
@@ -95,7 +95,7 @@ const Index = () => {
   }
 
   const renderCalendar = () => {
-    const yearMonth = moment(new Date()).format('YYYY年MM月')
+    const yearMonth = moment(new Date()).format('YYYY-MM')
     const day = moment(new Date()).format('DD')
     const localMoment = moment().locale('zh-cn')
     const weekDay = localMoment.format('dddd')
@@ -117,7 +117,7 @@ const Index = () => {
 
   return (
     <>
-      <HtmlHead title={'宜选商城 - 个人中心'} />
+      <HtmlHead title={'YiXuan mall - Personal center'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="center" />
@@ -141,12 +141,12 @@ const Index = () => {
 
               <div className={`${styles['m-order']}`}>
                 <div className={`${styles['s-bar']}`}>
-                  <i className={`${styles['s-icon']}`}></i>我的订单
+                  <i className={`${styles['s-icon']}`}></i>My order
                   <a
                     className={`${styles['i-load-more-item-shadow']}`}
                     href="/center/order"
                   >
-                    全部订单
+                    All orders
                   </a>
                 </div>
                 {orderStatusCounts && (
@@ -157,7 +157,7 @@ const Index = () => {
                           <img src="/static/images/pay.png" />
                         </i>
                         <span>
-                          待付款
+                          Unpaid
                           {orderStatusCounts.waitPayCounts > 0 && (
                             <em className="m-num">
                               {orderStatusCounts.waitPayCounts}
@@ -172,7 +172,7 @@ const Index = () => {
                           <img src="/static/images/send.png" />
                         </i>
                         <span>
-                          待发货
+                          Wait delivery
                           {orderStatusCounts.waitDeliverCounts > 0 && (
                             <em className="m-num">
                               {orderStatusCounts.waitDeliverCounts}
@@ -187,7 +187,7 @@ const Index = () => {
                           <img src="/static/images/receive.png" />
                         </i>
                         <span>
-                          待收货
+                          Wait receive
                           {orderStatusCounts.waitReceiveCounts > 0 && (
                             <em className="m-num">
                               {orderStatusCounts.waitReceiveCounts}
@@ -202,7 +202,7 @@ const Index = () => {
                           <img src="/static/images/comment.png" />
                         </i>
                         <span>
-                          待评价
+                          Wait comment
                           {orderStatusCounts.waitCommentCounts > 0 && (
                             <em className="m-num">
                               {orderStatusCounts.waitCommentCounts}
@@ -217,7 +217,7 @@ const Index = () => {
               <div className={`${styles['box-container-bottom']}`}></div>
               <div className={`${styles['m-logistics']}`}>
                 <div className={`${styles['s-bar']}`}>
-                  <i className="s-icon"></i>订单动向
+                  <i className="s-icon"></i>Order flow
                 </div>
                 <div className={`${styles['s-content']}`}>
                   <ul className={`${styles['lg-list']}`}>
@@ -226,37 +226,37 @@ const Index = () => {
                         <li className={`${styles['lg-item']}`} key={trendIndex}>
                           {trend.orderStatus == 20 && (
                             <div className={`${styles['lg-info']}`}>
-                              <p>订单号：[{trend.orderId}]</p>
+                              <p>Order Id: [{trend.orderId}]</p>
                               <div className={`${styles['lg-detail-wrap']}`}>
                                 <a href="" className={`${styles['lg-detail']}`}>
-                                  您已付款，等待发货~
+                                  Paid, wait delivering
                                 </a>
                               </div>
-                              <p>付款时间：{trend.payTime}</p>
+                              <p>Paid on: {trend.payTime}</p>
                             </div>
                           )}
 
                           {trend.orderStatus == 30 && (
                             <div className={`${styles['lg-info']}`}>
-                              <p>订单号：[{trend.orderId}]</p>
+                              <p>Order Id: [{trend.orderId}]</p>
                               <div className={`${styles['lg-detail-wrap']}`}>
                                 <a href="" className={`${styles['lg-detail']}`}>
-                                  商家已发货，请耐心等待噢~
+                                  Delivered, to be patient please
                                 </a>
                               </div>
-                              <p>发货时间：{trend.deliverTime}</p>
+                              <p>Delivered on: {trend.deliverTime}</p>
                             </div>
                           )}
 
                           {trend.orderStatus == 40 && (
                             <div className={`${styles['lg-info']}`}>
-                              <p>订单号：[{trend.orderId}]</p>
+                              <p>Order Id: [{trend.orderId}]</p>
                               <div className={`${styles['lg-detail-wrap']}`}>
                                 <a href="" className={`${styles['lg-detail']}`}>
-                                  该订单交易成功！
+                                  Order succeed
                                 </a>
                               </div>
-                              <p>成功时间：{trend.successTime}</p>
+                              <p>Succeed on: {trend.successTime}</p>
                             </div>
                           )}
                         </li>
@@ -280,7 +280,7 @@ const Index = () => {
             <div className={`${styles['day-list']}`}>
               <div className={`${styles['s-bar']}`}>
                 <a className={`${styles['i-history-trigger']}`} href="#"></a>
-                小日历
+                Calendar
               </div>
               <div className={`${styles['s-care-noweather']}`}>
                 <div className={`${styles['s-date']}`}>

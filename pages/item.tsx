@@ -58,7 +58,7 @@ const Item = ({ itemInfo }: Props) => {
   const handleAddToCart = async (shopcartItem: ShopcartItem) => {
     const shopcartCounts = getShopcartItemCounts()
     if (shopcartCounts >= 8) {
-      message.info('您购物车中的食物太多啦~请把它们带回家吧~！')
+      message.info('Your shopping cart overload now, take them back home~')
       return
     }
     shopcartItem.itemImgUrl = itemImgList[0].url
@@ -82,7 +82,7 @@ const Item = ({ itemInfo }: Props) => {
       }
     }
 
-    message.success('商品添加至购物车成功！')
+    message.success('Add product to shopping cart successfully!')
 
     // 刷新购物车数量
     setShopcartItemCounts(getShopcartItemCounts())
@@ -90,7 +90,7 @@ const Item = ({ itemInfo }: Props) => {
 
   return (
     <>
-      <HtmlHead title={'商品详情'} />
+      <HtmlHead title={'Product info'} />
       <SearchArea />
       <div className={`bw`}>
         <BreadcrumbNav showTotal={false} items={parentCatList} item={item} />
@@ -104,10 +104,10 @@ const Item = ({ itemInfo }: Props) => {
         </div>
         <div className={`${styles.introduce} contentWidth`}>
           <Tabs defaultActiveKey="1" onChange={handleChange}>
-            <TabPane tab="宝贝详情" key="1">
+            <TabPane tab="Product detail" key="1">
               <ItemDetails item={item} itemParams={itemParams} />
             </TabPane>
-            <TabPane tab="全部评价" key="2">
+            <TabPane tab="All comment" key="2">
               <ItemComment item={item} />
             </TabPane>
           </Tabs>

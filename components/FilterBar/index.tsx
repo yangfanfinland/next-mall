@@ -9,15 +9,15 @@ const FilterBar = ({ onSort }) => {
       <div className={`fl fcb`}>
         <Button.Group className={`${styles.btnGroup} fl`}>
           <Radio.Button value="1" onClick={() => onSort('k')}>
-            默认排序
+            Default sort
             <ArrowUpOutlined />
           </Radio.Button>
           <Radio.Button value="2" onClick={() => onSort('c')}>
-            销量排序
+            Sales sort
             <ArrowDownOutlined />
           </Radio.Button>
           <Radio.Button value="3" onClick={() => onSort('p')}>
-            价格优先
+            Price first
             <ArrowDownOutlined />
           </Radio.Button>
         </Button.Group>

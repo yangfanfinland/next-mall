@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Pagination, message } from "antd"
+import { Pagination, message } from 'antd'
 import styles from './index.less'
-import { getCommentLevelApi, getCommentsApi } from "../../../api/api"
+import { getCommentLevelApi, getCommentsApi } from '../../../api/api'
 import moment from 'moment'
 
 const ItemComment = ({ item }) => {
   const { id } = item
 
-  const [level, setLevel] = useState("")
+  const [level, setLevel] = useState('')
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(10)
   const [maxPage, setMaxPage] = useState(1)
@@ -46,7 +46,7 @@ const ItemComment = ({ item }) => {
 
       for (let i = 0; i < commentList.length; i++) {
         const date = commentList[i].createdTime
-        const formatedTime = moment(date).format('YYYY年MM月DD日 h:mm:ss')
+        const formatedTime = moment(date).format('YYYY-MM-DD h:mm:ss')
         commentList[i].createdTime = formatedTime
       }
 
@@ -91,35 +91,35 @@ const ItemComment = ({ item }) => {
               </div>
             )}
             <br />
-            <span>好评度</span>
+            <span>Praise degree</span>
           </div>
           <div className={`${styles['comment-counts']}`}>
             <div
               className="counts-words"
               onClick={() => renderCommentsByLevel('')}
             >
-              全部评价（{countsVO.totalCounts}）
+              All comments（{countsVO.totalCounts}）
             </div>
             <div
               className="counts-words"
               onClick={() => renderCommentsByLevel(1)}
               style={{ marginLeft: '20px' }}
             >
-              好评（{countsVO.goodCounts}）
+              Positive（{countsVO.goodCounts}）
             </div>
             <div
               className="counts-words"
               onClick={() => renderCommentsByLevel(2)}
               style={{ marginLeft: '20px' }}
             >
-              中评（{countsVO.normalCounts}）
+              Average（{countsVO.normalCounts}）
             </div>
             <div
               className="counts-words"
               onClick={() => renderCommentsByLevel(3)}
               style={{ marginLeft: '20px' }}
             >
-              差评（{countsVO.badCounts}）
+              Negative（{countsVO.badCounts}）
             </div>
           </div>
         </div>
@@ -129,15 +129,21 @@ const ItemComment = ({ item }) => {
         {commentList.map((commentRecord, commentIndex) => (
           <li key={commentIndex} className={`${styles['am-comment']}`}>
             <a href="#" onClick={(e) => e.preventDefault()}>
-              <img className={`${styles['am-comment-avatar']}`} src={commentRecord.userFace} />
+              <img
+                className={`${styles['am-comment-avatar']}`}
+                src={commentRecord.userFace}
+              />
             </a>
             <div className={`${styles['am-comment-main']}`}>
               <header className={`${styles['am-comment-hd']}`}>
                 <div className={`${styles['am-comment-meta']}`}>
-                  <a href="#link-to-user" className={`${styles['am-comment-author']}`}>
-                    {commentRecord.nickname} (匿名)
+                  <a
+                    href="#link-to-user"
+                    className={`${styles['am-comment-author']}`}
+                  >
+                    {commentRecord.nickname} (Anonymous)
                   </a>
-                  评论于
+                  Comment on
                   <time dateTime="">{commentRecord.createdTime}</time>
                 </div>
               </header>
@@ -149,7 +155,7 @@ const ItemComment = ({ item }) => {
                   </div>
                   <div className="tb-r-act-bar">
                     <span className="specName">
-                      规格：{commentRecord.specName}
+                      Specification: {commentRecord.specName}
                     </span>
                   </div>
                 </div>
@@ -160,7 +166,12 @@ const ItemComment = ({ item }) => {
       </ul>
 
       <div className={`${styles.wrap}`}>
-        <Pagination showQuickJumper defaultCurrent={1} total={total} onChange={doPaging} />
+        <Pagination
+          showQuickJumper
+          defaultCurrent={1}
+          total={total}
+          onChange={doPaging}
+        />
       </div>
     </div>
   )

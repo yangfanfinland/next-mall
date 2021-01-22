@@ -4,7 +4,13 @@ import { checkMobile } from '../../../util/app'
 import { cities } from '../../../util/cities'
 import { message } from 'antd'
 import { useSelector } from 'react-redux'
-import { getAddressListApi, addAddressApi, updateAddressApi, deleteAddressApi, setDefaultAddressApi } from '../../../api/api'
+import {
+  getAddressListApi,
+  addAddressApi,
+  updateAddressApi,
+  deleteAddressApi,
+  setDefaultAddressApi,
+} from '../../../api/api'
 import styles from './index.less'
 
 const Address = ({
@@ -18,9 +24,9 @@ const Address = ({
   const [userInfo, setUserInfo] = useState<any>()
   const [defaultAddressId, setDefaultAddressId] = useState('')
   const [choosedAddressId, setChoosedAddressId] = useState('')
-  const [prov, setProv] = useState('北京')
-  const [city, setCity] = useState('北京')
-  const [district, setDistrict] = useState('东城区')
+  const [prov, setProv] = useState('Beijing')
+  const [city, setCity] = useState('Beijing')
+  const [district, setDistrict] = useState('DongCheng district')
   const [arr] = useState(cities)
   const [cityArr, setCityArr] = useState([])
   const [districtArr, setDistrictArr] = useState([])
@@ -76,9 +82,9 @@ const Address = ({
   }
 
   const flushAddressForm = () => {
-    setProv('北京')
-    setCity('北京')
-    setDistrict('东城区')
+    setProv('Beijing')
+    setCity('Beijing')
+    setDistrict('DongCheng district')
 
     // updateCity()
     updateDistrict()
@@ -200,26 +206,26 @@ const Address = ({
   const saveNewAddressOrUpdate = async (values) => {
     const receiver = values.receiver
     if (receiver == null || receiver == '' || receiver == undefined) {
-      message.warning('收货人姓名不能为空')
+      message.warning('Receiver cannot be empty')
       return
     }
     if (receiver.length > 12) {
-      message.warning('收货人姓名不能太长')
+      message.warning('Receiver name max length is 12')
       return
     }
 
     const mobile = values.mobile
     if (mobile == null || mobile == '' || mobile == undefined) {
-      message.warning('手机不能为空')
+      message.warning('Mobile cannot be empty')
       return
     }
     if (mobile.length != 11) {
-      message.warning('手机号长度为11位')
+      message.warning('Mobile length is 11')
       return
     }
 
     if (!checkMobile(mobile)) {
-      message.warning('请输入有效的手机号码！')
+      message.warning('Fill in valid mobile!')
       return
     }
 
@@ -229,7 +235,7 @@ const Address = ({
 
     const detail = values.detail
     if (detail == null || detail == '' || detail == undefined) {
-      message.warning('详细地址不能为空')
+      message.warning('Detail address cannot be empty')
       return
     }
 
@@ -296,7 +302,7 @@ const Address = ({
 
   // 删除地址
   const deleteAddress = async (addressId) => {
-    const isDel = window.confirm('确认删除改地址吗')
+    const isDel = window.confirm('Confirm to delete address?')
     if (!isDel) {
       return
     }
@@ -350,7 +356,7 @@ const Address = ({
 
   return (
     <div className={`contentWidth`}>
-      <div className={styles.title}>选择收货地址</div>
+      <div className={styles.title}>Select address</div>
       <div className={`${styles.addressList} fcb`}>
         {addressList.map((address, aindex) => {
           return (
@@ -363,10 +369,12 @@ const Address = ({
             >
               <div className={`${styles.nameWrap} fcb`}>
                 <span className={`${styles.name} fl`}>
-                  {address.receiver} 收{' '}
+                  {address.receiver} receive{' '}
                 </span>
                 {address.isDefault === 1 && (
-                  <span className={`${styles.default} fr`}>默认地址</span>
+                  <span className={`${styles.default} fr`}>
+                    Default address
+                  </span>
                 )}
               </div>
               <div className={styles.address}>
@@ -380,7 +388,7 @@ const Address = ({
                     className={styles.modifyBtn}
                     onClick={() => setDefaultAddress(address.id)}
                   >
-                    设为默认
+                    Set to default
                   </a>
                   |
                 </>
@@ -389,21 +397,21 @@ const Address = ({
                 className={styles.modifyBtn}
                 onClick={() => editAddress(address.id)}
               >
-                修改
+                Edit
               </a>
               |
               <a
                 className={styles.modifyBtn}
                 onClick={() => deleteAddress(address.id)}
               >
-                删除
+                Delete
               </a>
             </div>
           )
         })}
       </div>
       <a className={styles.modifyAddrBtn} onClick={() => setVisible(true)}>
-        +新建地址
+        New address
       </a>
       <AddressModal
         initialValues={initialValues}

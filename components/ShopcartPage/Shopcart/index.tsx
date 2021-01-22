@@ -108,7 +108,7 @@ const Shopcart = () => {
 
   // 从购物车中删除商品
   const delFromCart = async (specId) => {
-    const bool = window.confirm('确认从购物车中移除该商品吗？')
+    const bool = window.confirm('Confirm to delete this product?')
     if (!bool) {
       return
     }
@@ -206,12 +206,12 @@ const Shopcart = () => {
     // href={'/submitOrder'}
     const shopcartList = getShopcartList()
     if (shopcartList.length <= 0) {
-      message.info('购物车中没有商品，无法结算')
+      message.info('No products to checkout')
       return
     }
 
     if (specIds.length <= 0) {
-      message.info('请至少在购物车中选择一个商品后再结算')
+      message.info('Please select at least one product to checkout')
       return
     }
 
@@ -220,7 +220,7 @@ const Shopcart = () => {
       const specIdsStr = specIds.toString()
       window.location.href = 'submitOrder?selectedItemSpecIds=' + specIdsStr
     } else {
-      const bool = window.confirm('请登录/注册后再进行结算操作噢~！')
+      const bool = window.confirm('Please login first to checkout~!')
       if (!bool) {
         return
       } else {
@@ -252,17 +252,17 @@ const Shopcart = () => {
     <div className={`bw`}>
       <div className={`${styles.carListPage} contentWidth`}>
         <div className={`${styles.title} fcb`}>
-          <span className={`fl`}>我的购物车 {shopcartList.length}</span>
+          <span className={`fl`}>My shopping cart {shopcartList.length}</span>
           <a className={`fr`} href="">
-            清空购物车
+            Clear cart
           </a>
         </div>
         <div className={`${styles.header} fcb`}>
-          <span className={styles.goodsInfo}>商品信息</span>
-          <span className={styles.price}>单价(元)</span>
-          <span className={styles.num}>数量</span>
-          <span className={styles.money}>金额(元)</span>
-          <span className={styles.action}>操作</span>
+          <span className={styles.goodsInfo}>Product info</span>
+          <span className={styles.price}>Price(€)</span>
+          <span className={styles.num}>Amount</span>
+          <span className={styles.money}>Sub total(€)</span>
+          <span className={styles.action}>Operate</span>
         </div>
         <ul className={styles.goodsList}>
           <Checkbox.Group value={specIds}>
@@ -281,7 +281,7 @@ const Shopcart = () => {
                   <div className={`${styles.goodsDesc} fl`}>
                     <p className={`${styles.name}`}>{cartItem.itemName}</p>
                     <p className={`${styles.color}`}>
-                      规格：{cartItem.specName}
+                      Specification: {cartItem.specName}
                     </p>
                   </div>
                   <div className={`${styles.goodsPrice} fl`}>
@@ -299,7 +299,7 @@ const Shopcart = () => {
                     {(cartItem.priceDiscount / 100) * cartItem.buyCounts}
                   </div>
                   <div className={`${styles.goodsAction} fl`}>
-                    <a onClick={() => delFromCart(cartItem.specId)}>删除</a>
+                    <a onClick={() => delFromCart(cartItem.specId)}>Delete</a>
                   </div>
                 </li>
               ))}
@@ -308,24 +308,24 @@ const Shopcart = () => {
 
         <div className={`${styles.buyBottom} fcb`}>
           <div className={'fl'}>
-            <Checkbox onChange={checkedAll}>全选</Checkbox>
+            <Checkbox onChange={checkedAll}>All</Checkbox>
           </div>
           <div className={`${styles.right} fr fcb`}>
             <p className={`${styles.choseGoods} fl`}>
-              已选商品{' '}
-              <span className={styles.choseRed}>{allSelectedCounts}</span> 件{' '}
+              Selected{' '}
+              <span className={styles.choseRed}>{allSelectedCounts}</span> pieces{' '}
             </p>
             <div className={`fl`}>
               <div className={`${styles.choseGoods}`}>
-                合计（不含运费）
+                Total
                 <span className={`${styles.choseRed}`}>
                   {totalAmount / 100}
                 </span>
               </div>
-              <div className={`${styles.rate}`}>商品税费： ¥0</div>
+              <div className={`${styles.rate}`}>Tax: €0</div>
             </div>
             <a className={`${styles.buyBtn} fr`} onClick={goPay}>
-              结算
+              Checkout
             </a>
           </div>
         </div>

@@ -19,7 +19,7 @@ const GoodsItem = ({ item, myClassName }: { item; myClassName?: string }) => {
         {/* <p className={styles.storeName}>春雨（papa recipe）海外旗舰店</p> */}
         <div className={`${styles.totalSaleWrap} fcb`}>
           <p className={`${styles.saleTotal} fl fcb`}>
-            销量：<span className={styles.num}>{item.sellCounts}</span>
+            Sales：<span className={styles.num}>{item.sellCounts}</span>
           </p>
           <span className={`${styles.car} fr`}>
             <ShoppingCartOutlined style={{ fontSize: 24, color: '#F33A3F' }} />

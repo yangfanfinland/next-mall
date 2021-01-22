@@ -67,7 +67,7 @@ const Order = () => {
 
       for (let i = 0; i < myOrderList.length; i++) {
         const date = myOrderList[i].createdTime
-        const formatedTime = moment(date).format('YYYY年MM月DD日 h:mm:ss')
+        const formatedTime = moment(date).format('YYYY-MM-DD h:mm:ss')
         myOrderList[i].createdTime = formatedTime
       }
       console.log(myOrderList)
@@ -95,7 +95,7 @@ const Order = () => {
   }
 
   const deleteOrder = async (orderId) => {
-    const confirm = window.confirm('确认删除吗？')
+    const confirm = window.confirm('Conform to delete?')
     if (!confirm) {
       return false
     }
@@ -115,7 +115,7 @@ const Order = () => {
   }
 
   const confirmReceive = async (orderId) => {
-    const confirm = window.confirm('确认收货吗？')
+    const confirm = window.confirm('Confirm to receive?')
     if (!confirm) {
       return false
     }
@@ -149,34 +149,34 @@ const Order = () => {
         shopServerUrl + 'alipay?orderId=' + orderId + '&amount=' + totalAmount
       window.open(shopServerUrl + 'alipayTempTransit.html?orderId=' + orderId)
     } else {
-      message.info('目前只支持微信或支付宝支付！')
+      message.info('Only support Wechat and Ali payment')
     }
   }
 
   return (
     <>
-      <HtmlHead title={'宜选商城 - 个人中心'} />
+      <HtmlHead title={'YiXuan mall - Personal center'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="order" />
         <div style={{ width: '100%' }}>
           <Tabs defaultActiveKey="1" onChange={queryOrdersByStatus}>
-            <TabPane tab="所有订单" key={0}>
+            <TabPane tab="All" key={0}>
               <OrderList myOrderList={myOrderList} deleteOrder={deleteOrder} />
             </TabPane>
-            <TabPane tab="代付款" key={10}>
+            <TabPane tab="Unpaid" key={10}>
               <OrderList myOrderList={myOrderList} goPay={goPay} />
             </TabPane>
-            <TabPane tab="代发货" key={20}>
+            <TabPane tab="Wait deliver" key={20}>
               <OrderList myOrderList={myOrderList} />
             </TabPane>
-            <TabPane tab="代收货" key={30}>
+            <TabPane tab="Wait receive" key={30}>
               <OrderList
                 myOrderList={myOrderList}
                 confirmReceive={confirmReceive}
               />
             </TabPane>
-            <TabPane tab="已完成" key={40}>
+            <TabPane tab="Complete" key={40}>
               <OrderList
                 myOrderList={myOrderList}
                 commentItems={commentItems}

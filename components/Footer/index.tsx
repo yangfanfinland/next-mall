@@ -10,16 +10,12 @@ const Footer = () => {
           <b>|</b>
           <a href="">Twitter</a>
           <b>|</b>
-          <a href="">WhatsApp</a>
-          <b>|</b>
-          <a href="">Wechat</a>
-          <b>|</b>
-          <a href="">QQ</a>
+          <a href="">Instagram</a>
         </p>
       </div>
       <div className={styles['footer-bd']}>
         <p>
-          <em>© 2021 miyixuan.com 宜选电商 版权所有</em>
+          <em>© 2021 miyixuan.com MiYiXuan e-commerce all rights reserved</em>
         </p>
       </div>
     </div>

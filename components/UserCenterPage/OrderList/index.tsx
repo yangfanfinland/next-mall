@@ -7,7 +7,7 @@ const OrderList = ({
   deleteOrder,
   confirmReceive,
   commentItems,
-  goPay
+  goPay,
 }: {
   myOrderList
   deleteOrder?: (orderId) => void
@@ -15,31 +15,30 @@ const OrderList = ({
   commentItems?: (orderId) => void
   goPay?: (orderId, payMethod, totalAmount) => void
 }) => {
-
   return (
     <div className={styles['am-tabs-bd']}>
       <div className={styles['am-tab-panel']}>
         <div className={styles['order-top']}>
           <div className={`${styles['th']} ${styles['th-item']}`}>
-            <div className="td-inner">商品</div>
+            <div className="td-inner">Product</div>
           </div>
           <div className={`${styles['th']} ${styles['th-price']}`}>
-            <div className="td-inner">单价</div>
+            <div className="td-inner">Price</div>
           </div>
           <div className={`${styles['th']} ${styles['th-number']}`}>
-            <div className="td-inner">数量</div>
+            <div className="td-inner">Amount</div>
           </div>
           <div className={`${styles['th']} ${styles['th-operation']}`}>
-            <div className="td-inner">支付方式</div>
+            <div className="td-inner">Payment</div>
           </div>
           <div className={`${styles['th']} ${styles['th-amount']}`}>
-            <div className="td-inner">合计</div>
+            <div className="td-inner">Sub total</div>
           </div>
           <div className={`${styles['th']} ${styles['th-status']}`}>
-            <div className="td-inner">交易状态</div>
+            <div className="td-inner">Status</div>
           </div>
           <div className={`${styles['th']} ${styles['th-change']}`}>
-            <div className="td-inner">交易操作</div>
+            <div className="td-inner">Operate</div>
           </div>
         </div>
 
@@ -50,9 +49,9 @@ const OrderList = ({
                 <div className={styles['order-status']} key={ordersIndex}>
                   <div className={styles['order-title']}>
                     <div className="dd-num">
-                      订单编号：<a href="">{order.orderId}</a>
+                      Order Id: <a href="">{order.orderId}</a>
                     </div>
-                    <span>成交时间：{order.createdTime}</span>
+                    <span>Created on: {order.createdTime}</span>
                   </div>
                   <div className={styles['order-content']}>
                     <div className={styles['order-left']}>
@@ -86,7 +85,7 @@ const OrderList = ({
                                   >
                                     <p>{subItem.itemName}</p>
                                     <p className="info-little">
-                                      规格：{subItem.itemSpecName}
+                                      Specification: {subItem.itemSpecName}
                                     </p>
                                   </a>
                                 </div>
@@ -96,7 +95,7 @@ const OrderList = ({
                               className={`${styles['td']} ${styles['td-price']}`}
                             >
                               <div className="item-price">
-                                ￥{subItem.price / 100}
+                                €{subItem.price / 100}
                               </div>
                             </li>
                             <li
@@ -123,15 +122,7 @@ const OrderList = ({
                       </li>
                       <li className={`${styles['td']} ${styles['td-amount']}`}>
                         <div className="item-amount">
-                          合计：{order.realPayAmount / 100}元
-                          <p>
-                            含运费：
-                            <span>
-                              {order.postAmount == 0
-                                ? '包邮'
-                                : order.postAmount / 100 + '元'}
-                            </span>
-                          </p>
+                          Total: {order.realPayAmount / 100}€
                         </div>
                       </li>
                       <div className={styles['move-right']}>
@@ -140,23 +131,23 @@ const OrderList = ({
                         >
                           <div className="">
                             {order.orderStatus == 10 && (
-                              <p className="Mystatus">等待付款</p>
+                              <p className="Mystatus">Unpaid</p>
                             )}
 
                             {order.orderStatus == 20 && (
-                              <p className="Mystatus">买家已付款</p>
+                              <p className="Mystatus">Paid</p>
                             )}
 
                             {order.orderStatus == 30 && (
-                              <p className="Mystatus">商家已发货</p>
+                              <p className="Mystatus">Delivered</p>
                             )}
 
                             {order.orderStatus == 40 && (
-                              <p className="Mystatus">交易成功</p>
+                              <p className="Mystatus">Succeed</p>
                             )}
 
                             {order.orderStatus == 50 && (
-                              <p className="Mystatus">交易关闭</p>
+                              <p className="Mystatus">Closed</p>
                             )}
                           </div>
                         </li>
@@ -174,12 +165,12 @@ const OrderList = ({
                               }
                               className={`${styles['btn']} ${styles['go-pay']}`}
                             >
-                              一键支付
+                              Pay
                             </div>
                           )}
 
                           {order.orderStatus == 20 && (
-                            <p className="Mystatus">拣货中</p>
+                            <p className="Mystatus">Delivering</p>
                           )}
 
                           {order.orderStatus == 30 && (
@@ -187,7 +178,7 @@ const OrderList = ({
                               onClick={() => confirmReceive(order.orderId)}
                               className={`${styles['btn']} ${styles['confirm-receive']}`}
                             >
-                              确认收货
+                              Receive
                             </div>
                           )}
 
@@ -196,12 +187,12 @@ const OrderList = ({
                               onClick={() => commentItems(order.orderId)}
                               className={`${styles['btn']} ${styles['comment-items']}`}
                             >
-                              评价商品
+                              Comment
                             </div>
                           )}
 
                           {order.isComment == 1 && order.orderStatus == 40 && (
-                            <div className="Mystatus">已评价</div>
+                            <div className="Mystatus">Commented</div>
                           )}
 
                           {order.orderStatus == 50 && (
@@ -209,7 +200,7 @@ const OrderList = ({
                               onClick={() => deleteOrder(order.orderId)}
                               className={`${styles['btn']} ${styles['delete-order']}`}
                             >
-                              删除订单
+                              Delete
                             </div>
                           )}
                         </li>

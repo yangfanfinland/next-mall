@@ -61,7 +61,7 @@ const DoComment = () => {
         tempItem.commentLevel == undefined ||
         tempItem.commentLevel == null
       ) {
-        message.warning('每个商品都需要一朵小花噢~')
+        message.warning('A flower needed for evey product~')
         return
       }
       if (
@@ -69,7 +69,7 @@ const DoComment = () => {
         tempItem.content == undefined ||
         tempItem.content == null
       ) {
-        message.warning('每个商品都需要您宝贵的评论噢~')
+        message.warning('A comment needed for every product~')
         return
       }
     }
@@ -82,7 +82,7 @@ const DoComment = () => {
     })
 
     if (res.status == 200) {
-      message.success('评论成功！')
+      message.success('Comment successfully!')
       window.location.href = '/center/order'
     } else if (res.status == 500) {
       message.error((res as any).msg)
@@ -127,7 +127,7 @@ const DoComment = () => {
 
   return (
     <>
-      <HtmlHead title={'宜选商城 - 个人中心'} />
+      <HtmlHead title={'YiXuan mall - Personal center'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="comment" />
@@ -136,7 +136,7 @@ const DoComment = () => {
             <div className={`${styles['am-padding']}`}>
               <div className={`${styles['am-fl']}`}>
                 <strong className={`${styles['am-text-danger']}`}>
-                  发表评论
+                  Post comment
                 </strong>{' '}
                 / <small>Make&nbsp;Comments</small>
               </div>
@@ -165,14 +165,14 @@ const DoComment = () => {
                       </div>
                       <div className={`${styles['item-info']}`}>
                         <div className={`${styles['info-little']}`}>
-                          <span>规格：{orderItem.itemSpecName}</span>
+                          <span>Specification: {orderItem.itemSpecName}</span>
                         </div>
                       </div>
                     </div>
                     <div className={`${styles['clear']}`}></div>
                     <div className={`${styles['item-comment']}`}>
                       <textarea
-                        placeholder="您的评价将会对其他小伙伴们提供很大帮助哟~"
+                        placeholder="Your comment will help others a lot~"
                         onChange={(e) => makeCommentContent(e, orderItem.id)}
                       ></textarea>
                     </div>
@@ -188,7 +188,7 @@ const DoComment = () => {
                               : `${styles['op1']}`
                           }
                         ></i>
-                        好评
+                        Positive
                       </li>
                       <li
                         id={'normal_' + orderItem.id}
@@ -201,7 +201,7 @@ const DoComment = () => {
                               : `${styles['op2']}`
                           }
                         ></i>
-                        中评
+                        Average
                       </li>
                       <li
                         id={'bad_' + orderItem.id}
@@ -214,7 +214,7 @@ const DoComment = () => {
                               : `${styles['op3']}`
                           }
                         ></i>
-                        差评
+                        Negative
                       </li>
                     </div>
                   </div>
@@ -226,7 +226,7 @@ const DoComment = () => {
                   className={`${styles['am-btn-danger']}`}
                   onClick={saveComments}
                 >
-                  发表评论
+                  Post comment
                 </div>
               </div>
             </div>

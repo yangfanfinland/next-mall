@@ -65,14 +65,14 @@ const AlipayTempTransit = ({ orderId }: Props) => {
         <div className={`${styles["hd-main"]}`}>
           <div className={`${styles["ep-hd-info"]}`}>
             <div className={`${styles["ep-logo"]}`}>
-              <img src="/static/images/logobig.png" alt="天天吃货" />
+              <img src="/static/images/logobig.png" alt="YiXuan mall" />
             </div>
             <div className={`${styles["ep-order-status"]}`}>
-              <span className={`${styles["page-title"]}`}>订单支付</span>
+              <span className={`${styles["page-title"]}`}>Order payment</span>
             </div>
           </div>
           <div className={`${styles["user-info"]}`}>
-            {userInfo && <p>账号：{userInfo.nickname}</p>}
+            {userInfo && <p>Account: {userInfo.nickname}</p>}
           </div>
         </div>
       </div>
@@ -84,8 +84,8 @@ const AlipayTempTransit = ({ orderId }: Props) => {
                 <div>
                   <img src="/static/images/loading.gif" />
                   <span className={`${styles["hit-words"]}`}>
-                    订单[<em>{orderId}</em>
-                    ]正在支付中，请耐心等待...
+                    Order [<em>{orderId}</em>
+                    ]Under payment, to be patient please...
                   </span>
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: alipayForm }}></div>

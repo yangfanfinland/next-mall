@@ -41,7 +41,7 @@ const Comment = () => {
 
       for (let i = 0; i < tempMyCommentList.length; i++) {
         const date = tempMyCommentList[i].createdTime
-        const formatedTime = moment(date).format('YYYY年MM月DD日 h:mm:ss')
+        const formatedTime = moment(date).format('YYYY-MM-DD h:mm:ss')
         tempMyCommentList[i].createdTime = formatedTime
       }
 
@@ -71,7 +71,7 @@ const Comment = () => {
 
   return (
     <>
-      <HtmlHead title={'宜选商城 - 个人中心'} />
+      <HtmlHead title={'YiXuan mall - Personal center'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="comment" />
@@ -79,8 +79,8 @@ const Comment = () => {
           <div className={`${styles['comment-main']}`}>
             <div className={`${styles['comment-list']}`}>
               <div className={`${styles['comment-top']}`}>
-                <div className={`${styles['th']}`}>评价</div>
-                <div className={`${styles['th']}`}>商品</div>
+                <div className={`${styles['th']}`}>Comment</div>
+                <div className={`${styles['th']}`}>Product</div>
               </div>
 
               <ul className={`${styles['item-list']}`}>
@@ -116,7 +116,7 @@ const Comment = () => {
                         <div className={`${styles['item-info']}`}>
                           <div>
                             <p className={`${styles['info-little']}`}>
-                              <span>规格：{comment.specName}</span>
+                              <span>Specification: {comment.specName}</span>
                             </p>
                             <p className={`${styles['info-time']}`}>
                               {comment.createdTime}

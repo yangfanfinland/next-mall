@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { withRouter, SingletonRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import { message } from 'antd'
-import { getPaidOrderInfoApi } from "../api/api"
+import { getPaidOrderInfoApi } from '../api/api'
 import styles from '../static/styles/alipay.less'
 
 interface Props extends SingletonRouter {
@@ -58,30 +58,32 @@ const Alipay = ({ orderId, amount }: Props) => {
   return (
     <>
       <div className={`${styles.hd}`}>
-        <div className={`${styles["hd-main"]}`}>
-          <div className={`${styles["ep-hd-info"]}`}>
-            <div className={`${styles["ep-logo"]}`}>
-              <img src="/static/images/logobig.png" alt="天天吃货" />
+        <div className={`${styles['hd-main']}`}>
+          <div className={`${styles['ep-hd-info']}`}>
+            <div className={`${styles['ep-logo']}`}>
+              <img src="/static/images/logobig.png" alt="YiXuan mall" />
             </div>
-            <div className={`${styles["ep-order-status"]}`}>
-              <span className={`${styles["page-title"]}`}>订单支付</span>
+            <div className={`${styles['ep-order-status']}`}>
+              <span className={`${styles['page-title']}`}>Order payment</span>
             </div>
           </div>
-          <div className={`${styles["user-info"]}`}>
-            {userInfo && <p>账号：{userInfo.nickname}</p>}
+          <div className={`${styles['user-info']}`}>
+            {userInfo && <p>Account: {userInfo.nickname}</p>}
           </div>
         </div>
       </div>
       <div className={`${styles.bd}`}>
-        <div className={`${styles["bd-main"]}`}>
-          <div className={`${styles["ep-wrapper"]}`}>
-            <div className={`${styles["ep-pay-step"]} ${styles["ep-step-channel"]} ${styles["bd-main-container"]}`}>
-              <div className={`${styles["ep-order-detail"]}`}>
+        <div className={`${styles['bd-main']}`}>
+          <div className={`${styles['ep-wrapper']}`}>
+            <div
+              className={`${styles['ep-pay-step']} ${styles['ep-step-channel']} ${styles['bd-main-container']}`}
+            >
+              <div className={`${styles['ep-order-detail']}`}>
                 <div>
                   <img src="/static/images/loading.gif" />
-                  <span className={`${styles["hit-words"]}`}>
-                    订单[<em>{orderId}</em>
-                    ]正在支付中，请耐心等待...
+                  <span className={`${styles['hit-words']}`}>
+                    Order [<em>{orderId}</em>
+                    ]Under payment, to be patient please...
                   </span>
                 </div>
               </div>

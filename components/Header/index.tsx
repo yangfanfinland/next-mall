@@ -11,27 +11,17 @@ const menu = (
   <Menu>
     <Menu.Item>
       <a target="_blank" rel="noopener noreferrer" href="/myOrder">
-        我的订单
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="/authentication">
-        实名认证
+        My order
       </a>
     </Menu.Item>
     <Menu.Item>
       <a target="_blank" rel="noopener noreferrer" href="/addressList">
-        收货地址
+        Address list
       </a>
     </Menu.Item>
     <Menu.Item>
       <a target="_blank" rel="noopener noreferrer" href="/collectionGoods">
-        收藏商品
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="/followStore">
-        关注店铺
+        Saved products
       </a>
     </Menu.Item>
   </Menu>
@@ -76,7 +66,7 @@ const Header = () => {
             <>
               <span>{userInfo.username}</span> |{' '}
               <a href="" onClick={(e) => handleLogout(e)}>
-                退出
+                Logout
               </a>
             </>
           ) : (
@@ -108,9 +98,6 @@ const Header = () => {
               <DownOutlined />
             </a>
           </Dropdown>
-          <a href="" className={styles.buyItem}>
-            商家入驻
-          </a>
         </li>
       </ul>
     </div>
