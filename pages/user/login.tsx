@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { getUrlParam } from '../../util/app'
+import { getUrlParam, serverUrl } from '../../util/app'
 import axios from 'axios'
 import LoginForm from '../../components/User/LoginForm'
 import { message } from 'antd'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Router from 'next/router'
-import { request } from '../../lib/api'
+import { request } from '../../server/request'
 
 export default function Login() {
   const [returnUrl, setReturnUrl] = useState('')
@@ -31,7 +31,7 @@ export default function Login() {
     // const res = await axios.post(serverUrl + '/passport/login', userBO)
     const res = await request({ method: "POST", url: '/auth/passport/login', data: userBO })
     if (res.data.status == 200) {
-      const user = res.data
+      var user = res.data
       dispatch({ type: 'LOGIN', user: { ...user.data } })
       if (returnUrl != null && returnUrl != undefined && returnUrl != '') {
         Router.push(returnUrl)

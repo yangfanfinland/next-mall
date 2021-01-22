@@ -1,4 +1,4 @@
-const { requestMall } = require('../lib/api')
+const { requestMall } = require('./request')
 
 module.exports = (server) => {
   server.use(async (ctx, next) => {

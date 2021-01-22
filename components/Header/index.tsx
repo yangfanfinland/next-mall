@@ -46,25 +46,6 @@ const Header = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // var userCookie = getCookie("user");
-    // if (userCookie != null && userCookie != undefined && userCookie != '') {
-    //     var userInfoStr = decodeURIComponent(userCookie);
-    //     if (userInfoStr != null && userInfoStr != undefined && userInfoStr != '') {
-    //         var userInfo = JSON.parse(userInfoStr);
-    //         // 判断是否是一个对象
-    //         if ( typeof(userInfo)  == "object" ) {
-    //             setUserIsLogin(true);
-    //             setUserInfo(userInfo);
-    //         } else {
-    //             setUserIsLogin(false);
-    //             setUserInfo({ username: "" })
-    //         }
-    //     }
-    // } else {
-    //     setUserIsLogin(false);
-    //     setUserInfo({ username: "" })
-    // }
-
     if (user && user.id) {
       setUserIsLogin(true)
       setUserInfo(user)

@@ -3,7 +3,6 @@ const Router = require('koa-router')
 const next = require('next')
 const session = require('koa-session')
 const koaBody = require('koa-body')
-const api = require('./server/api')
 const auth = require('./server/auth')
 
 const dev = process.env.NODE_ENV === 'production'
@@ -23,7 +22,6 @@ app.prepare().then(() => {
   server.use(session(SESSION_CONFIG, server))
 
   auth(server)
-  api(server)
 
   server.use(router.routes())
 
