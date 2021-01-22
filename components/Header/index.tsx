@@ -4,7 +4,7 @@ import { Dropdown, Menu } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
 import { useIntl } from 'react-intl'
 import { useSelector, useDispatch } from 'react-redux'
-import { logout } from '../../store/store'
+import { logout } from '../../redux/actions/users'
 import styles from './index.less'
 
 const menu = (
