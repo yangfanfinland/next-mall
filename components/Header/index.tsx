@@ -82,7 +82,7 @@ const Header = () => {
           )}
         </li>
         <li>
-          <a href="/myOrder" target={'_blank'} className={styles.buyItem}>
+          <a href="/myOrder" id="myOrder" target={'_blank'} className={styles.buyItem}>
             {f('header.myOrder')}
           </a>
           <a href="/shopcart" target={'_blank'} className={styles.buyItem}>

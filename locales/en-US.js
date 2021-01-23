@@ -6,7 +6,7 @@ let appLocale = {
     ...zhMessages,
   },
   antd: antdZh,
-  locale: 'zh-CN'
+  locale: 'en-US'
 }
 
 export default appLocale

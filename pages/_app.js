@@ -44,7 +44,7 @@ class MyApp extends App {
         result = _EN
         break
       default:
-        result = _ZH
+        result = _EN
     }
     return result
   }
@@ -63,9 +63,9 @@ class MyApp extends App {
               defaultLocale={defaultLocale}
               messages={Flat(appLocale.messages)}
             >
-              <UserLayout>
-                <Component {...pageProps} />
-              </UserLayout>
+                <UserLayout>
+                  <Component {...pageProps} />
+                </UserLayout>
             </IntlProvider>
           </ConfigProvider>
         </Provider>
