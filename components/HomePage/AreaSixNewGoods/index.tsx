@@ -16,13 +16,9 @@ const AreaSixNewGoods = ({ likeItemList }) => {
               >
                 <a href="/goodsDetail" target={'_blank'}>
                   <img
+                    className={styles['cat-image']}
                     src={rootCat.catImage}
                     alt={rootCat.rootCatName}
-                    style={{
-                      width: '210px',
-                      height: '210px',
-                      marginLeft: 'calc((100% - 210px) / 2)',
-                    }}
                   />
                 </a>
               </li>
@@ -31,41 +27,18 @@ const AreaSixNewGoods = ({ likeItemList }) => {
                   href={'/item?itemId=' + rootCat.simpleItemList[0].itemId}
                   target={'_blank'}
                   className={styles.topA}
-                  style={{ position: 'relative' }}
                 >
                   <img src={rootCat.simpleItemList[0].itemUrl} alt="" />
-                  <div
-                    className="goodsDesc"
-                    style={{
-                      position: 'absolute',
-                      width: '100%',
-                      bottom: '0',
-                      backgroundColor: 'snow',
-                      opacity: '0.7',
-                    }}
-                  >
+                  <div className={styles.goodsDesc}>
                     <p className="goodsName">
                       {rootCat.simpleItemList[0].itemName}
                     </p>
                     <p className="priceWrap">
                       {rootCat.simpleItemList[0].nowPrice && (
-                        <span
-                          className="nowPrice"
-                          style={{ margin: '0 10px', color: '#f33a3f' }}
-                        >
-                          €519
-                        </span>
+                        <span className={styles.nowPrice}>€519</span>
                       )}
                       {rootCat.simpleItemList[0].marketPrice && (
-                        <span
-                          className="marketPrice"
-                          style={{
-                            textDecoration: 'line-through',
-                            color: '#999999',
-                          }}
-                        >
-                          €619
-                        </span>
+                        <span className={styles.marketPrice}>€619</span>
                       )}
                     </p>
                   </div>
@@ -80,41 +53,18 @@ const AreaSixNewGoods = ({ likeItemList }) => {
                   href={'/item?itemId=' + rootCat.simpleItemList[3].itemId}
                   target={'_blank'}
                   className={styles.topA}
-                  style={{ position: 'relative' }}
                 >
                   <img src={rootCat.simpleItemList[3].itemUrl} alt="" />
-                  <div
-                    className="goodsDesc"
-                    style={{
-                      position: 'absolute',
-                      width: '100%',
-                      bottom: '0',
-                      backgroundColor: 'snow',
-                      opacity: '0.7',
-                    }}
-                  >
+                  <div className={styles.goodsDesc}>
                     <p className="goodsName">
                       {rootCat.simpleItemList[0].itemName}
                     </p>
                     <p className="priceWrap">
                       {rootCat.simpleItemList[0].nowPrice && (
-                        <span
-                          className="nowPrice"
-                          style={{ margin: '0 10px', color: '#f33a3f' }}
-                        >
-                          €519
-                        </span>
+                        <span className={styles.nowPrice}>€519</span>
                       )}
                       {rootCat.simpleItemList[0].marketPrice && (
-                        <span
-                          className="marketPrice"
-                          style={{
-                            textDecoration: 'line-through',
-                            color: '#999999',
-                          }}
-                        >
-                          €619
-                        </span>
+                        <span className={styles.marketPrice}>€619</span>
                       )}
                     </p>
                   </div>

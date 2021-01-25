@@ -159,7 +159,7 @@ const Order = () => {
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="order" />
-        <div style={{ width: '100%' }}>
+        <div className={styles.order}>
           <Tabs defaultActiveKey="1" onChange={queryOrdersByStatus}>
             <TabPane tab="All" key={0}>
               <OrderList myOrderList={myOrderList} deleteOrder={deleteOrder} />

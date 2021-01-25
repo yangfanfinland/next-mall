@@ -42,7 +42,7 @@ const Payment = ({
           </li>
         </ul>
       </div>
-      <div style={{ clear: 'both' }}></div>
+      <div className={styles.clear}></div>
     </>
   )
 }

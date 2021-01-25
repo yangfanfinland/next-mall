@@ -22,7 +22,7 @@ const GoodsItem = ({ item, myClassName }: { item; myClassName?: string }) => {
             Sales：<span className={styles.num}>{item.sellCounts}</span>
           </p>
           <span className={`${styles.car} fr`}>
-            <ShoppingCartOutlined style={{ fontSize: 24, color: '#F33A3F' }} />
+            <ShoppingCartOutlined />
           </span>
         </div>
       </div>

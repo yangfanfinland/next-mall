@@ -124,8 +124,7 @@ const Comment = () => {
                           </div>
                         </div>
                       </li>
-                      <div
-                        style={{ marginBottom: '12px', clear: 'both' }}
+                      <div className={styles.clear}
                       ></div>
                     </div>
                   ))}

@@ -94,30 +94,24 @@ const ItemComment = ({ item }) => {
             <span>Praise degree</span>
           </div>
           <div className={`${styles['comment-counts']}`}>
-            <div
-              className="counts-words"
-              onClick={() => renderCommentsByLevel('')}
-            >
+            <div onClick={() => renderCommentsByLevel('')}>
               All comments（{countsVO.totalCounts}）
             </div>
             <div
-              className="counts-words"
+              className={styles['counts-words']}
               onClick={() => renderCommentsByLevel(1)}
-              style={{ marginLeft: '20px' }}
             >
               Positive（{countsVO.goodCounts}）
             </div>
             <div
-              className="counts-words"
+              className={styles['counts-words']}
               onClick={() => renderCommentsByLevel(2)}
-              style={{ marginLeft: '20px' }}
             >
               Average（{countsVO.normalCounts}）
             </div>
             <div
-              className="counts-words"
+              className={styles['counts-words']}
               onClick={() => renderCommentsByLevel(3)}
-              style={{ marginLeft: '20px' }}
             >
               Negative（{countsVO.badCounts}）
             </div>
