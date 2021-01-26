@@ -27,6 +27,7 @@ Committed to found an unique website with full commerce functionalities. Foodies
 - Optimize
     - Image (lazy loading, next/image, webp)
     - Big first load js (Antd load on demand, lazy load)
+    - Scalable, components reusable highly
 - Payment
 - Localization
 

@@ -10,17 +10,17 @@ import styles from './index.less'
 const menu = (
   <Menu>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="/myOrder">
+      <a target="_blank" rel="noopener noreferrer" href="/center/order">
         My order
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="/addressList">
+      <a target="_blank" rel="noopener noreferrer" href="/center/address">
         Address list
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="/collectionGoods">
+      <a target="_blank" rel="noopener noreferrer" href="/center/collection">
         Saved products
       </a>
     </Menu.Item>
@@ -82,7 +82,7 @@ const Header = () => {
           )}
         </li>
         <li>
-          <a href="/myOrder" id="myOrder" target={'_blank'} className={styles.buyItem}>
+          <a href="/center/order" id="myOrder" target={'_blank'} className={styles.buyItem}>
             {f('header.myOrder')}
           </a>
           <a href="/shopcart" target={'_blank'} className={styles.buyItem}>
