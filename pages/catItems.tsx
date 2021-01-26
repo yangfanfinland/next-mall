@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic';
 import { withRouter, SingletonRouter } from 'next/router'
 import HtmlHead from '../components/HtmlHead'
 import SearchArea from '../components/SearchArea'
@@ -17,6 +18,8 @@ interface Props extends SingletonRouter {
   pageSize: number
   keywords?: string
 }
+
+// const GoodsList = dynamic(() => import('../components/GoodsList'))
 
 const catItems = ({ grid, searchType, catId, pageSize, keywords }: Props) => {
   const [sort, setSort] = useState('k')

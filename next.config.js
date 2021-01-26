@@ -11,7 +11,11 @@ const themeVariables = lessToJS(
   fs.readFileSync(path.resolve(__dirname, './util/antd.less'), 'utf8')
 )
 
-module.exports = withPlugins([withLess, withCss], {
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+module.exports = withPlugins([withBundleAnalyzer, withLess, withCss], {
   i18n: {
     // These are all the locales you want to support in
     // your application

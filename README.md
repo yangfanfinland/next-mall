@@ -1,30 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+- Project Name: Foodie Shop
+- Start Date: 2020-10
+- Github: [#front-end](https://github.com/yangfanfinland/next-mall)
+- Github: [#backend-end](https://github.com/yangfanfinland/mall-backend)
 
-## Getting Started
+# Summary
+An e-commerce website aims to bring all kinds of declious snacks to foodies.
 
-First, run the development server:
+# Motivation
+Committed to found an unique website with full commerce functionalities. Foodies could purchase different types of snacks around the world.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+# Guide-level explanation
+- The Foodie Shop is seperation of front-end and backend, containes 3 parts: Customer portal, Shop administrator management platform and Backend server.
+- Current project is the Customer portal. 
+- This project should have full commerce functionalities, such as user center, products display, shopping cart, payment, i18n etc.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Reference-level explanation
+- Technologies: Typescript, Next.js, Less, Antd design, redux, jest, koa2 and so on.
+- Monolithic architecture
+- Shopping cart (Cookie -> Redis)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+# Rationale and alternatives
+- SEO friendly React
+- AntD with less, not sass (styled-components)
 
-## Learn More
+# Unresolved questions
+- Optimize
+    - Image (lazy loading, next/image, webp)
+    - Big first load js (Antd load on demand, lazy load)
+- Payment
+- Localization
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# Future possibilities
+- Cluster, Micro-service
+- Different business mode

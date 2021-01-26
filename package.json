@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.11",
+    "@next/bundle-analyzer": "^10.0.5",
     "@testing-library/react": "^11.2.3",
     "@types/enzyme": "^3.10.8",
     "@types/jest": "^26.0.20",
