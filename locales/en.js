@@ -1,6 +1,6 @@
 export default {
   header: {
-    welcome: 'Welcome to MiYiXuan mall',
+    welcome: 'Welcome to Foodie shop',
     login: 'Login',
     register: 'Register',
     myOrder: 'My order',
@@ -15,6 +15,6 @@ export default {
     loginBtn: 'Login',
     registerLink: 'Register',
   },
-  'home.title': 'YiXuan e-commerce - Home',
+  'home.title': 'Foodie - Home',
   dynamicName: ' Dynamic Value：{val}',
 }

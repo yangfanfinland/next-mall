@@ -65,7 +65,7 @@ const AlipayTempTransit = ({ orderId }: Props) => {
         <div className={`${styles["hd-main"]}`}>
           <div className={`${styles["ep-hd-info"]}`}>
             <div className={`${styles["ep-logo"]}`}>
-              <img src="/static/images/logobig.png" alt="YiXuan mall" />
+              <img src="/static/images/logobig.png" alt="Foodie shop" />
             </div>
             <div className={`${styles["ep-order-status"]}`}>
               <span className={`${styles["page-title"]}`}>Order payment</span>

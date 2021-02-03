@@ -44,7 +44,7 @@ const Success = ({ orderId, orderAmount }: Props) => {
         <div className="hd-main">
           <div className="ep-hd-info">
             <div className="ep-logo">
-              <img src="images/logobig.png" alt="YiXuan mall" />
+              <img src="images/logobig.png" alt="Foodie shop" />
             </div>
             <div className="ep-order-status">
               <span className="page-title">Order payment</span>

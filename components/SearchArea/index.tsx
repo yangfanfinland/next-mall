@@ -15,7 +15,7 @@ const SearchArea = ({
       <div className={`${styles.searchWrap} contentWidth`}>
         <Link href={`/`}>
           <a className={styles.logoWrap}>
-            <img src="/static/images/logobig.png" alt="YiXuan mall" />
+            <img src="/static/images/logobig.png" alt="Foodie shop" />
           </a>
         </Link>
 

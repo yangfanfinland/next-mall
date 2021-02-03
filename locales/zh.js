@@ -1,6 +1,6 @@
 export default {
   header: {
-    welcome: '宜选商城欢迎你',
+    welcome: '吃货商店欢迎您',
     login: '登陆',
     register: '注册',
     myOrder: '我的订单',
@@ -15,6 +15,6 @@ export default {
     loginBtn: '登陆',
     registerLink: '注册',
   },
-  'home.title': '宜选商城 - 首页',
+  'home.title': '吃货商店 - 首页',
   dynamicName: ' 动态赋值：{val}',
 }

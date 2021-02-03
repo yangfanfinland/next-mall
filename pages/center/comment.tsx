@@ -71,7 +71,7 @@ const Comment = () => {
 
   return (
     <>
-      <HtmlHead title={'YiXuan mall - Personal center'} />
+      <HtmlHead title={'Foodie - Personal center'} />
       <SearchArea />
       <div className={`${styles.center} contentWidth`}>
         <UserCenterNav router="comment" />

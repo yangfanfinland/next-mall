@@ -9,7 +9,7 @@ import Flat from 'flat'
 
 const messages = {
   header: {
-    welcome: 'Welcome to MiYiXuan mall',
+    welcome: 'Welcome to Foodie shop',
     login: 'Login',
     register: 'Register',
     myOrder: 'My order',
