@@ -17,7 +17,7 @@ module.exports = (server) => {
         ctx.body = result.data
         ctx.session.userInfo = result.data.data
       } else {
-        ctx.body = `Login failed failed ${result.message}`
+        ctx.body = `Login failed ${result.message}`
       }
     } else {
       await next()
