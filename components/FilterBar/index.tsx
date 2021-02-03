@@ -18,7 +18,7 @@ const FilterBar = ({ onSort }) => {
           </Radio.Button>
           <Radio.Button value="3" onClick={() => onSort('p')}>
             Price first
-            <ArrowDownOutlined />
+            <ArrowUpOutlined />
           </Radio.Button>
         </Button.Group>
       </div>

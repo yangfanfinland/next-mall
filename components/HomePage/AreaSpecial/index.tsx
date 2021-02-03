@@ -16,7 +16,7 @@ const AreaSpecial = () => {
               <li className={styles.item}>
                 <a href="/goodsDetail" target={'_blank'}>
                   <img
-                    src="../../../static/images/test/speical1.png"
+                    src="/static/images/test/speical1.png"
                     alt="美妆专区"
                   />
                 </a>
@@ -27,7 +27,7 @@ const AreaSpecial = () => {
                   target={'_blank'}
                   className={styles.topA}
                 >
-                  <img src="../../../static/images/test/speical3.png" alt="" />
+                  <img src="/static/images/test/speical3.png" alt="" />
                 </a>
                 <div className={`fcb`}>
                   <GoodsItem item={null} />
@@ -40,7 +40,7 @@ const AreaSpecial = () => {
                   target={'_blank'}
                   className={styles.topA}
                 >
-                  <img src="../../../static/images/test/speical3.png" alt="" />
+                  <img src="/static/images/test/speical3.png" alt="" />
                 </a>
                 <div className={`fcb`}>
                   <GoodsItem item={null} />

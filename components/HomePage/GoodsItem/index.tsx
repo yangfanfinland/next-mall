@@ -19,7 +19,7 @@ const GoodsItem = ({
       className={`${styles.goodsItem} ${myClassName ? myClassName : ''}`}
     >
       <img
-        src={(item && item.itemUrl) || '../../static/images/test/goods.jpg'}
+        src={(item && item.itemUrl) || '/static/images/test/goods.jpg'}
         className={styles.goodsImg}
         alt=""
       />

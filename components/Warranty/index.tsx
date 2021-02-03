@@ -10,7 +10,7 @@ const Warranty = ({ width }: { width?: string }) => {
         <li className={`${styles.warrItem}`}>
           <img
             className={`${styles.wrrIcon}`}
-            src={'../static/images/warr1.png'}
+            src={'/static/images/warr1.png'}
             alt={'genuine product'}
           />
           <a>Genuine product</a>
@@ -18,7 +18,7 @@ const Warranty = ({ width }: { width?: string }) => {
         <li className={`${styles.warrItem}`}>
           <img
             className={`${styles.wrrIcon}`}
-            src={'../static/images/warr2.png'}
+            src={'/static/images/warr2.png'}
             alt={'Strict supervision'}
           />
           <a>Strict supervision</a>
@@ -26,7 +26,7 @@ const Warranty = ({ width }: { width?: string }) => {
         <li className={`${styles.warrItem}`}>
           <img
             className={`${styles.wrrIcon}`}
-            src={'../static/images/warr3.png'}
+            src={'/static/images/warr3.png'}
             alt={'Certified merchants'}
           />
           <a>Certified merchants</a>
@@ -34,7 +34,7 @@ const Warranty = ({ width }: { width?: string }) => {
         <li className={`${styles.warrItem}`}>
           <img
             className={`${styles.wrrIcon}`}
-            src={'../static/images/warr4.png'}
+            src={'/static/images/warr4.png'}
             alt={'Worry free after sale'}
           />
           <a>Worry free after sale</a>

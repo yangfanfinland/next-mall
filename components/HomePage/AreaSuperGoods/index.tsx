@@ -19,7 +19,7 @@ const AreaSuperGoods = () => {
             <li className={`${styles.item}`} key={i}>
               <a href="/goodsDetail" target={'_blank'}>
                 <img
-                  src="../static/images/test/hot1.png"
+                  src="/static/images/test/hot1.png"
                   alt=""
                   className={styles.googsImg}
                 />

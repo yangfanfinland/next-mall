@@ -7,7 +7,7 @@ const AreaShops = () => {
     <ul className={`mb40 fcb`}>
       <li className={styles.item}>
         <a href="">
-          <img src="../../../static/images/global_shop.png" alt="" />
+          <img src="/static/images/global_shop.png" alt="" />
         </a>
       </li>
       {test.map((o, i) => {
@@ -16,7 +16,7 @@ const AreaShops = () => {
             <a href="/storeDetail" target={'_blank'}>
               <p className={styles.tag}>品牌官方授权</p>
               <img
-                src="../../../static/images/test/hot1.png"
+                src="/static/images/test/hot1.png"
                 className={styles.brandLogo}
                 alt=""
               />
