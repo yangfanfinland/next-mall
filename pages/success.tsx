@@ -3,6 +3,7 @@ import HtmlHead from '../components/HtmlHead'
 import SearchArea from '../components/SearchArea'
 import { withRouter, SingletonRouter } from 'next/router'
 import { useSelector } from 'react-redux'
+import Link from 'next/link'
 
 interface Props extends SingletonRouter {
   orderId: string
@@ -43,9 +44,11 @@ const Success = ({ orderId, orderAmount }: Props) => {
       <div className="hd">
         <div className="hd-main">
           <div className="ep-hd-info">
-            <div className="ep-logo">
-              <img src="images/logobig.png" alt="Foodie shop" />
-            </div>
+            <Link href={`/`}>
+              <a className="ep-logo">
+                <img src="images/logobig.png" alt="Foodie shop" />
+              </a>
+            </Link>
             <div className="ep-order-status">
               <span className="page-title">Order payment</span>
             </div>

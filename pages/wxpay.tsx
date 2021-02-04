@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import HtmlHead from '../components/HtmlHead'
 import { withRouter, SingletonRouter } from 'next/router'
+import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { message } from 'antd'
@@ -112,9 +113,11 @@ const WXpay = ({ orderId }: Props) => {
       <div className={`${styles.hd}`}>
         <div className={`${styles['hd-main']}`}>
           <div className={`${styles['ep-hd-info']}`}>
-            <div className={`${styles['ep-logo']}`}>
-              <img src="/static/images/logobig.png" alt="Foodie shop" />
-            </div>
+            <Link href={`/`}>
+              <a className={`${styles['ep-logo']}`}>
+                <img src="/static/images/logobig.png" alt="Foodie shop" />
+              </a>
+            </Link>
             <div className={`${styles['ep-order-status']}`}>
               <span className={`${styles['page-title']}`}>Order payment</span>
             </div>

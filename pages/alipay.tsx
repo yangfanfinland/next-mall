@@ -3,6 +3,7 @@ import { withRouter, SingletonRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import { message } from 'antd'
 import { getPaidOrderInfoApi } from '../api/api'
+import Link from 'next/link'
 import styles from '../static/styles/alipay.less'
 
 interface Props extends SingletonRouter {
@@ -60,9 +61,11 @@ const Alipay = ({ orderId, amount }: Props) => {
       <div className={`${styles.hd}`}>
         <div className={`${styles['hd-main']}`}>
           <div className={`${styles['ep-hd-info']}`}>
-            <div className={`${styles['ep-logo']}`}>
-              <img src="/static/images/logobig.png" alt="Foodie shop" />
-            </div>
+            <Link href={`/`}>
+              <a className={`${styles['ep-logo']}`}>
+                <img src="/static/images/logobig.png" alt="Foodie shop" />
+              </a>
+            </Link>
             <div className={`${styles['ep-order-status']}`}>
               <span className={`${styles['page-title']}`}>Order payment</span>
             </div>

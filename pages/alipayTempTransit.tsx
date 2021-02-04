@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { paymentServerUrl } from '../util/app'
 import axios from 'axios'
 import { message } from 'antd'
+import Link from 'next/link'
 import styles from '../static/styles/alipayTempTransit.less'
 
 interface Props extends SingletonRouter {
@@ -62,28 +63,32 @@ const AlipayTempTransit = ({ orderId }: Props) => {
   return (
     <>
       <div className={`${styles.hd}`}>
-        <div className={`${styles["hd-main"]}`}>
-          <div className={`${styles["ep-hd-info"]}`}>
-            <div className={`${styles["ep-logo"]}`}>
-              <img src="/static/images/logobig.png" alt="Foodie shop" />
-            </div>
-            <div className={`${styles["ep-order-status"]}`}>
-              <span className={`${styles["page-title"]}`}>Order payment</span>
+        <div className={`${styles['hd-main']}`}>
+          <div className={`${styles['ep-hd-info']}`}>
+            <Link href={`/`}>
+              <a className={`${styles['ep-logo']}`}>
+                <img src="/static/images/logobig.png" alt="Foodie shop" />
+              </a>
+            </Link>
+            <div className={`${styles['ep-order-status']}`}>
+              <span className={`${styles['page-title']}`}>Order payment</span>
             </div>
           </div>
-          <div className={`${styles["user-info"]}`}>
+          <div className={`${styles['user-info']}`}>
             {userInfo && <p>Account: {userInfo.nickname}</p>}
           </div>
         </div>
       </div>
       <div className={`${styles.bd}`}>
-        <div className={`${styles["bd-main"]}`}>
-          <div className={`${styles["ep-wrapper"]}`}>
-            <div className={`${styles["ep-pay-step"]} ${styles["ep-step-channel"]} ${styles["bd-main-container"]}`}>
-              <div className={`${styles["ep-order-detail"]}`}>
+        <div className={`${styles['bd-main']}`}>
+          <div className={`${styles['ep-wrapper']}`}>
+            <div
+              className={`${styles['ep-pay-step']} ${styles['ep-step-channel']} ${styles['bd-main-container']}`}
+            >
+              <div className={`${styles['ep-order-detail']}`}>
                 <div>
                   <img src="/static/images/loading.gif" />
-                  <span className={`${styles["hit-words"]}`}>
+                  <span className={`${styles['hit-words']}`}>
                     Order [<em>{orderId}</em>
                     ]Under payment, to be patient please...
                   </span>
