@@ -9,6 +9,12 @@ const SearchBar = ({ defaultValue = '' }) => {
     setKeywords(e.target.value)
   }
 
+  const handleKeyUp = (e) => {
+    if (e.key === 'Enter' && keywords) {
+      window.open(`${location.protocol}//${location.host}/catItems?searchType=searchItems&keywords=${keywords}`, '_blank');
+    }
+  }
+
   return (
     <div className={styles.searchBar}>
       <SearchOutlined className={styles.searchIcon} />
@@ -18,6 +24,7 @@ const SearchBar = ({ defaultValue = '' }) => {
         type="text"
         className={styles.searchInput}
         placeholder={'Search'}
+        onKeyUp={handleKeyUp}
       />
       <a
         href={`/catItems?searchType=searchItems&keywords=${keywords}`}
